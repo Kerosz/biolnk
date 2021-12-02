@@ -1,3 +1,5 @@
+// @ts-check
+
 const securityHeaders = [
   /**
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
@@ -40,7 +42,7 @@ const securityHeaders = [
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   eslint: {
     // Only run ESLint on following directories during production builds
@@ -48,6 +50,7 @@ module.exports = {
   },
   /** @see https://nextjs.org/docs/advanced-features/compiler#minification */
   swcMinify: true,
+  optimizeFonts: true,
   async Headers() {
     return [
       {
@@ -57,3 +60,5 @@ module.exports = {
     ];
   },
 };
+
+module.exports = nextConfig;
