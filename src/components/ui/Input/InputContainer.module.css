@@ -58,11 +58,6 @@
   @apply text-right;
 }
 
-.blui-label-opt,
-.blui-label .blui-label-before,
-.blui-label .blui-label-after {
-  @apply text-sm text-normalText dark:text-gray-300;
-}
 
 .blui-error {
   @apply mt-2 ml-0.5 text-sm text-dangerText;
@@ -78,31 +73,26 @@
 */
 
 .blui-size--xs .blui-label,
-.blui-size--xs .blui-label-opt,
 .blui-size--xs .blui-error,
 .blui-size--xs .blui-desc {
   @apply text-xs;
 }
 .blui-size--sm .blui-label,
-.blui-size--sm .blui-label-opt,
 .blui-size--sm .blui-error,
 .blui-size--sm .blui-desc {
   @apply text-sm leading-4;
 }
 .blui-size--md .blui-label,
-.blui-size--md .blui-label-opt,
 .blui-size--md .blui-error,
 .blui-size--md .blui-desc {
   @apply text-sm;
 }
 .blui-size--lg .blui-label,
-.blui-size--lg .blui-label-opt,
 .blui-size--lg .blui-error,
 .blui-size--lg .blui-desc {
   @apply text-base;
 }
 .blui-size--xl .blui-label,
-.blui-size--xl .blui-label-opt,
 .blui-size--xl .blui-error,
 .blui-size--xl .blui-desc {
   @apply text-lg;

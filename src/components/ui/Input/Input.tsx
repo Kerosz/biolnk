@@ -1,6 +1,5 @@
 import React, { forwardRef, useState } from "react";
 import InputErrorIcon from "./InputErrorIcon";
-import InputIconContainer from "./InputIconContainer";
 import InputContainer from "./InputContainer";
 import Button from "../Button/Button";
 import Icon from "../Icon";
@@ -25,9 +24,6 @@ export interface InputProps
   /** Disables the label, and makes it only available for screen readers */
   srOnlyLabel?: boolean;
   label?: string;
-  afterLabel?: string;
-  beforeLabel?: string;
-  labelOptional?: string;
   layout?: "horizontal" | "vertical";
   name?: string;
   /**
@@ -63,9 +59,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       id,
       srOnlyLabel = false,
       label,
-      afterLabel,
-      beforeLabel,
-      labelOptional,
       layout,
       name,
       onChange,
@@ -137,9 +130,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <InputContainer
         srOnlyLabel={srOnlyLabel}
         label={label}
-        afterLabel={afterLabel}
-        beforeLabel={beforeLabel}
-        labelOptional={labelOptional}
         layout={layout}
         id={id}
         error={error}
@@ -173,7 +163,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={inptuClass}
             {...otherProps}
           />
-          {icon && <InputIconContainer icon={icon} />}
+          {icon && <div className={Styles["blui-icon-container"]}>{icon}</div>}
 
           {copy || error || actions || reveal || isPassword ? (
             <div className={Styles["blui-actions-container"]}>
@@ -196,7 +186,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {isPassword && (
                 <Button
                   size="xs"
-                  variant="default"
                   onClick={toggleShowPassword}
                   disabled={!isUndefined(value) && value.length < 1}
                 >

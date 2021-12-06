@@ -31,16 +31,12 @@ export default function InputContainer({
   id,
   srOnlyLabel,
   label,
-  labelOptional,
   layout = "vertical",
   style,
   flex,
   responsive = true,
   size = "md",
-  beforeLabel,
-  afterLabel,
 }: InputContainerProps) {
-  const isLabelled = Boolean(label || beforeLabel || afterLabel);
   const isVertical = layout === "vertical";
   const isHorizontal = layout === "horizontal";
   const isLeftAligned = align === "left";
@@ -50,10 +46,10 @@ export default function InputContainer({
     ${Styles["blui-root"]}
     ${size && Styles[`blui-size--${size}`]}
     ${flex && Styles["blui-root--flex"]}
-    ${flex && isLeftAligned ? Styles["blui-root--flex-left"] : undefined}
-    ${flex && isRightAligned ? Styles["blui-root--flex-right"] : undefined}
-    ${!flex && responsive ? Styles["blui-root--responsive"] : undefined}
-    ${!flex && !responsive ? Styles["blui-root--non-responsive"] : undefined}
+    ${flex && isLeftAligned && Styles["blui-root--flex-left"]}
+    ${flex && isRightAligned && Styles["blui-root--flex-right"]}
+    ${!flex && responsive && Styles["blui-root--responsive"]}
+    ${!flex && !responsive && Styles["blui-root--non-responsive"]}
     ${className && className}
   `);
 
@@ -79,31 +75,11 @@ export default function InputContainer({
 
   return (
     <div className={rootClass}>
-      {isLabelled || labelOptional || isHorizontal ? (
+      {label ? (
         <div className={labelContainerClass}>
-          {isLabelled && (
-            <label className={labelClass} htmlFor={id}>
-              {beforeLabel && (
-                <span
-                  className={Styles["blui-label-before"]}
-                  id={id + "-before"}
-                >
-                  {beforeLabel}
-                </span>
-              )}
-              {label}
-              {afterLabel && (
-                <span className={Styles["blui-label-after"]} id={id + "-after"}>
-                  {afterLabel}
-                </span>
-              )}
-            </label>
-          )}
-          {labelOptional && (
-            <span className={Styles["blui-label-opt"]} id={id + "-optional"}>
-              {labelOptional}
-            </span>
-          )}
+          <label className={labelClass} htmlFor={id}>
+            {label}
+          </label>
         </div>
       ) : null}
       <div className={containerClass} style={style}>
