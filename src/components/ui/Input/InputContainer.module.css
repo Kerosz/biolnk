@@ -35,7 +35,7 @@
 */
 
 .blui-label {
-  @apply block text-sm text-normalText font-semibold dark:text-gray-200;
+  @apply block text-sm text-normalTextHover font-semibold
 }
 
 .blui-label-horizontal {

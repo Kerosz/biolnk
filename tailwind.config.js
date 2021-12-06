@@ -36,8 +36,8 @@ module.exports = {
       inputBorder: "hsl(271 3.9% 86.3%)",
       inputBorderHover: "hsl(0 0% 78.0%)",
       inputBorderlessBg: "hsl(294 5.5% 95.3%)",
-      inputDangerBorder: "hsl(359 74.2% 81.7%)",
-      inputDangerBorderHover: "hsl(359 69.5% 74.3%)",
+      inputDangerBorder: "hsl(359 69.5% 74.3%)",
+      inputDangerBorderHover: "hsl(358 75.0% 59.0%)",
       // Normal colors
       black: "hsl(0 0% 0%)",
       white: "hsl(0 0% 100%)",
@@ -235,7 +235,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ["group-focus"],
+    },
     // typography: ["dark"],
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],

@@ -1,10 +1,18 @@
 import React, { forwardRef, useState } from "react";
-import InputErrorIcon from "./InputErrorIcon";
 import InputContainer from "./InputContainer";
+import InputEndIcon from "./InputEndIcon";
+import InputAddon from "./InputAddon";
 import Button from "../Button/Button";
 import Icon from "../Icon";
 import ctl from "~/utils/classname-literal";
-import { Copy, Eye, EyeOff } from "react-feather";
+import {
+  Copy,
+  Eye,
+  EyeOff,
+  Key,
+  AlertCircle,
+  CheckCircle,
+} from "react-feather";
 import { isUndefined } from "lodash";
 
 import Styles from "./Input.module.css";
@@ -13,13 +21,19 @@ export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   /** Renders a button to copy the input value. */
   copy?: boolean;
+  leftAddon?: string;
+  rightAddon?: string;
+  /** Makes the spacing of the left addon smaller */
+  tightAddonSpace?: boolean;
   value?: string;
   defaultValue?: string;
-  /**  Description field to be displayed under the input. */
+  /** Description field to be displayed under the input. */
   descriptionText?: string;
   disabled?: boolean;
-  /**  Custom error field to be displayed. */
+  /** Custom error field to be displayed. */
   error?: string;
+  /** Renders a valid input state */
+  valid?: boolean;
   icon?: any;
   /** Disables the label, and makes it only available for screen readers */
   srOnlyLabel?: boolean;
@@ -47,33 +61,37 @@ export interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      autoComplete,
-      autoFocus,
-      className,
-      copy,
-      defaultValue,
-      descriptionText,
-      disabled,
-      error,
-      icon,
       id,
-      srOnlyLabel = false,
-      label,
-      layout,
+      type = "text",
       name,
+      style,
+      className,
+      value,
+      defaultValue,
+      placeholder,
+      label,
+      srOnlyLabel = false,
+      disabled,
+      leftAddon,
+      rightAddon,
+      tightAddonSpace,
+      descriptionText,
       onChange,
       onBlur,
       onFocus,
       onKeyDown,
-      placeholder,
-      type = "text",
-      value,
-      style,
-      reveal = false,
-      actions,
-      size = "sm",
-      borderless = false,
       triggerOnKey,
+      autoComplete,
+      autoFocus,
+      layout = "horizontal",
+      size = "sm",
+      copy = false,
+      reveal = false,
+      borderless = false,
+      error,
+      valid,
+      icon,
+      actions,
       ...otherProps
     },
     ref
@@ -119,12 +137,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const inptuClass = ctl(`
-    ${Styles["blui-input"]}
-    ${size && Styles[`blui-size-${size}`]}
-    ${icon && Styles["blui--with-icon"]}
-    ${borderless && !error && Styles["blui--borderless"]}
-    ${error && Styles["blui--error"]}
-  `);
+      ${Styles["blui-input"]}
+      ${size && Styles[`blui-size-${size}`]}
+      ${icon && Styles["blui--with-icon"]}
+      ${leftAddon && Styles["blui-addon--left"]}
+      ${rightAddon && Styles["blui-addon--right"]}
+      ${tightAddonSpace && Styles["blui-addon--tight"]}
+    `);
+
+    const containerClass = ctl(`
+      group
+      ${Styles["blui-container"]}
+      ${error && Styles["blui--error"]}
+      ${valid && Styles["blui--valid"]}
+      ${borderless && !error && !valid && Styles["blui--borderless"]}
+    `);
 
     return (
       <InputContainer
@@ -138,7 +165,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         size={size}
         className={className}
       >
-        <div className={Styles["blui-container"]}>
+        <div className={containerClass}>
+          {/* Right Input Addon */}
+          {leftAddon && (
+            <InputAddon
+              text={leftAddon}
+              borderless={borderless}
+              size={size}
+              position="start"
+              tightSpace={tightAddonSpace}
+            />
+          )}
+
           <input
             id={id}
             ref={ref}
@@ -163,11 +201,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={inptuClass}
             {...otherProps}
           />
+
+          {/* Left Input Icon */}
           {icon && <div className={Styles["blui-icon-container"]}>{icon}</div>}
 
-          {copy || error || actions || reveal || isPassword ? (
+          {/* Action Buttons */}
+          {copy || error || actions || reveal || isPassword || valid ? (
             <div className={Styles["blui-actions-container"]}>
-              {error && <InputErrorIcon />}
+              {error && <InputEndIcon icon={AlertCircle} stroke="#f56565" />}
+              {valid && <InputEndIcon icon={CheckCircle} stroke="#3d9a50" />}
               {copy && !masked ? (
                 <Button
                   size="xs"
@@ -178,7 +220,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 </Button>
               ) : null}
               {masked && reveal ? (
-                <Button size="xs" onClick={onReveal}>
+                <Button
+                  size="xs"
+                  icon={<Icon icon={Key} size="xs" />}
+                  onClick={onReveal}
+                >
                   Reveal
                 </Button>
               ) : null}
@@ -198,6 +244,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
             </div>
           ) : null}
+
+          {/* Right Input Addon */}
+          {rightAddon && (
+            <InputAddon
+              text={rightAddon}
+              borderless={borderless}
+              size={size}
+              position="end"
+            />
+          )}
         </div>
       </InputContainer>
     );

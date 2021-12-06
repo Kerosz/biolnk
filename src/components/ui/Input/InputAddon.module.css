@@ -1,0 +1,51 @@
+.blui-root {
+  @apply bg-gray-300 rounded-md shadow-sm flex items-center font-semibold;
+}
+
+.blui-position--start {
+  @apply rounded-r-none border-r border-inputBorder;
+}
+
+.blui-position--end {
+  @apply rounded-l-none border-l border-inputBorder;
+}
+
+.blui--borderless {
+  @apply border-transparent shadow-none bg-transparent;
+  @apply focus-within:bg-body;
+}
+
+/*
+  Input sizes
+*/
+
+.blui-size-xs {
+  @apply px-2.5 py-2 text-xs;
+}
+.blui-size-xs.blui-addon--tight {
+  @apply pr-0.5 pl-2.5;
+}
+.blui-size-sm {
+  @apply px-3 py-2.5 text-sm leading-4;
+}
+.blui-size-sm.blui-addon--tight {
+  @apply pr-0.5 pl-3;
+}
+.blui-size-md {
+  @apply px-4 py-2.5 text-sm leading-5;
+}
+.blui-size-md.blui-addon--tight {
+  @apply pr-1 pl-4;
+}
+.blui-size-lg {
+  @apply px-4 py-2.5 text-base;
+}
+.blui-size-lg.blui-addon--tight {
+  @apply pr-1 pl-4;
+}
+.blui-size-xl {
+  @apply px-6 py-3 text-base;
+}
+.blui-size-xl.blui-addon--tight {
+  @apply pr-1.5 pl-6;
+}
