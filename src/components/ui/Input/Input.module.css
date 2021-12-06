@@ -1,0 +1,64 @@
+.blui-container {
+  @apply relative;
+}
+
+.blui-input {
+  @apply block box-border w-full rounded-md shadow-sm text-sm font-semibold border border-solid transition-all;
+  @apply bg-body text-normalTextHover placeholder-inputPlaceholder border-inputBorder;
+  @apply hover:bg-body;
+  @apply focus:ring-gray-500 focus:bg-body focus:border-inputBorderHover focus:outline-none;
+
+  /* @apply dark:bg-transparent dark:text-gray-700 dark:border-gray-700;
+  @apply dark:focus:border-gray-700 dark:focus:ring-gray-700; */
+
+  font-family: inherit;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.blui-input:focus {
+  box-shadow: 0 0 0 1px rgba(62, 207, 142, 0.1);
+}
+
+.blui--error {
+  @apply border-inputDangerBorder dark:border-red-700;
+  @apply focus:ring-red-500 focus:border-inputDangerBorderHover focus:outline-none;
+}
+
+
+.blui--borderless {
+  @apply border-transparent shadow-none bg-inputBorderlessBg;
+  @apply hover:border-inputBorderHover;
+}
+
+.blui-actions-container {
+  @apply absolute inset-y-0 right-0 pl-3 pr-1 flex flex-row items-center space-x-1;
+}
+
+/*
+  Input sizes
+*/
+
+.blui-size-xs {
+  @apply px-2.5 py-2 text-xs;
+}
+.blui-size-sm {
+  @apply px-3 py-2.5 text-sm leading-4;
+}
+.blui-size-md {
+  @apply px-4 py-2.5 text-sm leading-5;
+}
+.blui-size-lg {
+  @apply px-4 py-2.5 text-base;
+}
+.blui-size-xl {
+  @apply px-6 py-3 text-base;
+}
+
+
+/*
+  Input icon
+*/
+
+.blui--with-icon {
+  @apply pl-10;
+}
