@@ -183,7 +183,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   size="xs"
                   icon={<Icon icon={Copy} size="xs" />}
                   onClick={() => onCopy(value || defaultValue)}
-                  loading
                 >
                   {copyLabel}
                 </Button>
