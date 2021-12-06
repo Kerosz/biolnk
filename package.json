@@ -11,16 +11,21 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "@supabase/supabase-js": "^1.28.4",
+    "lodash": "^4.17.21",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-feather": "^2.0.9",
     "react-query": "^3.34.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.4.1",
+    "@tailwindcss/forms": "^0.4.0-alpha.2",
+    "@tailwindcss/typography": "^0.5.0-alpha.3",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
+    "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.11",
     "@types/react": "^17.0.37",
     "autoprefixer": "^10.4.0",
@@ -32,7 +37,7 @@
     "postcss": "^8.4.4",
     "prettier": "^2.5.0",
     "react-test-renderer": "^17.0.2",
-    "tailwindcss": "^2.2.19",
+    "tailwindcss": "^3.0.0-alpha.2",
     "typescript": "^4.5.2"
   }
 }
