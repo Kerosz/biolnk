@@ -4,7 +4,7 @@ import queryClient from "../lib/reactQuery";
 
 import type { AppProps } from "next/app";
 
-import "../styles/tailwind.css";
+import "~/styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (

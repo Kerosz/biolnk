@@ -34,10 +34,14 @@ export interface InputProps
   error?: string;
   /** Renders a valid input state */
   valid?: boolean;
+  /** Renders custom a custom icon on the left side of the input */
   icon?: any;
   /** Disables the label, and makes it only available for screen readers */
   srOnlyLabel?: boolean;
   label?: string;
+  /** Input orientation
+   * @default `horizontal``
+   */
   layout?: "horizontal" | "vertical";
   name?: string;
   /**
@@ -48,6 +52,9 @@ export interface InputProps
   reveal?: boolean;
   /** Additional actions to be rendered */
   actions?: React.ReactNode;
+    /** Size variants for the input
+   * @default `xs`
+   */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   /** Renders the input component in the `borderless` state */
   borderless?: boolean;
@@ -58,6 +65,23 @@ export interface InputProps
   triggerOnKey?: string;
 }
 
+/**
+ * UI `atom` level component for rendering an `<Input />`
+ * 
+ * @component
+ * @example
+ * return (
+ *    <Input
+ *      label="My Label"
+ *      srOnlyLabel
+ *      leftAddon="My Addon"
+ *      error={errorMessage}
+ *      valid={isFormValid}
+ *      borderless
+ *      copy
+ *    />
+ * )
+ */
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {

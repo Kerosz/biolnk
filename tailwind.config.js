@@ -10,6 +10,20 @@ module.exports = {
   /** @see https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually */
   darkMode: "class",
   theme: {
+    fontFamily: {
+      sans: ["Rubik", "Helvetica", "Arial", "sans-serif"],
+      serif: ["Domine", "serif"],
+    },
+    screens: {
+      xs: "480px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1370px",
+      "3xl": "1536px",
+      "4xl": "1660px",
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -153,6 +167,20 @@ module.exports = {
         950: "hsl(322 75.0% 46.0%)",
         1000: "hsl(320 70.0% 13.5%)",
       },
+      lime: {
+        50: "hsl(85 50.0% 98.7%)",
+        100: "hsl(85 66.7% 96.5%)",
+        200: "hsl(85 76.0% 92.3%)",
+        300: "hsl(84 75.3% 87.5%)",
+        400: "hsl(84 71.5% 81.9%)",
+        500: "hsl(82 65.0% 74.6%)",
+        600: "hsl(79 53.2% 61.8%)",
+        700: "hsl(76 61.7% 45.1%)",
+        800: "hsl(81 67.0% 50.0%)",
+        900: "hsl(80 68.3% 46.9%)",
+        950: "hsl(75 80.0% 26.0%)",
+        1000: "hsl(78 70.0% 11.5%)",
+      },
       green: {
         50: "hsl(116 50.0% 98.9%)",
         100: "hsl(120 60.0% 97.1%)",
@@ -231,6 +259,8 @@ module.exports = {
           "linear-gradient(to right, #e93d82, #df3c91, #d13ea0, #c043ae, #ab4aba)",
         "gradient-btn-hover":
           "linear-gradient(to right, #e03177, #d72c87, #ca2e97, #ba34a6, #a43cb4);",
+        "gradient-btn-active":
+          "linear-gradient(to right top, #f04f88, #e94c98, #de4ba7, #d04fb7, #bd54c6);",
       },
     },
   },

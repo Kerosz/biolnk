@@ -6,7 +6,7 @@
 }
 
 .blui-input {
-  @apply block box-border w-full rounded-md text-sm font-semibold transition-all border-transparent;
+  @apply block box-border w-full rounded-md text-sm font-normal transition-all border-transparent;
   @apply bg-transparent text-normalTextHover placeholder-inputPlaceholder;
   @apply focus:outline-none focus:ring-0 focus:border-transparent;
 
@@ -22,13 +22,13 @@
 }
 
 .blui--error {
-  @apply !border-inputDangerBorder border-2;
+  @apply !border-inputDangerBorder border;
   @apply focus-within:ring-red-500 focus-within:border-inputDangerBorderHover;
 }
 
 .blui--valid {
-  @apply !border-green-700 border-2;
-  @apply focus-within:ring-green-500 focus-within:border-green-800;
+  @apply !border-green-700 border;
+  @apply focus-within:ring-lime-500 focus-within:border-lime-800;
 }
 
 
