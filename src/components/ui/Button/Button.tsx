@@ -6,19 +6,46 @@ import { Loader } from "react-feather";
 import Styles from "./Button.module.css";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  type?: "button" | "submit" | "reset";
+  /**
+   * Allows any component/string to be passed as the button tag
+   *
+   * @example
+   * <Button as="a" variant="link">Anchor button</Button>
+   */
+  as?: keyof JSX.IntrinsicElements;
+  /** Gives the button full width */
   block?: boolean;
   className?: any;
   children?: React.ReactNode;
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /** Renders an icon on the `left` side of the button */
   icon?: React.ReactNode;
+  /** Renders an icon on the `right` side of the button */
   iconRight?: React.ReactNode;
+  /** `Boolean` used to activate the `loading` state */
   loading?: boolean;
+  /** Removes the button text and centers the loading spinner */
   loadingCentered?: boolean;
+  /** Custom text for the loading button state */
   customLoadingText?: string;
+  /** Enables button shadow */
   shadow?: boolean;
+  /** Makes the button text uppercase and gives it letter tracking/spacing */
+  uppercase?: boolean;
+  /** Aligns the button text on the specified side.
+   * @default `center`
+   */
+  textAlign?: "left" | "center" | "right";
+  /** Size variants for the button
+   * @default `xs`
+   */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   style?: React.CSSProperties;
+  /** Style variants for the button
+   * @default `default`
+   */
   variant?:
     | "primary"
     | "default"
@@ -28,43 +55,60 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     | "dashed"
     | "link"
     | "text";
+  /** Enables the `danger`/`error` button state */
   danger?: boolean;
-  type?: "button" | "submit" | "reset";
   ariaSelected?: boolean;
   ariaControls?: string;
   tabIndex?: 0 | -1;
   role?: string;
-  textAlign?: "left" | "center" | "right";
-  as?: keyof JSX.IntrinsicElements;
 }
 
 interface CustomButtonProps extends React.HTMLAttributes<HTMLOrSVGElement> {}
 
+/**
+ * UI `atom` level component for rendering a `<Button />`
+ *
+ * @component
+ * @example
+ * return (
+ *    <Button
+ *      variant="primary"
+ *      size="md"
+ *      loading={isLoading}
+ *      disabled={isInvalid}
+ *      block
+ *      uppercase
+ *    >
+ *      My Button
+ *    </Button>
+ * )
+ */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      block,
+      style,
       className,
       children,
-      danger,
-      disabled = false,
-      onClick,
       icon,
       iconRight,
       loading = false,
       loadingCentered = false,
-      customLoadingText,
+      customLoadingText = undefined,
+      block = false,
+      uppercase = false,
       shadow = true,
-      size = "xs",
-      style,
-      variant = "default",
+      danger = false,
+      disabled = false,
       type = "button",
+      size = "xs",
+      variant = "default",
+      textAlign = "center",
+      onClick,
       ariaSelected,
       ariaControls,
       tabIndex,
       role,
       as,
-      textAlign = "center",
       ...otherProps
     },
     ref
@@ -96,6 +140,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ${loading && loadingCentered && Styles[`blui-btn--text-fade-out`]}
     `);
 
+    const textClass = ctl(`
+      ${uppercase && Styles["blui-btn--upper"]}
+    `);
+
     const CustomButton: React.FC<CustomButtonProps> = ({ ...props }) => {
       const El = as as keyof JSX.IntrinsicElements;
       return <El {...props} />;
@@ -108,17 +156,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </CustomButton>
       ) : (
         <button
-          {...otherProps}
-          ref={ref}
-          className={rootClass}
-          disabled={loading || (disabled && true)}
-          onClick={onClick}
-          style={style}
           type={type}
+          ref={ref}
+          role={role}
+          style={style}
+          className={rootClass}
+          disabled={!!loading || !!disabled}
+          aria-disabled={!!loading || !!disabled}
           aria-selected={ariaSelected}
           aria-controls={ariaControls}
+          onClick={onClick}
           tabIndex={tabIndex}
-          role={role}
+          {...otherProps}
         >
           {children}
         </button>
@@ -131,13 +180,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : icon ? (
           icon
         ) : null}
-        {children && <span>{loading ? loadingText : children}</span>}
+        {children && (
+          <span className={textClass}>{loading ? loadingText : children}</span>
+        )}
         {iconRight && !loading && iconRight}
       </RenderedButton>
     );
   }
 );
 
-Button.displayName = "ButtonComponent";
+Button.displayName = "ButtonUIComponent";
 
 export default Button;
