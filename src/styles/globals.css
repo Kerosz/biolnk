@@ -17,6 +17,6 @@
   }
 
   ::selection {
-    @apply bg-green-800 text-normalTextHover;
+    @apply bg-crimson-400 text-normalTextHover;
   }
 }
