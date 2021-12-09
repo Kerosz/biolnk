@@ -44,6 +44,10 @@ const securityHeaders = [
  */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    /** @see https://github.com/vercel/next.js/issues/30750 */
+    esmExternals: false,
+  },
   eslint: {
     // Only run ESLint on following directories during production builds
     dirs: ["pages", "utils", "lib", "components"],
