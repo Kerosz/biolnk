@@ -4,19 +4,20 @@ module.exports = {
     next: {
       rootDir: [
         "apps/docs/",
-        "apps/web/",
+        "apps/studio/",
         "packages/ui/",
         "packages/config/",
-        "packages/tsconfig/",
+        "packages/utils/",
       ],
     },
   },
-  "rules": {
+  rules: {
     "react/no-unescaped-entities": [
       "error",
       {
-        "forbid": [">", "}", "\""]
-      }
-    ]
-  }
+        forbid: [">", "}", '"'],
+      },
+    ],
+    "react-hooks/exhaustive-deps": 0,
+  },
 };
