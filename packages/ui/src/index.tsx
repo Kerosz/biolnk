@@ -1,3 +1,5 @@
+// importing tailwind to be bundled by rollup
+import "./index.css";
 // re-exporting all the icons
 export * from "react-feather";
 // custom components

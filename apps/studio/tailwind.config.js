@@ -1,8 +1,4 @@
 module.exports = {
-  /**
-   * `purge` changed to `content` in the release v3.0.0
-   * @see https://github.com/tailwindlabs/tailwindcss/discussions/5668
-   */
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",

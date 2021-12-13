@@ -13,15 +13,19 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build:css": "npx tailwindcss -o ./dist/tailwind.css --minify",
+    "build": "tsdx build && yarn build:css",
+    "build:win": "set NODE_ENV=production && yarn build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "yarn build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "react": ">=17"
+    "react": ">=17",
+    "react-dom": ">=17",
+    "tailwindcss": ">=3"
   },
   "size-limit": [
     {
@@ -34,13 +38,11 @@
     }
   ],
   "dependencies": {
-    "@biolnk/utils": "*",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "react-feather": "^2.0.9"
   },
   "devDependencies": {
     "@biolnk/config": "*",
+    "@biolnk/utils": "*",
     "@size-limit/preset-small-lib": "^7.0.3",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.0",
@@ -48,9 +50,7 @@
     "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.4",
-    "postcss-import": "^14.0.2",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-postcss-modules": "^2.0.2",
     "size-limit": "^7.0.4",
     "tailwindcss": "^3.0.1",
     "tsdx": "^0.14.1",

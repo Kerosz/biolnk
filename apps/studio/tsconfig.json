@@ -1,7 +1,6 @@
 {
   "extends": "@biolnk/config/ts/nextjs.json",
   "compilerOptions": {
-    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
