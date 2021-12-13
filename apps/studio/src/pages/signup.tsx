@@ -1,28 +1,30 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
 import SigningPageLayout from "~layout/SigningPageLayout";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSupabase } from "~/lib/supabase";
 import { Button, Input } from "@biolnk/ui";
 import { SIGNUP_SCHEMA } from "~/data/validations";
+import { Routes } from "~/data/enums/routes";
+import type { SignUpDto } from "~/types";
 
-/** @TODO Move typings into separate folder */
-type SignUpDto = {
-  email: string;
-  username: string;
-  password: string;
-};
-
-/**
- * @TODO Hook up supabase auth to the signup page
- * @TODO Change route links to `enums`
- */
 export default function SignUpPage() {
   const DEFAULT_FORM_VALUES: SignUpDto = {
     email: "",
     username: "",
     password: "",
   };
+  const { signUpWithEmail, isAuthenticated } = useSupabase();
+  const router = useRouter();
 
-  const handleSignUp = (formData: SignUpDto) => console.log(formData);
+  const handleSignUp = async (formData: SignUpDto) => {
+    await signUpWithEmail(formData);
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) router.replace(Routes.DASHBOARD);
+  }, []);
 
   return (
     <SigningPageLayout

@@ -1,0 +1,6 @@
+{
+  "extends": "@biolnk/config/eslint/base-preset",
+  "rules": {
+    "react-hooks/exhaustive-deps": "off"
+  }
+}

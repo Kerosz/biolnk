@@ -1,11 +1,12 @@
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { SupabaseProvider } from "~/lib/supabase";
 import queryClient from "../lib/reactQuery";
 import useTheme from "~/hooks/useTheme";
 
 import type { AppProps } from "next/app";
 
-import "~/styles/globals.css";
+import "~/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
   useTheme();
@@ -13,7 +14,9 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Component {...pageProps} />
+      <SupabaseProvider>
+        <Component {...pageProps} />
+      </SupabaseProvider>
     </QueryClientProvider>
   );
 }
