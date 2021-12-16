@@ -73,6 +73,7 @@ export const Text = forwardRef(
     const Element = as ?? DEFAULT_TAG;
 
     const rootClass = ctl(`
+      block
       ${spacing && Styles[`blui-space--${spacing}`]}
       ${variant && Styles[`blui-variant--${variant}`]}
       ${size && Styles[`blui-size--${size}`]}

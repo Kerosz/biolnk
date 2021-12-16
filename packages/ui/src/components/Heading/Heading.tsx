@@ -6,7 +6,7 @@ import {
 } from "@/types";
 import { ctl } from "@biolnk/utils";
 
-import Styles from "./Text.module.css";
+import Styles from "./Heading.module.css";
 
 export interface HeadingOwnProps {
   size?: "xs" | "sm" | "default" | "md" | "lg" | "xl";
