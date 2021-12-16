@@ -7,6 +7,7 @@ export interface LinkProps
     Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
   url: string;
   external?: boolean;
+  variant?: "hover" | "basic";
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -14,6 +15,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     {
       url,
       external = false,
+      variant = "hover",
       children,
       className,
       replace,
@@ -22,11 +24,12 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref
   ) => {
+    const isHover = variant === "hover";
     const matchInternal = url.startsWith("/") || url.startsWith("#");
 
     const rootClass = ctl(`
       ${className}
-      hover:underline
+      ${isHover && "hover:underline"}
     `);
 
     // Use Next Link for internal links, and <a> for others
