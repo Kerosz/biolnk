@@ -1,0 +1,32 @@
+.blui-root {
+  @apply lg:px-14 md:px-12 px-4 mx-auto w-full;
+}
+
+/*
+  Widths
+*/
+
+.blui-size--xs {
+  @apply max-w-screen-xs;
+}
+.blui-size--sm {
+  @apply max-w-screen-sm;
+}
+.blui-size--md {
+  @apply max-w-screen-md;
+}
+.blui-size--lg {
+  @apply max-w-screen-lg;
+}
+.blui-size--xl {
+  @apply max-w-screen-xl;
+}
+.blui-size--2xl {
+  @apply max-w-screen-2xl;
+}
+.blui-size--3xl {
+  @apply max-w-screen-3xl;
+}
+.blui-size--4xl {
+  @apply max-w-screen-4xl;
+}

@@ -5,4 +5,7 @@ export * from "react-feather";
 // custom components
 export * from "./components/Button/index";
 export * from "./components/Input/index";
+export * from "./components/Container/Container";
 export * from "./components/BaseIcon";
+// types
+export * from "./types/index";
