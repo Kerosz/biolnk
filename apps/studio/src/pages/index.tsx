@@ -1,7 +1,9 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { Text } from "@biolnk/ui";
 import { Routes } from "~/data/enums/routes";
 import { useSupabase } from "~/lib/supabase";
+import Header from "~/components/common/Header/Header";
 
 export default function HomePage() {
   const { isAuthenticated } = useSupabase();
@@ -15,5 +17,10 @@ export default function HomePage() {
     if (!isAuthenticated) router.replace(Routes.SIGNIN);
   }, []);
 
-  return <h1>Studio</h1>;
+  return (
+    <>
+      <Header />
+      <Text size="lg">Studio</Text>
+    </>
+  );
 }
