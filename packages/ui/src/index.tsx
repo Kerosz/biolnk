@@ -8,5 +8,6 @@ export * from "./components/Input/index";
 export * from "./components/BaseIcon";
 export * from "./components/Container/Container";
 export * from "./components/Text/Text";
+export * from "./components/Heading/Heading";
 // types
 export * from "./types/index";
