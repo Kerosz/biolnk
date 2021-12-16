@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
-import { BaseIcon, Button } from "@biolnk/ui";
+import { BaseIcon, Button, Heading, Text } from "@biolnk/ui";
 import { Facebook, Twitter } from "react-feather";
 
 export interface SigningPageLayoutProps {
@@ -30,21 +30,21 @@ const SigningPageLayout: React.FC<SigningPageLayoutProps> = ({
       />
       <div className="bg-white rounded-lg max-w-[410px] w-full sm:px-8 px-4 py-6 mt-6">
         {/* Header */}
-        <h1 className="text-normalTextHover text-xl font-semibold pb-2">
+        <Heading as="h1" className="font-semibold pb-2">
           {title}
-        </h1>
-        <p className="text-sm font-normal text-mauveDark-600 pb-6">
+        </Heading>
+        <Text as="span" size="sm" variant="gray" className="pb-6">
           {subTitle}
-        </p>
+        </Text>
 
         {/* Signing Form */}
         {children}
 
         {/* Divider */}
         <div className="border-b border-mauve-400 w-full flex justify-center mt-6 mb-11">
-          <p className="transform translate-y-2.5 uppercase bg-white max-w-max px-4 text-sm text-mauve-800 font-normal select-none">
+          <span className="transform translate-y-2.5 uppercase bg-white max-w-max px-4 text-sm text-mauve-800 font-normal select-none">
             or
-          </p>
+          </span>
         </div>
 
         {/* Social Signing */}
@@ -69,7 +69,9 @@ const SigningPageLayout: React.FC<SigningPageLayoutProps> = ({
 
       {/* Footer */}
       <div className="bg-white rounded-lg max-w-[410px] w-full sm:px-8 px-4 py-5 mt-7 text-center">
-        <span className="text-normalText tracking-wide">{footer}</span>
+        <Text as="span" variant="light" spacing="wide">
+          {footer}
+        </Text>
       </div>
     </section>
   );

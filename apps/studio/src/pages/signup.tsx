@@ -4,7 +4,7 @@ import SigningPageLayout from "~layout/SigningPageLayout";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSupabase } from "~/lib/supabase";
-import { Button, Input } from "@biolnk/ui";
+import { Button, Input, Text } from "@biolnk/ui";
 import { SIGNUP_SCHEMA } from "~/data/validations";
 import { Routes } from "~/data/enums/routes";
 import type { SignUpDto } from "~/types";
@@ -22,6 +22,10 @@ export default function SignUpPage() {
     await signUpWithEmail(formData);
   };
 
+  /**
+   * @TODO
+   * use middleware or next 'api' to enable route redirects on SSR
+   */
   useEffect(() => {
     if (isAuthenticated) router.replace(Routes.DASHBOARD);
   }, []);
@@ -104,10 +108,10 @@ export default function SignUpPage() {
             >
               Sign Up With Email
             </Button>
-            <span className="mt-3 block text-xs text-mauve-900 tracking-wide">
+            <Text as="span" size="xs" variant="lighter" spacing="wide" className="mt-3">
               By creating an account you are agreeing to our Terms and
               Conditions and Privacy Policy
-            </span>
+            </Text>
           </>
         )}
       </Form>

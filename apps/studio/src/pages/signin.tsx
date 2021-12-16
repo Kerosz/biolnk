@@ -21,6 +21,10 @@ export default function SignInPage() {
     await signInWithEmail(formData);
   };
 
+  /**
+   * @TODO
+   * use middleware or next 'api' to enable route redirects on SSR
+   */
   useEffect(() => {
     if (isAuthenticated) router.replace(Routes.DASHBOARD);
   }, []);
