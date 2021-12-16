@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import {
-  PolymorphicForwardRefExoticComponent,
   PolymorphicPropsWithoutRef,
   PolymorphicPropsWithRef,
   PolymorphicRef,
@@ -20,16 +19,23 @@ export type ContainerProps<
 
 const DEFAULT_TAG = "section";
 
-export const Container: PolymorphicForwardRefExoticComponent<
-  ContainerOwnProps,
-  typeof DEFAULT_TAG
-> = forwardRef(
+/**
+ * UI `atom` level component for rendering a `<Container />`
+ *
+ * @component
+ * @example
+ * return (
+ *    <Container maxWidth="3xl">
+ *      My Content
+ *    </Container>
+ * )
+ */
+export const Container = forwardRef(
   <C extends React.ElementType = typeof DEFAULT_TAG>(
     {
-      children,
       as,
-      maxWidth,
-      resetBaseStyle,
+      maxWidth = "3xl",
+      resetBaseStyle = false,
       className,
       ...otherProps
     }: PolymorphicPropsWithoutRef<ContainerOwnProps, C>,
@@ -48,3 +54,4 @@ export const Container: PolymorphicForwardRefExoticComponent<
 );
 
 Container.displayName = "ContainerUIComponent";
+

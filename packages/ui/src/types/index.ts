@@ -51,8 +51,8 @@ export type PolymorphicPropsWithRef<
 >;
 
 export type PolymorphicExoticComponent<
-  P = {},
-  C extends React.ElementType = React.ElementType
+  P,
+  C extends React.ElementType
 > = MergeProps<
   React.ExoticComponent<P & { [key: string]: unknown }>,
   {
@@ -69,8 +69,8 @@ export type PolymorphicExoticComponent<
  * Wrapper around React `ForwardRefExotic` and the `PolymorphicExotic`
  */
 export type PolymorphicForwardRefExoticComponent<
-  P = {},
-  C extends React.ElementType = React.ElementType
+  P,
+  C extends React.ElementType
 > = MergeProps<
   React.ForwardRefExoticComponent<P & { [key: string]: unknown }>,
   PolymorphicExoticComponent<P, C>
