@@ -1,5 +1,5 @@
 .blui-root {
-  @apply bg-mauve-50;
+  @apply bg-mauve-50 border-b border-mauve-600 py-4;
 }
 
 .blui-separator {
@@ -7,5 +7,6 @@
 }
 
 .blui-page--text {
-  @apply font-semibold bg-clip-text !text-transparent bg-gradient-btn !decoration-crimson-800 !decoration-2;
+  @apply font-medium;
+  /* @apply bg-clip-text !text-transparent bg-gradient-btn-active !decoration-crimson-700 !decoration-2; */
 }

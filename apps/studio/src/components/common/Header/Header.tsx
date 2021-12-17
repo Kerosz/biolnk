@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <header className={rootClass}>
-      <Container className="flex items-center h-full pt-4 pb-2.5">
+      <Container className="flex items-center h-full">
         <Image
           src={Logo}
           height={36}
@@ -25,30 +25,20 @@ const Header = () => {
         <div className={`${Styles["blui-separator"]} rotate-[30deg]`} />
         <div className="flex items-center">
           <Link url="/chirila" variant="basic">
-            <Text
-              as="span"
-              underline
-              size="leading"
-              className={Styles["blui-page--text"]}
-            >
+            <Text as="span" className={Styles["blui-page--text"]}>
               biolnk.me/chirila
             </Text>
           </Link>
-          <Button variant="text" size="xs">
-            <BaseIcon icon={Copy} size="lg" stroke="hsl(336 73.7% 53.5%)" />
+          <Button variant="text" size="xs" title="Copy to clipboard">
+            <BaseIcon
+              aria-label="Copy to clipboard"
+              icon={Copy}
+              size="lg"
+              stroke="hsl(336 73.7% 53.5%)"
+            />
           </Button>
         </div>
       </Container>
-      <nav className="py-3 border-b border-mauve-600">
-        <Container as="ul" className="flex space-x-3">
-          <li>
-            <Text variant="light">Overview</Text>
-          </li>
-          <li>
-            <Text>Design</Text>
-          </li>
-        </Container>
-      </nav>
     </header>
   );
 };
