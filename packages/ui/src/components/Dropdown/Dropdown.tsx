@@ -54,7 +54,7 @@ const DropdownMenu = forwardRef(
           <Menu.Button as={Fragment} children={trigger} />
         ) : (
           <Menu.Button as={Fragment}>
-            <Button icon={<BaseIcon icon={MenuIcon} />} />
+            <Button icon={MenuIcon} />
           </Menu.Button>
         )}
 
