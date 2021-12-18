@@ -5,9 +5,13 @@ import * as React from "react";
  * @source https://github.com/emotion-js/emotion/blob/main/packages/react/types/helper.d.ts
  * It takes `defaultProps` into an account - making props with defaults optional.
  */
-export type PropsOf<
+export type PropsOfWithRef<
   C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
-> = JSX.LibraryManagedAttributes<C, React.ComponentProps<C>>;
+> = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithRef<C>>;
+
+export type PropsOfWithoutRef<
+  C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>
+> = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithoutRef<C>>;
 
 export type PropsWithAs<P, T extends React.ElementType> = P & { as?: T };
 
@@ -18,9 +22,8 @@ export type PropsWithAs<P, T extends React.ElementType> = P & { as?: T };
 export type MergeProps<T, U> = Omit<T, keyof U> & U;
 
 /** Extracts the `ref` prop from a polymorphic component */
-export type PolymorphicRef<
-  C extends React.ElementType
-> = React.ComponentPropsWithRef<C>["ref"];
+export type PolymorphicRef<C extends React.ElementType> =
+  React.ComponentPropsWithRef<C>["ref"];
 
 /**
  * Allows for inheriting a set of props from a specifid generic component `C`
@@ -32,7 +35,7 @@ export type PolymorphicPropsWithoutRef<
 > = MergeProps<
   C extends keyof JSX.IntrinsicElements
     ? React.PropsWithoutRef<JSX.IntrinsicElements[C]>
-    : React.ComponentPropsWithoutRef<C>,
+    : PropsOfWithoutRef<C>,
   PropsWithAs<P, C>
 >;
 
@@ -46,7 +49,7 @@ export type PolymorphicPropsWithRef<
 > = MergeProps<
   C extends keyof JSX.IntrinsicElements
     ? React.PropsWithRef<JSX.IntrinsicElements[C]>
-    : React.ComponentPropsWithRef<C>,
+    : PropsOfWithRef<C>,
   PropsWithAs<P, C>
 >;
 

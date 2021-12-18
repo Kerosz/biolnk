@@ -15,7 +15,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     {
       url,
       external = false,
-      variant = "hover",
+      variant = "basic",
       children,
       className,
       replace,

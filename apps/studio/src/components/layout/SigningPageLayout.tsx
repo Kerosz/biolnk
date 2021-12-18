@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
-import { BaseIcon, Button, Heading, Text } from "@biolnk/ui";
+import { Button, Heading, Text } from "@biolnk/ui";
 import { Facebook, Twitter } from "react-feather";
 
 export interface SigningPageLayoutProps {
@@ -52,7 +52,8 @@ const SigningPageLayout: React.FC<SigningPageLayoutProps> = ({
           <Button
             size="md"
             block
-            icon={<BaseIcon icon={Twitter} fill="#1DA1F2" />}
+            icon={Twitter}
+            iconProps={{ fill: "#1DA1F2" }}
           >
             {socialBtnText} With Twitter
           </Button>
@@ -60,7 +61,8 @@ const SigningPageLayout: React.FC<SigningPageLayoutProps> = ({
           <Button
             size="md"
             block
-            icon={<BaseIcon icon={Facebook} fill="#4267B2" />}
+            icon={Facebook}
+            iconProps={{ fill: "#4267B2" }}
           >
             {socialBtnText} With Facebook
           </Button>
