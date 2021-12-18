@@ -9,5 +9,6 @@ export * from "./components/BaseIcon";
 export * from "./components/Container/Container";
 export * from "./components/Text/Text";
 export * from "./components/Heading/Heading";
+export * from "./components/Dropdown/Dropdown";
 // types
 export * from "./types/index";

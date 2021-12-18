@@ -1,0 +1,30 @@
+.blui-root {
+  @apply relative inline-block text-left;
+}
+
+.blui-menu--items {
+  @apply absolute right-0 w-56 mt-2 py-1 origin-top-right bg-white divide-y divide-mauve-300 rounded shadow-lg focus:outline-none;
+}
+.blui-listItem {
+  @apply flex items-center w-full px-5 py-2 text-sm;
+}
+
+.blui-listItem--active {
+  @apply bg-mauve-100 text-mauve-1000;
+}
+
+.blui-listItem--inactive {
+  @apply text-gray-950;
+}
+
+.blui-icon--left {
+  @apply mr-2;
+}
+
+.blui-icon--right {
+  @apply absolute right-3.5;
+}
+
+.blui-group {
+  @apply py-1.5;
+}
