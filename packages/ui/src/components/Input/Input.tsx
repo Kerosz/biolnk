@@ -236,18 +236,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {copy && !masked ? (
                 <Button
                   size="xs"
-                  icon={<BaseIcon icon={Copy} size="xs" />}
+                  icon={Copy}
+                  iconSize="xs"
                   onClick={() => onCopy(value || defaultValue)}
                 >
                   {copyLabel}
                 </Button>
               ) : null}
               {masked && reveal ? (
-                <Button
-                  size="xs"
-                  icon={<BaseIcon icon={Key} size="xs" />}
-                  onClick={onReveal}
-                >
+                <Button size="xs" icon={Key} iconSize="xs" onClick={onReveal}>
                   Reveal
                 </Button>
               ) : null}
