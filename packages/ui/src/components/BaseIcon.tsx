@@ -1,9 +1,10 @@
 import * as React from "react";
 import { isString } from "@biolnk/utils";
+import { Icon } from "react-feather";
 
 export interface BaseIconProps extends React.SVGAttributes<SVGElement> {
   size?: IconSize | number;
-  icon: any;
+  icon: Icon;
 }
 
 type IconSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
