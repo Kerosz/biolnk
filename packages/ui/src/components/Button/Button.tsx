@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import BaseIcon from "../BaseIcon";
+import BaseIcon, { BaseIconProps } from "../BaseIcon";
 import { Icon } from "react-feather";
 import { ctl } from "@biolnk/utils";
 import { Loader } from "react-feather";
@@ -25,6 +25,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon?: Icon;
   /** Renders an icon on the `right` side of the button */
   iconRight?: Icon;
+  iconProps?: Omit<BaseIconProps, "icon">;
   /** `Boolean` used to activate the `loading` state */
   loading?: boolean;
   /** Removes the button text and centers the loading spinner */
@@ -46,7 +47,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Size variant for the button icon
    * @default `xs`
    */
-  iconSize?: "xs" | "sm" | "md" | "lg" | "xl";
   style?: React.CSSProperties;
   /** Style variants for the button
    * @default `default`
@@ -96,7 +96,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       icon,
       iconRight,
-      iconSize = "xs",
+      iconProps,
       loading = false,
       loadingCentered = false,
       customLoadingText = undefined,
@@ -184,12 +184,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <BaseIcon icon={Loader} size={size} className={loadingClass} />
         ) : icon ? (
-          <BaseIcon icon={icon} size={iconSize} />
+          <BaseIcon icon={icon} {...iconProps} />
         ) : null}
         {children && (
           <span className={textClass}>{loading ? loadingText : children}</span>
         )}
-        {iconRight && !loading && <BaseIcon icon={iconRight} size={iconSize} />}
+        {iconRight && !loading && <BaseIcon icon={iconRight} {...iconProps} />}
       </RenderedButton>
     );
   }

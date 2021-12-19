@@ -1,0 +1,12 @@
+.blui-root {
+  @apply bg-mauve-50 border-b border-mauve-600 py-4;
+}
+
+.blui-separator {
+  @apply h-8 w-[1px] bg-gray-600 transform-gpu ml-7 mr-6;
+}
+
+.blui-page--text {
+  @apply font-medium;
+  /* @apply bg-clip-text !text-transparent bg-gradient-btn-active !decoration-crimson-700 !decoration-2; */
+}

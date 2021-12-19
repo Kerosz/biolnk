@@ -3,7 +3,7 @@
 }
 
 .blui-menu--items {
-  @apply absolute right-0 w-56 mt-2 py-1 origin-top-right bg-white divide-y divide-mauve-300 rounded shadow-lg focus:outline-none;
+  @apply absolute right-0 w-56 mt-2 py-1 origin-top-right bg-mauve-50 divide-y divide-mauve-300 rounded-md shadow-lg focus:outline-none;
 }
 .blui-listItem {
   @apply flex items-center w-full px-5 py-2 text-sm;

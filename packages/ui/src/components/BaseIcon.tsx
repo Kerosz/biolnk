@@ -35,7 +35,7 @@ export const BaseIcon: React.FC<BaseIconProps> = ({
     "2xl": 30,
     "3xl": 42,
   };
-  const DEFAULT_SIZE = SIZES_MAP["lg"];
+  const DEFAULT_SIZE = SIZES_MAP["sm"];
 
   let iconSize: number = DEFAULT_SIZE;
 
