@@ -36,7 +36,7 @@ export type TextProps<C extends React.ElementType> = PolymorphicPropsWithRef<
   C
 >;
 
-const DEFAULT_TAG = "p";
+const DEFAULT_TAG = "span";
 
 /**
  * UI `atom` level component for rendering a `<Text />`
