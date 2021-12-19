@@ -1,0 +1,52 @@
+/*
+  Justify
+*/
+.blui-justify--center {
+  @apply justify-center;
+}
+.blui-justify--between {
+  @apply justify-between;
+}
+.blui-justify--evenly {
+  @apply justify-evenly;
+}
+.blui-justify--around {
+  @apply justify-around;
+}
+.blui-justify--start {
+  @apply justify-start;
+}
+.blui-justify--end {
+  @apply justify-end;
+}
+
+/*
+  Align
+*/
+.blui-align--center {
+  @apply items-center;
+}
+.blui-align--baseline {
+  @apply items-baseline;
+}
+.blui-align--end {
+  @apply items-end;
+}
+.blui-align--start {
+  @apply items-start;
+}
+.blui-align--stretch {
+  @apply items-stretch;
+}
+
+.blui-grow {
+  @apply flex-grow;
+}
+
+.blui-shrink {
+  @apply flex-shrink;
+}
+
+.blui-center {
+  @apply justify-center items-center;
+}

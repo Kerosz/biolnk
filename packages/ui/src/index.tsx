@@ -11,5 +11,6 @@ export * from "./components/Text/Text";
 export * from "./components/Heading/Heading";
 export * from "./components/Dropdown/Dropdown";
 export * from "./components/Avatar/Avatar";
+export * from "./components/Flex/Flex";
 // types
 export * from "./types/index";
