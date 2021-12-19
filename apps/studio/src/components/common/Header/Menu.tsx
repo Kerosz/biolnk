@@ -1,5 +1,5 @@
 import Link from "../Link";
-import { Plus, Dropdown } from "@biolnk/ui";
+import { Plus, Dropdown, Avatar } from "@biolnk/ui";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
 
@@ -7,7 +7,13 @@ const Menu = () => {
   const { signOut } = useSupabase();
 
   return (
-    <Dropdown>
+    <Dropdown
+      trigger={
+        <button type="button">
+          <Avatar alt="chirila" />
+        </button>
+      }
+    >
       <Dropdown.Group>
         {/* @ts-ignore */}
         <Dropdown.ListItem as={Link} url={Routes.DASHBOARD}>
