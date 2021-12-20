@@ -1,3 +1,14 @@
+.blui-root {
+  @apply flex;
+}
+
+.blui-layout--horizontal {
+  @apply flex-row;
+}
+.blui-layout--vertical {
+  @apply flex-col;
+}
+
 /*
   Justify
 */
