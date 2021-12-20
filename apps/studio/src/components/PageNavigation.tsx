@@ -1,10 +1,10 @@
-import { Text } from "@biolnk/ui";
+import { Text, Flex } from "@biolnk/ui";
 import { Routes } from "~/data/enums/routes";
 import Link from "./common/Link";
 
 const PageNavigation: React.FC = () => {
   return (
-    <ul className="flex space-x-8 mb-8 border-b-2 border-mauve-600">
+    <Flex as="ul" className="space-x-8 mb-8 border-b-2 border-mauve-600">
       <li className="py-4">
         <Link url={Routes.DASHBOARD}>
           <Text>Overview</Text>
@@ -16,7 +16,7 @@ const PageNavigation: React.FC = () => {
         </Link>
       </li>
       <li className="py-4">
-        <Link url={Routes.DESIGN}>
+        <Link url={Routes.ANALYTICS}>
           <Text>Analytics</Text>
         </Link>
       </li>
@@ -25,7 +25,7 @@ const PageNavigation: React.FC = () => {
           <Text>Account</Text>
         </Link>
       </li>
-    </ul>
+    </Flex>
   );
 };
 

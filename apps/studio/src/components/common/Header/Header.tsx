@@ -2,7 +2,7 @@ import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
 import Menu from "./Menu";
 import Link from "../Link";
-import { BaseIcon, Container, Text, Copy, Button } from "@biolnk/ui";
+import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/ui";
 import { ctl } from "@biolnk/utils";
 
 import Styles from "./Header.module.css";
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className={rootClass}>
       <Container className="flex items-center justify-between h-full">
-        <div className="flex items-center">
+        <Flex align="center">
           <Image
             src={Logo}
             height={36}
@@ -39,7 +39,7 @@ const Header = () => {
               stroke="hsl(336 73.7% 53.5%)"
             />
           </Button>
-        </div>
+        </Flex>
 
         <Menu />
       </Container>

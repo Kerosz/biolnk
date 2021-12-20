@@ -11,7 +11,8 @@ export default function HomePage() {
 
   /**
    * @TODO
-   * use middleware or next 'api' to enable route redirects on SSR
+   * 1. Use middleware or next 'api' to enable route redirects on SSR
+   * 2. Have a coming soon component to display
    */
   useEffect(() => {
     if (!isAuthenticated) router.replace(Routes.SIGNIN);
@@ -19,7 +20,7 @@ export default function HomePage() {
 
   return (
     <DashboardLayout>
-      <Text size="lg">Dash</Text>
+      <Text>Coming Soon</Text>
     </DashboardLayout>
   );
 }
