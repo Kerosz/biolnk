@@ -48,19 +48,27 @@ export const SupabaseProvider: React.FC = (props) => {
     async ({ username, password }: SignInDto) => {
       const dbUser = await getUserByUsername(username);
 
-      const { user, error } = await sbClient.auth.signIn({
-        email: dbUser.email,
-        password,
-      });
-
-      if (error) {
+      if (!dbUser) {
         /**
          * @TODO
          * implement a toast to show the error
          */
-      }
-      if (user && !error) {
-        router.replace(Routes.DASHBOARD);
+        return;
+      } else {
+        const { user, error } = await sbClient.auth.signIn({
+          email: dbUser.email,
+          password,
+        });
+
+        if (error) {
+          /**
+           * @TODO
+           * implement a toast to show the error
+           */
+        }
+        if (user && !error) {
+          router.replace(Routes.DASHBOARD);
+        }
       }
     },
     []
@@ -69,6 +77,8 @@ export const SupabaseProvider: React.FC = (props) => {
   const signUpWithEmail = useCallback(async (signUpDto: SignUpDto) => {
     try {
       await createUserWithEmailAndPassword(signUpDto);
+
+      router.replace(Routes.EMAIL_VERIFICATION);
     } catch (_error) {
       /**
        * @TODO

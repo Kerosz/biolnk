@@ -1,6 +1,6 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import SigningPageLayout from "~layout/SigningPageLayout";
+import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSupabase } from "~/lib/supabase";
@@ -30,7 +30,7 @@ export default function SignInPage() {
   }, []);
 
   return (
-    <SigningPageLayout
+    <CenteredPageLayout
       title="Sign In"
       subTitle="Free forever. No payment needed."
       footer={
@@ -97,6 +97,6 @@ export default function SignInPage() {
           </>
         )}
       </Form>
-    </SigningPageLayout>
+    </CenteredPageLayout>
   );
 }

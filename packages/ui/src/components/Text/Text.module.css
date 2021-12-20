@@ -2,6 +2,14 @@
   @apply !text-mauve-900 cursor-not-allowed select-none;
 }
 
+.blui-centered {
+  @apply text-center;
+}
+
+.blui-underline {
+  @apply underline decoration-wavy decoration-2;
+}
+
 /*
   Sizes
 */

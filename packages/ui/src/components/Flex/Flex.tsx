@@ -15,6 +15,7 @@ export interface FlexOwnProps {
   grow?: boolean;
   shrink?: boolean;
   center?: boolean;
+  layout?: "horizontal" | "vertical";
 }
 
 export type FlexProps<C extends React.ElementType> = PolymorphicPropsWithRef<
@@ -33,12 +34,15 @@ const Flex = forwardRef(
       grow,
       shrink,
       center,
+      layout,
       className,
       ...otherProps
     }: PolymorphicPropsWithoutRef<FlexOwnProps, C>,
     ref: PolymorphicRef<C>
   ) => {
     const rootClass = ctl(`
+      ${Styles["blui-root"]}
+      ${layout && Styles[`blui-layout--${layout}`]}
       ${justify && Styles[`blui-justify--${justify}`]}
       ${align && Styles[`blui-align--${align}`]}
       ${grow && Styles[`blui-grow`]}

@@ -15,7 +15,7 @@ export interface AvatarOwnProps
 }
 
 const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
-  ({ src, alt, fallback, delay = 600, className, ...otherProps }, ref) => {
+  ({ src, alt, fallback, delay, className, ...otherProps }, ref) => {
     const getFallback = useCallback((value: string) => {
       const fallbackValue = [];
       const splitValue = value.split(" ");

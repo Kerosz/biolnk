@@ -3,4 +3,7 @@ export enum Routes {
   SIGNUP = "/signup",
   DASHBOARD = "/",
   ACCOUNT = "/account",
+  DESIGN = "/design",
+  ANALYTICS = "/analytics",
+  EMAIL_VERIFICATION = "/email-verification",
 }

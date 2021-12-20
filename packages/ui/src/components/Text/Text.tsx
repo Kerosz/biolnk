@@ -24,6 +24,7 @@ export interface TextOwnProps {
   underline?: boolean;
   strikeThrough?: boolean;
   strong?: boolean;
+  center?: boolean;
 }
 
 /** @TODO add support for truncating text */
@@ -36,7 +37,7 @@ export type TextProps<C extends React.ElementType> = PolymorphicPropsWithRef<
   C
 >;
 
-const DEFAULT_TAG = "p";
+const DEFAULT_TAG = "span";
 
 /**
  * UI `atom` level component for rendering a `<Text />`
@@ -65,6 +66,7 @@ export const Text = forwardRef(
       strikeThrough = false,
       underline = false,
       strong = false,
+      center = false,
       className,
       ...otherProps
     }: PolymorphicPropsWithoutRef<TextOwnProps, C>,
@@ -74,12 +76,13 @@ export const Text = forwardRef(
 
     const rootClass = ctl(`
       block
+      ${center && Styles["blui-centered"]}
       ${spacing && Styles[`blui-space--${spacing}`]}
       ${variant && Styles[`blui-variant--${variant}`]}
       ${size && Styles[`blui-size--${size}`]}
       ${disabled && Styles["blui-disabled"]}
       ${strikeThrough && "line-through"}
-      ${underline && "underline decoration-wavy decoration-2"}
+      ${underline && Styles["blui-underline"]}
       ${strong && "font-bold"}
       ${className}
     `);
