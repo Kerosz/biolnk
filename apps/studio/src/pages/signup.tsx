@@ -1,6 +1,6 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import SigningPageLayout from "~layout/SigningPageLayout";
+import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSupabase } from "~/lib/supabase";
@@ -31,7 +31,7 @@ export default function SignUpPage() {
   }, []);
 
   return (
-    <SigningPageLayout
+    <CenteredPageLayout
       title="Sign Up"
       subTitle="Free forever. No payment needed."
       footer={
@@ -108,13 +108,19 @@ export default function SignUpPage() {
             >
               Sign Up With Email
             </Button>
-            <Text as="span" size="xs" variant="lighter" spacing="wide" className="mt-3">
+            <Text
+              as="span"
+              size="xs"
+              variant="lighter"
+              spacing="wide"
+              className="mt-3"
+            >
               By creating an account you are agreeing to our Terms and
               Conditions and Privacy Policy
             </Text>
           </>
         )}
       </Form>
-    </SigningPageLayout>
+    </CenteredPageLayout>
   );
 }

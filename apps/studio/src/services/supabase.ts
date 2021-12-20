@@ -29,28 +29,23 @@ export const getUserById = async (id: string) => {
   return data;
 };
 
-export const createUserWithEmailAndPassword = async (u: SignUpDto) => {
-  const { user: authUser, error: authError } = await sbClient.auth.signUp({
-    email: u.email,
-    password: u.password,
-  });
-
-  if (authError) {
-    throw new Error(authError.message);
-  }
-
-  const { data, error } = await sbClient
-    .from("users")
-    .insert({
-      id: authUser.id,
-      email: authUser.email,
-      username: u.username,
-    })
-    .single();
+export const createUserWithEmailAndPassword = async ({
+  email,
+  password,
+  username,
+}: SignUpDto) => {
+  const { user, error } = await sbClient.auth.signUp(
+    { email, password },
+    {
+      // additional metadata needed to auto create a new user entry
+      // on auth ( new.raw_user_meta_data->>'username' )
+      data: { username },
+    }
+  );
 
   if (error) {
     throw new Error(error.message);
   }
 
-  return data;
+  return user;
 };

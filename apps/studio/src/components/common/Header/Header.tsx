@@ -20,7 +20,6 @@ const Header = () => {
             src={Logo}
             height={36}
             width={22}
-            placeholder="blur"
             alt="Biolnk.me branding"
             title="Biolnk.me branding"
           />
