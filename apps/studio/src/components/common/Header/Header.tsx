@@ -4,10 +4,17 @@ import Menu from "./Menu";
 import Link from "../Link";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/ui";
 import { ctl } from "@biolnk/utils";
+import { useSupabase } from "~/lib/supabase";
 
 import Styles from "./Header.module.css";
 
+/**
+ * @TODO
+ * Skeleton for loading states
+ */
 const Header = () => {
+  const { user } = useSupabase();
+
   const rootClass = ctl(`
     ${Styles["blui-root"]}
   `);
@@ -27,7 +34,7 @@ const Header = () => {
 
           <Link url="/chirila" variant="basic">
             <Text as="span" className={Styles["blui-page--text"]}>
-              biolnk.me/chirila
+              {`biolnk.me/${user ? user.username : "skeleton"}`}
             </Text>
           </Link>
           <Button variant="text" size="xs" title="Copy to clipboard">

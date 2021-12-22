@@ -2,7 +2,7 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { SupabaseProvider } from "~/lib/supabase";
 import queryClient from "../lib/reactQuery";
-import useTheme from "~/hooks/useTheme";
+import useTheme from "~/utils/hooks/useTheme";
 
 import type { AppProps } from "next/app";
 

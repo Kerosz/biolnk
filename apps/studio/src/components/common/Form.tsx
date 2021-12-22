@@ -14,7 +14,7 @@ export interface FormProps<Values>
   > {
   onSubmit: SubmitHandler<Values>;
   defaultValues: UseFormProps<Values>["defaultValues"];
-  validationSchema?: any;
+  validationSchema: any;
   resetOnSubmit?: boolean;
   mode?: UseFormProps<Values>["mode"];
   formProps?: UseFormProps<Values>;
