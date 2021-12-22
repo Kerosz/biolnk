@@ -1,9 +1,11 @@
 <h1 align="center">
-  Biolnk
   <br />
   <a href="http://www.biolnk.me">
     <img src="./apps/studio/src/assets/images/biolnk.png" alt="Biolnk branding" />
   </a>
+  <br />
+  Biolnk
+  <br />
 </h1>
 
 <p align="center">
