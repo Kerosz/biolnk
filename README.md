@@ -1,5 +1,9 @@
 <h1 align="center">
-Biolnk
+  Biolnk
+  <br />
+  <a href="http://www.biolnk.me">
+    <img src="./apps/studio/src/assets/images/biolnk.png" alt="Biolnk branding" />
+  </a>
 </h1>
 
 <p align="center">
@@ -21,7 +25,9 @@ Biolnk
 
 ## About The Project
 
-The digital world and social media dictating our lives nowadays, we need means to promote and advertise ourselves and our work. Biolnk lets you create beautiful pages filled with links to all your online content with just a few taps. Customize your biolink page to fit your brand with your logo, the right colors, background image and much more. You get one link you can share anywhere, on platforms like `Instagram` or `TikTok` that only allow for one link.
+The digital world and social media is dictating our lives nowadays, we need means to promote and advertise ourselves and our work. 
+
+**Biolnk** lets you create beautiful pages filled with links to all your online content with just a few taps. Customize your biolink page to fit your brand with your logo, the right colors, background image and much more. You get one link you can share anywhere, on platforms like `Instagram` or `TikTok` that only allow for one link.
 
 > **NOTE:** Biolnk came together as a fun project to try out new tech out there.
 

@@ -16,10 +16,10 @@ The `studio` is where the web dashboard application lives
 `studio/`<br>
 `├──`[`public`](./public) — public static files and assets<br>
 `├──`[`src`](./src) — app src files<br>
-`├────`[`assets`](./src/pages) — static files<br>
+`├────`[`assets`](./src/assets) — static files<br>
 `├────`[`components`](./src/components) — common React components, UI building blocks<br>
 `├────`[`data`](./src/data) — data related helper files<br>
-`├────`[`lib`](./src/store) — configuration for external libs<br>
+`├────`[`lib`](./src/lib) — configuration for external libs<br>
 `├────`[`pages`](./src/pages) — application views and router<br>
 `├────`[`services`](./src/services) — network calls and business logic<br>
-`└────`[`types`](./src/theme) — TypeScript typings<br>
+`└────`[`types`](./src/types) — TypeScript typings<br>
