@@ -1,6 +1,7 @@
 import DashboardLayout from "~/components/layout/DashboardLayout";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Text } from "@biolnk/ui";
 import { Routes } from "~/data/enums/routes";
 import { useSupabase } from "~/lib/supabase";
 
@@ -15,8 +16,11 @@ export default function HomePage() {
    */
   useEffect(() => {
     if (!isAuthenticated) router.replace(Routes.SIGNIN);
-    if (isAuthenticated) router.replace(Routes.DASHBOARD);
   }, []);
 
-  return null;
+  return (
+    <DashboardLayout>
+      <Text>Coming Soon</Text>
+    </DashboardLayout>
+  );
 }
