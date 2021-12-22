@@ -1,5 +1,4 @@
 <h1 align="center">
-  <br />
   <a href="http://www.biolnk.me">
     <img src="./apps/studio/src/assets/images/biolnk.png" alt="Biolnk branding" />
   </a>
@@ -7,6 +6,8 @@
   Biolnk
   <br />
 </h1>
+<p align="center">Combine all your online content into one short, easy Biolink
+</p>
 
 <p align="center">
   <a href="#about-the-project">About</a> •
@@ -56,6 +57,7 @@ The entire codebase consists in **JavaScript/TypeScript**, here is a list of tec
 - **[Supabase](https://supabase.com/)**: BE services
 - **[React-Query](https://react-query.tanstack.com/)**: Data fetching and caching
 - **[TailwindCSS](https://mui.com/)**: CSS framework
+- **[TSDX](https://tsdx.io/)**: CLI for TypeScript package development
 
 ### Directory Structure
 
@@ -97,5 +99,15 @@ please see the document [How to Contribute](./CONTRIBUTING.md), which covers the
 
 Licensed under the BSD-3-Clause license. See [BSD-3-Clause](LICENSE) for more information.
 
+
 <!-- ACKNOWLEDGEMENTS -->
 
+## Acknowledgements
+
+- [Prettier](https://prettier.io/)
+- [EsLint](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/)
+- [Jest](https://jestjs.io/)
+- [Testing Library](https://testing-library.com/)
+
+---
