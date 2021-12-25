@@ -2,25 +2,22 @@ import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
 import Menu from "./Menu";
 import Link from "../Link";
+import useUser from "~/utils/hooks/queries/useUser";
+import useClipboard from "~/utils/hooks/useClipboard";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/ui";
-import { ctl } from "@biolnk/utils";
-import { useSupabase } from "~/lib/supabase";
 
 import Styles from "./Header.module.css";
+import getPageLink from "~/utils/getPageLink";
 
-/**
- * @TODO
- * Skeleton for loading states
- */
 const Header = () => {
-  const { user } = useSupabase();
+  const [_, handleCopy] = useClipboard();
+  const { user } = useUser();
+  const { username, page_link } = user;
 
-  const rootClass = ctl(`
-    ${Styles["blui-root"]}
-  `);
+  const [pageLinkLabel, pageLinkUrl] = getPageLink(username, page_link);
 
   return (
-    <header className={rootClass}>
+    <header className={Styles["blui-root"]}>
       <Container className="flex items-center justify-between h-full">
         <Flex align="center">
           <Image
@@ -32,12 +29,17 @@ const Header = () => {
           />
           <div className={`${Styles["blui-separator"]} rotate-[30deg]`} />
 
-          <Link url="/chirila" variant="basic">
+          <Link url={pageLinkUrl} variant="basic" external>
             <Text as="span" className={Styles["blui-page--text"]}>
-              {`biolnk.me/${user ? user.username : "skeleton"}`}
+              {pageLinkLabel}
             </Text>
           </Link>
-          <Button variant="text" size="xs" title="Copy to clipboard">
+          <Button
+            variant="text"
+            size="xs"
+            title="Copy to clipboard"
+            onClick={() => handleCopy(pageLinkUrl)}
+          >
             <BaseIcon
               aria-label="Copy to clipboard"
               icon={Copy}

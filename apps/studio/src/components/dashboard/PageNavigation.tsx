@@ -1,6 +1,6 @@
 import { Text, Flex } from "@biolnk/ui";
 import { Routes } from "~/data/enums/routes";
-import Link from "./common/Link";
+import Link from "../common/Link";
 
 const PageNavigation: React.FC = () => {
   return (

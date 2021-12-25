@@ -1,26 +1,34 @@
 import DashboardLayout from "~/components/layout/DashboardLayout";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { Text } from "@biolnk/ui";
-import { Routes } from "~/data/enums/routes";
-import { useSupabase } from "~/lib/supabase";
+import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
+import useDisclosure from "~/utils/hooks/useDisclosure";
+import useUser from "~/utils/hooks/queries/useUser";
+import withAuthCheck from "~/components/HOC/withAuthCheck";
+import { Button, Flex, Heading, Plus } from "@biolnk/ui";
 
-export default function HomePage() {
-  const { isAuthenticated } = useSupabase();
-  const router = useRouter();
-
-  /**
-   * @TODO
-   * 1. Use middleware or next 'api' to enable route redirects on SSR
-   * 2. Have a coming soon component to display
-   */
-  useEffect(() => {
-    if (!isAuthenticated) router.replace(Routes.SIGNIN);
-  }, []);
+function OverviewPage() {
+  const { user } = useUser();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <DashboardLayout>
-      <Text>Coming Soon</Text>
+      <Flex justify="between">
+        <Heading as="h1" size="md" className="font-medium mb-8">
+          {`@${user?.username}'s links`}
+        </Heading>
+
+        <Button
+          variant="primary"
+          size="md"
+          icon={Plus}
+          onClick={onOpen}
+          uppercase
+        >
+          Add link
+        </Button>
+        <NewLinkDialog open={isOpen} onClose={onClose} />
+      </Flex>
     </DashboardLayout>
   );
 }
+
+export default withAuthCheck(OverviewPage);

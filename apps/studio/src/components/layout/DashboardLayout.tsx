@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "~/components/common/Header/Header";
-import PreviewEmbed from "../PreviewEmbed";
-import PageNavigation from "../PageNavigation";
+import PreviewEmbed from "../dashboard/PreviewEmbed";
+import PageNavigation from "../dashboard/PageNavigation";
 import { Container } from "@biolnk/ui";
 
 export interface DashboardLayoutProps {
