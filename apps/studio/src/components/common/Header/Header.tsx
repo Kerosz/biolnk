@@ -4,10 +4,10 @@ import Menu from "./Menu";
 import Link from "../Link";
 import useUser from "~/utils/hooks/queries/useUser";
 import useClipboard from "~/utils/hooks/useClipboard";
+import getPageLink from "~/utils/misc/getPageLink";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/ui";
 
 import Styles from "./Header.module.css";
-import getPageLink from "~/utils/getPageLink";
 
 const Header = () => {
   const [_, handleCopy] = useClipboard();

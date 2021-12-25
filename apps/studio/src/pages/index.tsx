@@ -1,4 +1,4 @@
-import withAuthCheck from "~/components/HOC/withAuthCheck";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
 
 function HomePage() {
   return null;

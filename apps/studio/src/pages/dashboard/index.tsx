@@ -2,7 +2,7 @@ import DashboardLayout from "~/components/layout/DashboardLayout";
 import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
 import useDisclosure from "~/utils/hooks/useDisclosure";
 import useUser from "~/utils/hooks/queries/useUser";
-import withAuthCheck from "~/components/HOC/withAuthCheck";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { Button, Flex, Heading, Plus } from "@biolnk/ui";
 
 function OverviewPage() {
