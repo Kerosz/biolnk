@@ -1,9 +1,9 @@
 import { sbClient } from "~/lib/supabase/index";
-import type { SignUpDto } from "~/types";
+import type { CreateLinkDto, Link, SignUpDto, User } from "~/types";
 
 export const getUserByUsername = async (username: string) => {
   const { data, error } = await sbClient
-    .from("users")
+    .from<User>("users")
     .select("*")
     .eq("username", username)
     .single();
@@ -17,17 +17,35 @@ export const getUserByUsername = async (username: string) => {
 
 export const getUserById = async (id: string) => {
   const { data, error } = await sbClient
-    .from("users")
+    .from<User>("users")
     .select("*")
     .eq("id", id)
     .single();
 
-  if (!data || error) {
-    return null;
-  }
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (!data) {
+      throw new Error("User record not found");
+    }
 
   return data;
 };
+
+export const getLinksByUserId = async (id: string) => {
+  const {data, error} = await sbClient.from<Link>("links").select("*").eq("user_id", id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("No link record found");
+  }
+
+  return data;
+}
 
 export const createUserWithEmailAndPassword = async ({
   email,
@@ -49,3 +67,13 @@ export const createUserWithEmailAndPassword = async ({
 
   return user;
 };
+
+export const createNewLink = async (newLink: CreateLinkDto) => {
+  const {data, error} = await sbClient.from<Link>("links").upsert(newLink).single()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return data
+}
