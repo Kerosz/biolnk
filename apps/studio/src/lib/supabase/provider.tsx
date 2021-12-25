@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { isUndefined } from "@biolnk/utils";
+import { makeToast } from "@biolnk/ui";
 import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
 import {
@@ -41,34 +42,54 @@ export const SupabaseProvider: React.FC = (props) => {
 
     if (!error) {
       router.replace(Routes.SIGNIN);
+
+      makeToast({
+        duration: 2500,
+        kind: "success",
+        title: "Logged Out",
+        message: "You have successfully logged out of your account!",
+      });
     }
   }, []);
 
   const signInWithEmail = useCallback(
     async ({ username, password }: SignInDto) => {
-      const dbUser = await getUserByUsername(username);
+      try {
+        const dbUser = await getUserByUsername(username);
 
-      if (!dbUser) {
-        /**
-         * @TODO
-         * implement a toast to show the error
-         */
-        return;
-      } else {
         const { user, error } = await sbClient.auth.signIn({
           email: dbUser.email,
           password,
         });
 
         if (error) {
-          /**
-           * @TODO
-           * implement a toast to show the error
-           */
+          makeToast({
+            duration: 2500,
+            kind: "error",
+            title: "Failed",
+            message: error.message,
+          });
+
+          return;
         }
+
         if (user && !error) {
           router.replace(Routes.DASHBOARD);
+
+          makeToast({
+            duration: 2500,
+            kind: "success",
+            title: "Logged In",
+            message: "You have successfully logged in your account!",
+          });
         }
+      } catch (_error) {
+        makeToast({
+          duration: 2500,
+          kind: "error",
+          title: "Failed",
+          message: "Username or password are invalid!",
+        });
       }
     },
     []
@@ -79,11 +100,13 @@ export const SupabaseProvider: React.FC = (props) => {
       await createUserWithEmailAndPassword(signUpDto);
 
       router.replace(Routes.EMAIL_VERIFICATION);
-    } catch (_error) {
-      /**
-       * @TODO
-       * implement a toast to show the error
-       */
+    } catch (error) {
+      makeToast({
+        duration: 2500,
+        kind: "error",
+        title: "Failed",
+        message: error.message,
+      });
     }
   }, []);
 
