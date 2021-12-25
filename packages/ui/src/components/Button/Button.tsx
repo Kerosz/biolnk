@@ -19,7 +19,9 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   as?: keyof JSX.IntrinsicElements;
   /** Gives the button full width */
   block?: boolean;
-  className?: any;
+  /** Gives the button no padding */
+  noSpace?: boolean;
+  className?: string;
   children?: React.ReactNode;
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -105,6 +107,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loadingCentered = false,
       customLoadingText = undefined,
       block = false,
+      noSpace = false,
       uppercase = false,
       rounded = true,
       shadow = true,
@@ -140,7 +143,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ? Styles["blui-btn-container--shadow"]
           : undefined
       }
-      ${size && Styles[`blui-btn--${size}`]}
+      ${size && Styles[`blui-btn_text--${size}`]}
+      ${size && !noSpace && Styles[`blui-btn_space--${size}`]}
       ${loading && loadingCentered && Styles[`blui-btn--text-fade-out`]}
       ${Styles[`blui-btn--text-align-${textAlign}`]}
       ${className && className}

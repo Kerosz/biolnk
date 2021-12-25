@@ -34,20 +34,36 @@
   Button sizes
 */
 
-.blui-btn--xs {
-  @apply px-2.5 py-1.5 text-xs;
+.blui-btn_text--xs {
+  @apply text-xs;
 }
-.blui-btn--sm {
-  @apply px-3 py-2 text-sm leading-4;
+.blui-btn_text--sm {
+  @apply text-sm leading-4;
 }
-.blui-btn--md {
-  @apply px-4 py-2 text-sm;
+.blui-btn_text--md {
+  @apply text-sm;
 }
-.blui-btn--lg {
-  @apply px-4 py-2 text-base;
+.blui-btn_text--lg {
+  @apply text-base;
 }
-.blui-btn--xl {
-  @apply px-6 py-3 text-base;
+.blui-btn_text--xl {
+  @apply text-base;
+}
+
+.blui-btn_space--xs {
+  @apply px-2.5 py-1.5;
+}
+.blui-btn_space--sm {
+  @apply px-3 py-2;
+}
+.blui-btn_space--md {
+  @apply px-4 py-2;
+}
+.blui-btn_space--lg {
+  @apply px-4 py-2;
+}
+.blui-btn_space--xl {
+  @apply px-6 py-3;
 }
 
 /*
@@ -112,7 +128,7 @@
 
 .blui-btn--danger {
   @apply border-btnDanger text-red-950;
-  
+
   /* @apply dark:border-red-500 dark:text-red-500; */
 }
 
