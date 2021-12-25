@@ -6,12 +6,16 @@ import type { User } from "~/types";
 export default function useUser() {
   const authUser = sbClient.auth.user();
 
-  const { data, ...methods } = useQuery<User>("user", () => {
-    // don't make a call if the `ID` does't exist
-    if(!authUser?.id) return;
+  const { data, ...methods } = useQuery<User>(
+    "user",
+    () => {
+      // don't make a call if the `ID` does't exist
+      if (!authUser?.id) return;
 
-    return getUserById(authUser?.id)
-  });
+      return getUserById(authUser?.id);
+    },
+    { refetchOnWindowFocus: false, refetchInterval: false }
+  );
 
-  return { user: data, ...methods}
+  return { user: data, ...methods };
 }

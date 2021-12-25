@@ -3,10 +3,13 @@ import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
 import useDisclosure from "~/utils/hooks/useDisclosure";
 import useUser from "~/utils/hooks/queries/useUser";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
+import useLinks from "~/utils/hooks/queries/useLinks";
 import { Button, Flex, Heading, Plus } from "@biolnk/ui";
+import LinkCard from "~/components/dashboard/LinkCard";
 
 function OverviewPage() {
   const { user } = useUser();
+  const { links } = useLinks();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -27,6 +30,10 @@ function OverviewPage() {
         </Button>
         <NewLinkDialog open={isOpen} onClose={onClose} />
       </Flex>
+
+      <ul className="mt-3 space-y-4">
+        {links && links.map((l) => <LinkCard key={l.id} {...l} />)}
+      </ul>
     </DashboardLayout>
   );
 }

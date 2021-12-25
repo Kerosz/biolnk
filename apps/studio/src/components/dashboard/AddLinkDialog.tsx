@@ -18,7 +18,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
 
   const {
     register,
-    formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+    formState: { errors, touchedFields, isValid, isDirty },
     handleSubmit,
     reset,
   } = useForm<FormLinkDto>({
@@ -26,7 +26,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
     resolver: zodResolver(CREATE_LINK_SCHEMA),
     mode: "all",
   });
-  const { mutate } = useCreateNewLink()
+  const { mutate, isLoading } = useCreateNewLink();
 
   const handleDialogClose = () => {
     onClose();
@@ -34,7 +34,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
   };
 
   const handleCreateLink = async (formData: FormLinkDto) => {
-    mutate({data: formData})
+    mutate({ data: formData });
     handleDialogClose();
   };
 
@@ -50,7 +50,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
           variant="primary"
           size="xl"
           rounded={false}
-          loading={isSubmitting}
+          loading={isLoading}
           disabled={isDirty && !isValid}
           block
         >

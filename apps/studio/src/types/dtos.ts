@@ -5,10 +5,14 @@ export type CreateLinkDto = {
   title: string;
   url: string;
   picture_url?: string;
-  kind?: `${LinkKind}`
+  kind?: `${LinkKind}`;
 };
 
-export type UpdateLinkDto = CreateLinkDto & { visible?: boolean, order?: number };
+export type UpdateLinkDto = CreateLinkDto & {
+  visible?: boolean;
+  order?: number;
+  total_clicks?: number;
+};
 
 export type FormLinkDto = {
   title: string;
