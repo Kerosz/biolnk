@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -ms-overflow-style: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-body overflow-y-auto;
+  }
+
+  ::selection {
+    @apply bg-crimson-400 text-normalTextHover;
+  }
+}
