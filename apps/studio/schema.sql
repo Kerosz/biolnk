@@ -90,13 +90,14 @@ create trigger on_public_user_insert
 create type public.link_kind as enum ('default', 'icon');
 
 create table if not exists public.links (
-  id uuid primary key not null,
+  id uuid primary key default uuid_generate_v4(),
   -- UUID from public.users, cascading
   user_id uuid not null,
   title varchar(50) not null,
   url text not null,
   picture_url text,
   visible boolean default true not null,
+  order int not null,
   kind link_kind default 'default'::public.link_kind,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
@@ -106,3 +107,4 @@ create table if not exists public.links (
 alter table public.links enable row level security;
 create policy "Can view own link data." on public.links for select using (auth.uid() = user_id);
 create policy "Can update own link data" on public.links for update using (auth.uid() = user_id);
+create policy "Can insert when authenticated" on public.links for insert using (auth.role() = 'authenticated');

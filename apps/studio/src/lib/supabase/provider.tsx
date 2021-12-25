@@ -15,8 +15,8 @@ import {
   getUserById,
   getUserByUsername,
 } from "~/services/supabase";
-import type { Session, User } from "@supabase/supabase-js";
-import type { SignInDto, SignUpDto } from "~/types";
+import type { Session } from "@supabase/supabase-js";
+import type { SignInDto, SignUpDto, User } from "~/types";
 
 /**
  * @TODO
