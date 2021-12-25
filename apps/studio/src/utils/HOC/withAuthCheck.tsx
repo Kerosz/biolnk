@@ -14,12 +14,13 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
 
     const { isReady, replace, pathname } = useRouter();
     const { isAuthenticated } = useSupabase();
-    const { isLoading, isError, isSuccess } = useUser();
+    const { isLoading, isError, user } = useUser();
 
     const isEntryPage = pathname === Routes.ENTRY;
     const isSignUpPage = pathname === Routes.SIGNUP;
     // pages that you need to be auth to acess
     const isBlacklisted = !PAGE_WHITELIST.includes(pathname as any);
+    
 
     useEffect(() => {
       // no user and blacklisted -> redirect to signin
@@ -37,10 +38,10 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
 
     useEffect(() => {
       // user -> stop loading
-      if (!isLoading && isSuccess && isAuthenticated && isReady) {
+      if (!isLoading && user && isAuthenticated && isReady) {
         setConnecting(false);
       }
-    }, [isLoading, isSuccess, isAuthenticated, isReady]);
+    }, [isLoading, user, isAuthenticated, isReady]);
 
     if (isConnecting && isBlacklisted) return <Loading />;
 
