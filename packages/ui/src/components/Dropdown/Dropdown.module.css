@@ -1,5 +1,5 @@
 .blui-root {
-  @apply relative inline-block text-left;
+  @apply relative inline-block text-left z-30;
 }
 
 .blui-menu--items {
