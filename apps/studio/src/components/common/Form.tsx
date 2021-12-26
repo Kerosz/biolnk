@@ -5,7 +5,7 @@ import {
   UseFormProps,
   UseFormReturn,
 } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { vestResolver } from "@hookform/resolvers/vest";
 
 export interface FormProps<Values>
   extends Omit<
@@ -38,7 +38,7 @@ const Form = <
   const methods = useForm<Values>(
     formProps ?? {
       defaultValues,
-      resolver: zodResolver(validationSchema),
+      resolver: vestResolver(validationSchema),
       mode,
     }
   );

@@ -2039,6 +2039,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/validator@^13.7.1":
+  version "13.7.1"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.7.1.tgz#cdab1b4779f6b1718a08de89d92d2603b71950cb"
+  integrity sha512-I6OUIZ5cYRk5lp14xSOAiXjWrfVoMZVjDuevBYgQDYzZIjsf2CAISpEcXOkFAtpAHbmWIDLcZObejqny/9xq5Q==
+
 "@types/websocket@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.4.tgz#1dc497280d8049a5450854dd698ee7e6ea9e60b8"
@@ -3502,6 +3507,11 @@ constants-browserify@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
+
+context@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/context/-/context-2.0.1.tgz#f5bbd0d4ee2a5ced0eba2636595173704759dfed"
+  integrity sha512-8QV3EXa7WP9l8aL8a3BMM792vvuPbIyp6ktGHEX6V4XiGNaiqxCGMRGzEavE3cPnHWqI9fXTujPEfBPt0iRhQw==
 
 convert-source-map@1.7.0:
   version "1.7.0"
@@ -7819,6 +7829,13 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
+n4s@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/n4s/-/n4s-4.0.1.tgz#5728f96d471e8709bb14b6ab4b94f8ba66770b02"
+  integrity sha512-S3/8mLYORi1SjgUflavLmZg/d3r0K7t+G9LsYdE3zPIILKX2A8nXpdUTauOBk6ayUUhJD0zQEtfJY+qNsYysBw==
+  dependencies:
+    context "^2.0.1"
+
 nano-time@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/nano-time/-/nano-time-1.0.0.tgz#b0554f69ad89e22d0907f7a12b0993a5d96137ef"
@@ -11060,6 +11077,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+validator@^13.7.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
+
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
@@ -11068,6 +11090,14 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vest@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/vest/-/vest-4.0.1.tgz#f91a4fc855422248b722ec4d14a98041eef1dfd8"
+  integrity sha512-J1WJeMVyyjzkQ4uiLxDoIBiiW44FxAl/Z2znNxTQlwPQe7Ys/VDjbEJV1GnErB9oCr0O1tUc5JbwXh8/eQlfzA==
+  dependencies:
+    context "^2.0.1"
+    n4s "^4.0.1"
 
 vm-browserify@1.1.2:
   version "1.1.2"
@@ -11376,8 +11406,3 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
-
-zod@^3.11.6:
-  version "3.11.6"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.11.6.tgz#e43a5e0c213ae2e02aefe7cb2b1a6fa3d7f1f483"
-  integrity sha512-daZ80A81I3/9lIydI44motWe6n59kRBfNzTuS2bfzVh1nAXi667TOTWWtatxyG+fwgNUiagSj/CWZwRRbevJIg==

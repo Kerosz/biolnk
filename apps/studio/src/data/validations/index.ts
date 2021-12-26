@@ -1,3 +1,3 @@
 export * from "./signupFormSchema";
 export * from "./signinFormSchema";
-export * from "./createLinkSchema";
+export * from "./linkSchema";
