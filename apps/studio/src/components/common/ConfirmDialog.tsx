@@ -40,6 +40,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             size="xl"
             rounded={false}
             block
+            className="!bg-red-800 hover:!bg-red-900 active:!bg-red-800"
             onClick={onConfirm}
           >
             {confirmText}

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import ConfirmDialog from "../common/ConfirmDialog";
+import UpdateLinkDialog from "./UpdateLinkDialog";
 import useDeleteLink from "~/utils/hooks/mutations/useDeleteLink";
 import useDisclosure from "~/utils/hooks/useDisclosure";
 import {
@@ -14,19 +15,28 @@ import {
 import { Link } from "~/types";
 
 const LinkCard: FC<Link> = ({ title, url, id }) => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onClose: onDeleteClose,
+    onOpen: onDeleteOpen,
+  } = useDisclosure();
+  const {
+    isOpen: isUpdateOpen,
+    onClose: onUpdateClose,
+    onOpen: onUpdateOpen,
+  } = useDisclosure();
   const { mutate } = useDeleteLink();
 
   const handleDeleteLink = () => {
     mutate(id);
-    onClose();
+    onDeleteClose();
   };
 
   return (
     <>
       <ConfirmDialog
-        open={isOpen}
-        onClose={onClose}
+        open={isDeleteOpen}
+        onClose={onDeleteClose}
         onConfirm={handleDeleteLink}
         message={
           <p>
@@ -34,6 +44,13 @@ const LinkCard: FC<Link> = ({ title, url, id }) => {
             <span className="font-medium">{url}</span> ?
           </p>
         }
+      />
+      <UpdateLinkDialog
+        open={isUpdateOpen}
+        onClose={onUpdateClose}
+        linkId={id}
+        currentTitle={title}
+        currentUrl={url}
       />
       <Flex
         as="li"
@@ -56,13 +73,19 @@ const LinkCard: FC<Link> = ({ title, url, id }) => {
           </Text>
 
           <Flex className="mt-4 space-x-3">
-            <Button aria-label="Edit" icon={Edit} variant="text" noSpace />
+            <Button
+              aria-label="Edit"
+              icon={Edit}
+              variant="text"
+              noSpace
+              onClick={onUpdateOpen}
+            />
             <Button
               aria-label="Delete"
               icon={Trash2}
               variant="text"
               noSpace
-              onClick={onOpen}
+              onClick={onDeleteOpen}
             />
           </Flex>
         </div>

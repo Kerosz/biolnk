@@ -8,7 +8,7 @@ export type CreateLinkDto = {
   kind?: `${LinkKind}`;
 };
 
-export type UpdateLinkDto = CreateLinkDto & {
+export type UpdateLinkDto = Partial<Omit<CreateLinkDto, "user_id">> & {
   visible?: boolean;
   order?: number;
   total_clicks?: number;

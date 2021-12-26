@@ -1,6 +1,12 @@
 import { Tables } from "~/data/enums/tables";
 import { sbClient } from "~/lib/supabase/index";
-import type { CreateLinkDto, Link, SignUpDto, User } from "~/types";
+import type {
+  CreateLinkDto,
+  Link,
+  SignUpDto,
+  UpdateLinkDto,
+  User,
+} from "~/types";
 
 export const getUserByUsername = async (username: string) => {
   const { data, error } = await sbClient
@@ -9,11 +15,7 @@ export const getUserByUsername = async (username: string) => {
     .eq("username", username)
     .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  if (!data) {
+  if (!data || error) {
     throw new Error("User record not found");
   }
 
@@ -27,11 +29,7 @@ export const getUserById = async (id: string) => {
     .eq("id", id)
     .single();
 
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  if (!data) {
+  if (!data || error) {
     throw new Error("User record not found");
   }
 
@@ -60,6 +58,30 @@ export const createUserWithEmailAndPassword = async ({
   password,
   username,
 }: SignUpDto) => {
+  /**
+   * We need to make these 2 separate calls as supabase doesn't
+   * check before auth if any credentials already exist
+   */
+  const { data: usernameExists } = await sbClient
+    .from<User>(Tables.USERS)
+    .select("*")
+    .eq("username", username)
+    .single();
+
+  if (usernameExists) {
+    throw new Error("Username already in use!");
+  }
+
+  const { data: emailExists } = await sbClient
+    .from<User>(Tables.USERS)
+    .select("*")
+    .eq("email", email)
+    .single();
+
+  if (emailExists) {
+    throw new Error("Email address already in use!");
+  }
+
   const { user, error } = await sbClient.auth.signUp(
     { email, password },
     {
@@ -91,9 +113,23 @@ export const createNewLink = async (newLink: CreateLinkDto) => {
 
 export const deleteLink = async (linkId: string) => {
   const { data, error } = await sbClient
-    .from(Tables.LINKS)
+    .from<Link>(Tables.LINKS)
     .delete()
     .eq("id", linkId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const updateLink = async (linkDto: UpdateLinkDto, linkId: string) => {
+  const { data, error } = await sbClient
+    .from<Link>(Tables.LINKS)
+    .update(linkDto)
+    .match({ id: linkId })
+    .single();
 
   if (error) {
     throw new Error(error.message);

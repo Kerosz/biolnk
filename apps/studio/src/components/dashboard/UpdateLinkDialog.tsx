@@ -1,17 +1,26 @@
-import useCreateNewLink from "~/utils/hooks/mutations/useCreateNewLink";
+import useUpdateLink from "~/utils/hooks/mutations/useUpdateLink";
 import { useForm } from "react-hook-form";
 import { vestResolver } from "@hookform/resolvers/vest";
 import { Dialog, Input } from "@biolnk/ui";
-import { CREATE_LINK_SCHEMA } from "~/data/validations";
+import { UPDATE_LINK_SCHEMA } from "~/data/validations";
 import type { FormLinkDto } from "~/types";
 
-export interface AddLinkDialogProps {
+export interface UpdateLinkDialogProps {
   onClose: () => void;
   open: boolean;
+  currentTitle: string;
+  currentUrl: string;
+  linkId: string;
 }
 
-const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
-  const DEFAULT_FORM_VALUES: FormLinkDto = {
+const UpdateLinkDialog: React.FC<UpdateLinkDialogProps> = ({
+  open,
+  onClose,
+  linkId,
+  currentTitle,
+  currentUrl,
+}) => {
+  const DEFAULT_FORM_VALUES: Partial<FormLinkDto> = {
     title: "",
     url: "",
   };
@@ -21,51 +30,61 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
     formState: { errors, touchedFields, isValid, isDirty },
     handleSubmit,
     reset,
-  } = useForm<FormLinkDto>({
+  } = useForm<Partial<FormLinkDto>>({
     defaultValues: DEFAULT_FORM_VALUES,
-    resolver: vestResolver(CREATE_LINK_SCHEMA),
+    resolver: vestResolver(UPDATE_LINK_SCHEMA),
     mode: "all",
   });
-  const { mutate, isLoading } = useCreateNewLink();
+  const { mutate, isLoading } = useUpdateLink();
 
   const handleDialogClose = () => {
     onClose();
     reset(DEFAULT_FORM_VALUES);
   };
 
-  const handleCreateLink = async (formData: FormLinkDto) => {
-    mutate({ data: formData });
+  const handleUpdateLink = async ({ title, url }: Partial<FormLinkDto>) => {
+    const data = {
+      title: title || currentTitle,
+      url: url || currentUrl,
+    };
+
+    // If any of the fields are different from the existing values -> send req
+    if (data.title !== currentTitle || data.url !== currentUrl) {
+      mutate({ data, linkId });
+    }
+
     handleDialogClose();
   };
 
   return (
     <Dialog
-      title="Add"
+      title="Update"
       open={open}
       onClose={handleDialogClose}
       actions={
         <Dialog.Button
           type="submit"
-          form="create-link__form"
-          variant="primary"
+          form="update-link__form"
+          variant="colored"
           size="xl"
           rounded={false}
           loading={isLoading}
           disabled={isDirty && !isValid}
           block
+          className="!bg-blue-800 hover:!bg-blue-900 active:!bg-blue-800"
         >
-          Save
+          Update
         </Dialog.Button>
       }
     >
-      <form id="create-link__form" onSubmit={handleSubmit(handleCreateLink)}>
+      <form id="update-link__form" onSubmit={handleSubmit(handleUpdateLink)}>
         <Input
           id="title"
           type="text"
           title="Please enter your title!"
           label="title"
           srOnlyLabel
-          placeholder="Title"
+          placeholder={currentTitle}
           borderless
           error={errors.title?.message}
           valid={!errors.title && touchedFields.title}
@@ -77,7 +96,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
           title="Please enter your url!"
           label="URL"
           srOnlyLabel
-          placeholder="URL"
+          placeholder={currentUrl}
           borderless
           error={errors.url?.message}
           valid={!errors.url && touchedFields.url}
@@ -88,4 +107,4 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
   );
 };
 
-export default AddLinkDialog;
+export default UpdateLinkDialog;
