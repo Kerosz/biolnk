@@ -15,9 +15,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       <Container
         as="section"
         maxWidth="3xl"
-        className="py-10 grid grid-cols-5 gap-12"
+        className="py-8 md:grid grid-cols-5 lg:gap-12 md:gap-3"
       >
-        <div className="col-span-3 px-3">
+        <div className="col-span-3">
           <PageNavigation />
           {children}
         </div>

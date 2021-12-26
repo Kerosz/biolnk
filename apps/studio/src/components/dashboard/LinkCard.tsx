@@ -7,6 +7,7 @@ import {
   BaseIcon,
   Button,
   Edit,
+  Eye,
   Flex,
   MoreVertical,
   Text,
@@ -14,7 +15,7 @@ import {
 } from "@biolnk/ui";
 import { Link } from "~/types";
 
-const LinkCard: FC<Link> = ({ title, url, id }) => {
+const LinkCard: FC<Link> = ({ title, url, id, total_clicks }) => {
   const {
     isOpen: isDeleteOpen,
     onClose: onDeleteClose,
@@ -56,6 +57,7 @@ const LinkCard: FC<Link> = ({ title, url, id }) => {
         as="li"
         className="bg-white shadow-sm rounded border border-mauve-200"
       >
+        {/* Dragging Bar */}
         <Flex
           as="button"
           justify="center"
@@ -64,31 +66,57 @@ const LinkCard: FC<Link> = ({ title, url, id }) => {
         >
           <BaseIcon icon={MoreVertical} size="xl" />
         </Flex>
-        <div className="p-5">
-          <Text as="p" className="font-medium mb-1.5">
-            {title}
-          </Text>
-          <Text as="p" variant="light" size="sm">
-            {url}
-          </Text>
 
-          <Flex className="mt-4 space-x-3">
-            <Button
-              aria-label="Edit"
-              icon={Edit}
-              variant="text"
-              noSpace
-              onClick={onUpdateOpen}
-            />
-            <Button
-              aria-label="Delete"
-              icon={Trash2}
-              variant="text"
-              noSpace
-              onClick={onDeleteOpen}
-            />
+        {/* Card content */}
+        <Flex
+          justify="between"
+          align="center"
+          className="px-3.5 sm:px-5 pt-5 pb-4 w-full"
+        >
+          <div className="w-full">
+            <Text as="p" className="font-medium mb-1.5">
+              {title}
+            </Text>
+            <Text as="p" variant="light" size="sm">
+              {url}
+            </Text>
+
+            <Flex className="mt-5" align="center" justify="between">
+              <div className="space-x-3">
+                <Button
+                  aria-label="Edit"
+                  icon={Edit}
+                  variant="text"
+                  noSpace
+                  onClick={onUpdateOpen}
+                />
+                <Button
+                  aria-label="Delete"
+                  icon={Trash2}
+                  variant="text"
+                  noSpace
+                  onClick={onDeleteOpen}
+                />
+              </div>
+
+              <Flex
+                className="flex xs:!hidden text-mauve-800 sm:mr-3 md:mr-0 lg:mr-3"
+                align="center"
+              >
+                <BaseIcon icon={Eye} size="lg" />
+                <span className="text-mauve-1000 ml-2.5">{total_clicks}</span>
+              </Flex>
+            </Flex>
+          </div>
+
+          <Flex
+            className="!hidden xs:!flex text-mauve-800 sm:mr-3 md:mr-0 lg:mr-3"
+            align="center"
+          >
+            <BaseIcon icon={Eye} size="lg" />
+            <span className="text-mauve-1000 ml-2.5">{total_clicks}</span>
           </Flex>
-        </div>
+        </Flex>
       </Flex>
     </>
   );

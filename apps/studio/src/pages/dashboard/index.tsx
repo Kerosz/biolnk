@@ -14,8 +14,8 @@ function OverviewPage() {
 
   return (
     <DashboardLayout>
-      <Flex justify="between">
-        <Heading as="h1" size="md" className="font-medium mb-8">
+      <Flex justify="between" className="flex-col-reverse xs:flex-row">
+        <Heading as="h1" size="md" className="font-medium mt-10 xs:mt-0">
           {`@${user?.username}'s links`}
         </Heading>
 
@@ -31,7 +31,7 @@ function OverviewPage() {
         <NewLinkDialog open={isOpen} onClose={onClose} />
       </Flex>
 
-      <ul className="mt-3 space-y-4">
+      <ul className="mt-6 xs:mt-8 space-y-4">
         {links && links.map((l) => <LinkCard key={l.id} {...l} />)}
       </ul>
     </DashboardLayout>
