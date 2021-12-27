@@ -1,8 +1,9 @@
-import { Tables } from "~/data/enums/tables";
 import { sbClient } from "~/lib/supabase/index";
-import type {
+import { Tables, CustomFunction } from "~/data/enums/index";
+import {
   CreateLinkDto,
   Link,
+  ReorderLinkDto,
   SignUpDto,
   UpdateLinkDto,
   User,
@@ -62,6 +63,7 @@ export const createUserWithEmailAndPassword = async ({
    * We need to make these 2 separate calls as supabase doesn't
    * check before auth if any credentials already exist
    */
+  // START CHECKS
   const { data: usernameExists } = await sbClient
     .from<User>(Tables.USERS)
     .select("*")
@@ -81,6 +83,7 @@ export const createUserWithEmailAndPassword = async ({
   if (emailExists) {
     throw new Error("Email address already in use!");
   }
+  // END CHECKS
 
   const { user, error } = await sbClient.auth.signUp(
     { email, password },
@@ -130,6 +133,18 @@ export const updateLink = async (linkDto: UpdateLinkDto, linkId: string) => {
     .update(linkDto)
     .match({ id: linkId })
     .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const reorderLinks = async (listDto: ReorderLinkDto[]) => {
+  const { data, error } = await sbClient.rpc(CustomFunction.REORDER, {
+    payload: listDto,
+  });
 
   if (error) {
     throw new Error(error.message);
