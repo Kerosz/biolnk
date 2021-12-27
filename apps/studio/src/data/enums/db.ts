@@ -13,3 +13,7 @@ export enum LinkKind {
   DEFAULT = "default",
   ICON = "icon",
 }
+
+export enum CustomFunction {
+  REORDER = "update_links_order",
+}

@@ -1,4 +1,4 @@
-import { LinkKind } from "~/data/enums/db";
+import { LinkKind } from "~/data/enums/index";
 
 export type CreateLinkDto = {
   user_id: string;
@@ -10,7 +10,7 @@ export type CreateLinkDto = {
 
 export type UpdateLinkDto = Partial<Omit<CreateLinkDto, "user_id">> & {
   visible?: boolean;
-  order?: number;
+  display_order?: number;
   total_clicks?: number;
 };
 
@@ -18,4 +18,9 @@ export type FormLinkDto = {
   title: string;
   url: string;
   picture_url?: string;
+};
+
+export type ReorderLinkDto = {
+  id: string;
+  display_order: number;
 };

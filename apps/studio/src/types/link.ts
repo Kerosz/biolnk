@@ -1,4 +1,4 @@
-import { LinkKind } from "~/data/enums/db";
+import { LinkKind } from "~/data/enums/index";
 
 export type Link = {
   id: string;
@@ -7,7 +7,7 @@ export type Link = {
   url: string;
   picture_url: string | null;
   visible: boolean;
-  order: number;
+  display_order: number;
   total_clicks: number;
   kind: `${LinkKind}`;
   inserted_at: string;
