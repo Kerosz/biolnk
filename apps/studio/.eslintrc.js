@@ -1,4 +1,4 @@
-module.exports = {
+module.exports ={
   extends: ["next/core-web-vitals", "prettier"],
   settings: {
     next: {
@@ -17,6 +17,7 @@ module.exports = {
       {
         forbid: [">", "}", '"'],
       },
-    ]
+    ],
+    "react-hooks/exhaustive-deps": "off"
   },
-};
+}

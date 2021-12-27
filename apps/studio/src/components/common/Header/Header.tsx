@@ -12,9 +12,11 @@ import Styles from "./Header.module.css";
 const Header = () => {
   const [_, handleCopy] = useClipboard();
   const { user } = useUser();
-  const { username, page_link } = user;
 
-  const [pageLinkLabel, pageLinkUrl] = getPageLink(username, page_link);
+  const [pageLinkLabel, pageLinkUrl] = getPageLink(
+    user?.username,
+    user?.page_link
+  );
 
   return (
     <header className={Styles["blui-root"]}>

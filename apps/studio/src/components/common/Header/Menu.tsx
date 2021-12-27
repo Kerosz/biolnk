@@ -16,7 +16,7 @@ const Menu = () => {
       <Dropdown
         trigger={
           <button type="button">
-            <Avatar src={user.avatar_url} alt={user.username} />
+            <Avatar src={user?.avatar_url} alt={user?.username ?? "Biolnk"} />
           </button>
         }
       >

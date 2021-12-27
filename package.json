@@ -20,22 +20,30 @@
     "turbo": "latest"
   },
   "turbo": {
-    "baseBranch": "origin/main",
     "pipeline": {
       "build": {
-        "dependsOn": [
-          "^build"
-        ],
         "outputs": [
           "dist/**",
           ".next/**"
+        ],
+        "dependsOn": [
+          "^build"
         ]
+      },
+      "test": {
+        "outputs": [
+          "coverage/**"
+        ],
+        "dependsOn": []
       },
       "lint": {
         "outputs": []
       },
       "dev": {
-        "cache": true
+        "cache": false
+      },
+      "clean": {
+        "cache": false
       }
     }
   }

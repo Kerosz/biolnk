@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import useUser from "~/utils/hooks/queries/useUser";
 import { ComponentType, useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -20,7 +21,6 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
     const isSignUpPage = pathname === Routes.SIGNUP;
     // pages that you need to be auth to acess
     const isBlacklisted = !PAGE_WHITELIST.includes(pathname as any);
-    
 
     useEffect(() => {
       // no user and blacklisted -> redirect to signin
