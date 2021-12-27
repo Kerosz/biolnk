@@ -12,8 +12,8 @@
     "dev": "turbo run dev --parallel --no-cache",
     "lint": "turbo run lint",
     "format": "prettier --write '**/*.{ts,tsx,.md}'",
-    "deploy:studio": "turbo run build --scope=\"@biolnk/studio\" --includeDependencies --no-deps",
-    "deploy:web": "turbo run build --scope=\"@biolnk/web\" --includeDependencies --no-deps"
+    "deploy:studio": "turbo run build --scope=\"@biolnk/studio\" --include-dependencies --no-deps",
+    "deploy:web": "turbo run build --scope=\"@biolnk/web\" --include-dependencies --no-deps"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

@@ -1,4 +1,4 @@
-import isUrl from "validator/lib/isUrl";
+import isUrl from "validator/lib/isURL";
 import { create, test, enforce, only, optional } from "vest";
 import { FormLinkDto } from "~/types";
 

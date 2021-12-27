@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useCallback } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { ctl } from "@biolnk/utils";

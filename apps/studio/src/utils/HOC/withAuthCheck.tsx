@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import useUser from "~/utils/hooks/queries/useUser";
 import { ComponentType, useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -7,7 +6,7 @@ import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
 
 const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
-  return (props: Props) => {
+  const Component = (props: Props) => {
     // allow access to these pages with no additional auth checks
     const PAGE_WHITELIST = [Routes.SIGNIN, Routes.SIGNUP];
 
@@ -47,6 +46,8 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
 
     return <WrappedComponent {...props} />;
   };
+
+  return Component;
 };
 
 export default withAuthCheck;
