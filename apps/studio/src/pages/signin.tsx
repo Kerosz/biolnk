@@ -1,33 +1,23 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
 import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { useSupabase } from "~/lib/supabase";
 import { Button, Input } from "@biolnk/ui";
 import { SIGNIN_SCHEMA } from "~/data/validations";
-import { Routes } from "~/data/enums/routes";
 import type { SignInDto } from "~/types";
 
-export default function SignInPage() {
+function SignInPage() {
   const DEFAULT_FORM_VALUES: SignInDto = {
     username: "",
     password: "",
   };
-  const router = useRouter();
-  const { signInWithEmail, isAuthenticated } = useSupabase();
+  
+  const { signInWithEmail } = useSupabase();
 
   const handleSignIn = async (formData: SignInDto) => {
     await signInWithEmail(formData);
   };
-
-  /**
-   * @TODO
-   * use middleware or next 'api' to enable route redirects on SSR
-   */
-  useEffect(() => {
-    if (isAuthenticated) router.replace(Routes.DASHBOARD);
-  }, []);
 
   return (
     <CenteredPageLayout
@@ -100,3 +90,5 @@ export default function SignInPage() {
     </CenteredPageLayout>
   );
 }
+
+export default withAuthCheck(SignInPage);

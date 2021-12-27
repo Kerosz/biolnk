@@ -5,7 +5,7 @@ import {
   UseFormProps,
   UseFormReturn,
 } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { vestResolver } from "@hookform/resolvers/vest";
 
 export interface FormProps<Values>
   extends Omit<
@@ -14,7 +14,7 @@ export interface FormProps<Values>
   > {
   onSubmit: SubmitHandler<Values>;
   defaultValues: UseFormProps<Values>["defaultValues"];
-  validationSchema?: any;
+  validationSchema: any;
   resetOnSubmit?: boolean;
   mode?: UseFormProps<Values>["mode"];
   formProps?: UseFormProps<Values>;
@@ -38,7 +38,7 @@ const Form = <
   const methods = useForm<Values>(
     formProps ?? {
       defaultValues,
-      resolver: zodResolver(validationSchema),
+      resolver: vestResolver(validationSchema),
       mode,
     }
   );

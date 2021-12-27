@@ -1,9 +1,10 @@
 export enum Routes {
+  ENTRY = "/",
   SIGNIN = "/signin",
   SIGNUP = "/signup",
-  DASHBOARD = "/",
   ACCOUNT = "/account",
-  DESIGN = "/design",
-  ANALYTICS = "/analytics",
+  DASHBOARD = "/dashboard",
+  DESIGN = "/dashboard/design",
+  ANALYTICS = "/dashboard/analytics",
   EMAIL_VERIFICATION = "/email-verification",
 }

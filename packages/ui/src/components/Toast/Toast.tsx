@@ -9,7 +9,6 @@ import {
   Info,
 } from "react-feather";
 import { ctl } from "@biolnk/utils";
-import { MergeProps } from "@/types";
 
 import Styles from "./Toast.module.css";
 
@@ -21,8 +20,8 @@ export interface ToastOwnProps {
   customIcon?: ReactNode | null;
 }
 
-export type MakeToastOptions = MergeProps<ToastOptions, ToastOwnProps>;
-export type ToastProps = MergeProps<Partial<Toast>, ToastOwnProps>;
+export type MakeToastOptions = ToastOptions & ToastOwnProps;
+export type ToastProps = Partial<Toast> & ToastOwnProps;
 type ToastKind = "success" | "warning" | "info" | "error" | "default";
 type ToastIconMap = {
   [Key in ToastKind]: Icon;
@@ -114,14 +113,14 @@ const Toast: FC<ToastProps> = ({
   );
 };
 
-const makeToast = ({
+export const makeToast = ({
   onComplete,
   title,
   message,
   kind,
   customIcon,
   ...toasterOptions
-}: MakeToastOptions) =>
+}: MakeToastOptions) => {
   toast.custom(
     ({ visible, id }) => (
       <Toast
@@ -136,5 +135,6 @@ const makeToast = ({
     ),
     toasterOptions
   );
+};
 
-export { Toaster, makeToast };
+export { Toaster };

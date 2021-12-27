@@ -1,0 +1,26 @@
+.blui-dialog__root {
+  @apply fixed inset-0 z-30 overflow-y-auto;
+}
+
+.blui-dialog__overlay--container {
+  @apply min-h-screen px-3 text-center;
+}
+.blui-dialog__overlay {
+  @apply fixed inset-0 bg-blackAlpha-300;
+}
+
+.blui-dialog__hidden--element {
+  @apply inline-block h-screen align-middle;
+}
+
+.blui-dialog {
+  @apply inline-block w-full max-w-md pt-7 my-6 overflow-hidden text-left align-middle transition-all transform bg-mauve-50 shadow-sm rounded-t-lg;
+}
+
+.blui-dialog--title {
+  @apply text-lg font-medium text-gray-1000;
+}
+
+.blui-dialog--child {
+  @apply mt-4 mb-8 px-6;
+}

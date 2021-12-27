@@ -1,21 +1,57 @@
-import { z } from "zod";
+import { create, test, enforce, only } from "vest";
+import { SignInDto } from "~/types";
 
-export const SIGNIN_SCHEMA = z.object({
-  username: z
-    .string()
-    .nonempty("Username must not be empty!")
-    .regex(
-      /^[a-z0-9.\-_]+$/,
-      "Username must be lowercase and no special characters!"
-    )
-    .min(3, "Username must be at least 3 characters long!")
-    .max(18, "Username must be at most 18 characters long!"),
-  password: z
-    .string()
-    .nonempty("Password must not be empty!")
-    .min(8, "Password must be at least 8 characters long!")
-    .regex(/[*@!#%&()^~{}]+/, "Password must contain one special character!")
-    .regex(/[A-Z]+/, "Password must contain at least one uppercase character!")
-    .regex(/[a-z]+/, "Password must contain at least one lowercase character!")
-    .regex(/[0-9]+/, "Password must contain at least one number!"),
-});
+export const SIGNIN_SCHEMA: any = create(
+  (data: SignInDto, currentField: string) => {
+    only(currentField);
+
+    // Username validation
+    test("username", "Username must not be empty!", () => {
+      enforce(data.username).isNotBlank();
+    });
+    test("username", "Username must be at least 3 characters long!", () => {
+      enforce(data.username).longerThanOrEquals(3);
+    });
+    test("username", "Username must be at most 18 characters long!", () => {
+      enforce(data.username).shorterThanOrEquals(18);
+    });
+    test(
+      "username",
+      "Username must be lowercase and no special characters!",
+      () => {
+        enforce(data.username).matches(/^[a-z0-9.\-_]+$/);
+      }
+    );
+
+    // Password validation
+    test("password", "Password must not be empty!", () => {
+      enforce(data.password).isNotBlank();
+    });
+    test("password", "Password must be at least 8 characters long!", () => {
+      enforce(data.password).longerThanOrEquals(8);
+    });
+    test("password", "Password must be at most 40 characters long!", () => {
+      enforce(data.password).shorterThanOrEquals(40);
+    });
+    test("password", "Password must contain one special character!", () => {
+      enforce(data.password).matches(/[*@!#%&()^~{}]+/);
+    });
+    test(
+      "password",
+      "Password must contain at least one uppercase character!",
+      () => {
+        enforce(data.password).matches(/[A-Z]+/);
+      }
+    );
+    test(
+      "password",
+      "Password must contain at least one lowercase character!",
+      () => {
+        enforce(data.password).matches(/[a-z]+/);
+      }
+    );
+    test("password", "Password must contain at least one number!", () => {
+      enforce(data.password).matches(/[0-9]+/);
+    });
+  }
+);

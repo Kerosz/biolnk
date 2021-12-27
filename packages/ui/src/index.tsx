@@ -12,6 +12,8 @@ export * from "./components/Heading/Heading";
 export * from "./components/Dropdown/Dropdown";
 export * from "./components/Avatar/Avatar";
 export * from "./components/Flex/Flex";
+export * from "./components/Dialog/Dialog";
+export * from "./components/Loading/Loading";
 export * from "./components/Toast/Toast";
 // types
 export * from "./types/index";
