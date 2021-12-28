@@ -1,18 +1,21 @@
 import Link from "../Link";
 import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
-import useDisclosure from "~/utils/hooks/useDisclosure";
 import useUser from "~/utils/hooks/queries/useUser";
 import { Plus, Dropdown, Avatar } from "@biolnk/ui";
+import { useAppContext } from "~/data/context";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
 
 const Menu = () => {
   const { user } = useUser();
   const { signOut } = useSupabase();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { isAddLinkDialogOpen, closeAddLinkDialog, openAddLinkDialog } =
+    useAppContext();
 
   return (
     <>
+      <NewLinkDialog open={isAddLinkDialogOpen} onClose={closeAddLinkDialog} />
+
       <Dropdown
         trigger={
           <button type="button">
@@ -28,7 +31,11 @@ const Menu = () => {
         </Dropdown.Group>
 
         <Dropdown.Group>
-          <Dropdown.ListItem as="button" onClick={onOpen} rightIcon={Plus}>
+          <Dropdown.ListItem
+            as="button"
+            onClick={openAddLinkDialog}
+            rightIcon={Plus}
+          >
             Add Link
           </Dropdown.ListItem>
           {/* @ts-ignore */}
@@ -41,8 +48,6 @@ const Menu = () => {
           <Dropdown.ListItem onClick={signOut}>Log out</Dropdown.ListItem>
         </Dropdown.Group>
       </Dropdown>
-
-      <NewLinkDialog open={isOpen} onClose={onClose} />
     </>
   );
 };

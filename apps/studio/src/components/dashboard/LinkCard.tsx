@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ConfirmDialog from "../common/ConfirmDialog";
+import ConfirmDialog from "../ConfirmDialog";
 import UpdateLinkDialog from "./UpdateLinkDialog";
 import useDeleteLink from "~/utils/hooks/mutations/useDeleteLink";
 import useDisclosure from "~/utils/hooks/useDisclosure";
