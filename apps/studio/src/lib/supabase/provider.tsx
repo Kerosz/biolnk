@@ -1,15 +1,14 @@
 import React, {
-  createContext,
+  ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import { isUndefined } from "@biolnk/utils";
 import { makeToast } from "@biolnk/ui";
 import { sbClient } from "./client";
+import { SupabaseContext, SupabaseContextState } from "./context";
 import { Routes } from "~/data/enums/routes";
 import {
   createUserWithEmailAndPassword,
@@ -19,13 +18,11 @@ import {
 import type { Session } from "@supabase/supabase-js";
 import type { SignInDto, SignUpDto, User } from "~/types";
 
-/**
- * @TODO
- * improve typing of supabase ctx
- */
-export const SupabaseContext = createContext<any>({});
+export type SupabaseProviderProps = {
+  children: ReactNode;
+};
 
-export const SupabaseProvider: React.FC = (props) => {
+export const SupabaseProvider = (props: SupabaseProviderProps) => {
   const [currentSession, setCurrentSession] = useState<Session | null>(
     sbClient.auth.session()
   );
@@ -111,10 +108,12 @@ export const SupabaseProvider: React.FC = (props) => {
   }, []);
 
   const isAuthenticated = currentSession?.user.role === "authenticated";
+  const authUser = sbClient.auth.user();
 
-  const providerValue = useMemo(
+  const providerValue: SupabaseContextState = useMemo(
     () => ({
       user: currentUser,
+      authUser,
       session: currentSession,
       isAuthenticated,
       signOut,
@@ -143,14 +142,4 @@ export const SupabaseProvider: React.FC = (props) => {
   }, []);
 
   return <SupabaseContext.Provider {...props} value={providerValue} />;
-};
-
-export const useSupabase = () => {
-  const ctx = useContext(SupabaseContext);
-
-  if (isUndefined(ctx)) {
-    throw new Error("Supabase must be used within the 'SupabaseProvider'");
-  }
-
-  return ctx;
 };
