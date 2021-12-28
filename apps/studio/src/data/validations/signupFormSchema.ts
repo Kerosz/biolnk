@@ -1,6 +1,5 @@
 import isEmail from "validator/lib/isEmail";
-import { create, test, enforce, only, skipWhen } from "vest";
-import { getUserByUsername } from "~/services/supabase";
+import { create, test, enforce, only } from "vest";
 import { SignUpDto } from "~/types";
 
 export const SIGNUP_SCHEMA: any = create(
