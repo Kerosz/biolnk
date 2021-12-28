@@ -8,21 +8,33 @@ import React, {
 import { useRouter } from "next/router";
 import { makeToast } from "@biolnk/ui";
 import { sbClient } from "./client";
-import { SupabaseContext, SupabaseContextState } from "./context";
 import { Routes } from "~/data/enums/routes";
 import {
   createUserWithEmailAndPassword,
   getUserById,
   getUserByUsername,
 } from "~/services/supabase";
+import { makeContext } from "~/utils/makeContext";
 import type { Session } from "@supabase/supabase-js";
-import type { SignInDto, SignUpDto, User } from "~/types";
+import type { SignInDto, SignUpDto, User, AuthUser } from "~/types";
+
+export type SupabaseContextState = {
+  user: User;
+  authUser: AuthUser;
+  session: Session;
+  isAuthenticated: boolean;
+  signOut: () => Promise<void>;
+  signUpWithEmail: (signUpDto: SignUpDto) => Promise<void>;
+  signInWithEmail: (signInDto: SignInDto) => Promise<void>;
+};
 
 export type SupabaseProviderProps = {
   children: ReactNode;
 };
 
-export const SupabaseProvider = (props: SupabaseProviderProps) => {
+const [SupabaseContext, Provider, useSupabase] = makeContext("SupabaseContext");
+
+const SupabaseProvider = (props: SupabaseProviderProps) => {
   const [currentSession, setCurrentSession] = useState<Session | null>(
     sbClient.auth.session()
   );
@@ -141,5 +153,7 @@ export const SupabaseProvider = (props: SupabaseProviderProps) => {
     return () => data?.unsubscribe();
   }, []);
 
-  return <SupabaseContext.Provider {...props} value={providerValue} />;
+  return <Provider {...props} value={providerValue} />;
 };
+
+export { SupabaseContext, SupabaseProvider, useSupabase };
