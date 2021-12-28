@@ -1,14 +1,11 @@
 import DashboardLayout from "~/components/layout/DashboardLayout";
-import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
-import useDisclosure from "~/utils/hooks/useDisclosure";
-import useUser from "~/utils/hooks/queries/useUser";
-import withAuthCheck from "~/utils/HOC/withAuthCheck";
-
-import { Button, Flex, Plus } from "@biolnk/ui";
 import DraggableList from "~/components/dashboard/DraggableList";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
+import { Button, Flex, Plus } from "@biolnk/ui";
+import { useAppContext } from "~/data/context";
 
 function OverviewPage() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { openAddLinkDialog } = useAppContext();
 
   return (
     <DashboardLayout>
@@ -17,12 +14,11 @@ function OverviewPage() {
           variant="primary"
           size="md"
           icon={Plus}
-          onClick={onOpen}
+          onClick={openAddLinkDialog}
           uppercase
         >
           Add link
         </Button>
-        <NewLinkDialog open={isOpen} onClose={onClose} />
       </Flex>
 
       <DraggableList />

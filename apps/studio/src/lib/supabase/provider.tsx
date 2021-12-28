@@ -1,13 +1,11 @@
 import React, {
-  createContext,
+  ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import { isUndefined } from "@biolnk/utils";
 import { makeToast } from "@biolnk/ui";
 import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
@@ -16,16 +14,28 @@ import {
   getUserById,
   getUserByUsername,
 } from "~/services/supabase";
+import { makeContext } from "~/utils/makeContext";
 import type { Session } from "@supabase/supabase-js";
-import type { SignInDto, SignUpDto, User } from "~/types";
+import type { SignInDto, SignUpDto, User, AuthUser } from "~/types";
 
-/**
- * @TODO
- * improve typing of supabase ctx
- */
-export const SupabaseContext = createContext<any>({});
+export type SupabaseContextState = {
+  user: User;
+  authUser: AuthUser;
+  session: Session;
+  isAuthenticated: boolean;
+  signOut: () => Promise<void>;
+  signUpWithEmail: (signUpDto: SignUpDto) => Promise<void>;
+  signInWithEmail: (signInDto: SignInDto) => Promise<void>;
+};
 
-export const SupabaseProvider: React.FC = (props) => {
+export type SupabaseProviderProps = {
+  children: ReactNode;
+};
+
+const [SupabaseContext, Provider, useSupabase] =
+  makeContext<SupabaseContextState>("SupabaseContext");
+
+const SupabaseProvider = (props: SupabaseProviderProps) => {
   const [currentSession, setCurrentSession] = useState<Session | null>(
     sbClient.auth.session()
   );
@@ -111,10 +121,12 @@ export const SupabaseProvider: React.FC = (props) => {
   }, []);
 
   const isAuthenticated = currentSession?.user.role === "authenticated";
+  const authUser = sbClient.auth.user();
 
-  const providerValue = useMemo(
+  const providerValue: SupabaseContextState = useMemo(
     () => ({
       user: currentUser,
+      authUser,
       session: currentSession,
       isAuthenticated,
       signOut,
@@ -142,15 +154,7 @@ export const SupabaseProvider: React.FC = (props) => {
     return () => data?.unsubscribe();
   }, []);
 
-  return <SupabaseContext.Provider {...props} value={providerValue} />;
+  return <Provider {...props} value={providerValue} />;
 };
 
-export const useSupabase = () => {
-  const ctx = useContext(SupabaseContext);
-
-  if (isUndefined(ctx)) {
-    throw new Error("Supabase must be used within the 'SupabaseProvider'");
-  }
-
-  return ctx;
-};
+export { SupabaseContext, SupabaseProvider, useSupabase };

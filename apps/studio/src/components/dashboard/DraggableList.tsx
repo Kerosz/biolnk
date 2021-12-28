@@ -1,15 +1,19 @@
 import React, { FC, useEffect, useState, memo } from "react";
 import LinkCard from "~/components/dashboard/LinkCard";
+import EmptyShell from "../EmptyShell";
 import useLinks from "~/utils/hooks/queries/useLinks";
 import useReorderLink from "~/utils/hooks/mutations/useReorderLink";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { FilePlus } from "@biolnk/ui";
+import { useAppContext } from "~/data/context";
 import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
 
 const DraggableList: FC = () => {
   const { links, isLoading, isError } = useLinks();
+  const { openAddLinkDialog } = useAppContext();
   const { mutate } = useReorderLink();
 
-  const [linksList, setLinksList] = useState(links);
+  const [linksList, setLinksList] = useState([]);
 
   const handleDragEnd = ({ source, destination }: DropResult) => {
     // Dragged outside of container -> cancel
@@ -29,8 +33,19 @@ const DraggableList: FC = () => {
     }
   }, [links]);
 
-  if (isLoading || !linksList) {
+  /** @TODO Implement <Skeleton /> component */
+  if (isLoading) {
     return <span>Skeleton loading</span>;
+  }
+
+  if (!isLoading && links.length < 1) {
+    return (
+      <EmptyShell
+        text="Begin by adding your first link"
+        icon={FilePlus}
+        onPress={openAddLinkDialog}
+      />
+    );
   }
 
   return (
