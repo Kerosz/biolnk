@@ -1,8 +1,9 @@
-import React, { FC, useEffect, useState, memo } from "react";
+import React, { FC, useState, memo } from "react";
 import LinkCard from "~/components/dashboard/LinkCard";
 import EmptyShell from "../EmptyShell";
 import useLinks from "~/utils/hooks/queries/useLinks";
 import useReorderLink from "~/utils/hooks/mutations/useReorderLink";
+import useSafeLayoutEffect from "~/utils/hooks/useSafeLayoutEffect";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { FilePlus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
@@ -27,7 +28,7 @@ const DraggableList: FC = () => {
     mutate(list);
   };
 
-  useEffect(() => {
+  useSafeLayoutEffect(() => {
     if (links && !isLoading && !isError) {
       setLinksList(getLinksWithOrder(links));
     }

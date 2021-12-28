@@ -1,5 +1,6 @@
 import useUser from "~/utils/hooks/queries/useUser";
-import { ComponentType, useEffect, useState } from "react";
+import useSafeLayoutEffect from "../hooks/useSafeLayoutEffect";
+import { ComponentType, useState } from "react";
 import { useRouter } from "next/router";
 import { Loading } from "@biolnk/ui";
 import { useSupabase } from "~/lib/supabase";
@@ -21,21 +22,19 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
     // pages that you need to be auth to acess
     const isBlacklisted = !PAGE_WHITELIST.includes(pathname as any);
 
-    useEffect(() => {
+    useSafeLayoutEffect(() => {
       // no user and blacklisted -> redirect to signin
       if ((!isAuthenticated || isError) && isBlacklisted && isReady) {
         replace(Routes.SIGNIN).then(() => setConnecting(false));
       }
     }, [isAuthenticated, isError, isReady]);
 
-    useEffect(() => {
+    useSafeLayoutEffect(() => {
       // entry page or signup page and user -> redirect to dashboard
       if ((isEntryPage || isSignUpPage) && isAuthenticated && isReady) {
         replace(Routes.DASHBOARD);
       }
-    }, [isAuthenticated, isReady]);
 
-    useEffect(() => {
       // user -> stop loading
       if (!isLoading && user && isAuthenticated && isReady) {
         setConnecting(false);

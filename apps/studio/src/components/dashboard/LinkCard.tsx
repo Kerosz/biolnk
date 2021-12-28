@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import ConfirmDialog from "../ConfirmDialog";
 import UpdateLinkDialog from "./UpdateLinkDialog";
 import useDeleteLink from "~/utils/hooks/mutations/useDeleteLink";
@@ -155,4 +155,4 @@ const LinkCard: FC<Link> = ({
   );
 };
 
-export default LinkCard;
+export default memo(LinkCard);
