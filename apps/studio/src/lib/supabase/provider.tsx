@@ -32,7 +32,8 @@ export type SupabaseProviderProps = {
   children: ReactNode;
 };
 
-const [SupabaseContext, Provider, useSupabase] = makeContext("SupabaseContext");
+const [SupabaseContext, Provider, useSupabase] =
+  makeContext<SupabaseContextState>("SupabaseContext");
 
 const SupabaseProvider = (props: SupabaseProviderProps) => {
   const [currentSession, setCurrentSession] = useState<Session | null>(
