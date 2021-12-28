@@ -167,7 +167,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const RenderedButton = ({ children }: any) =>
       as ? (
-        <CustomButton className={rootClass} onClick={onClick} style={style}>
+        <CustomButton
+          role={role}
+          className={rootClass}
+          onClick={onClick}
+          style={style}
+          aria-selected={ariaSelected}
+          aria-controls={ariaControls}
+          tabIndex={tabIndex}
+          {...otherProps}
+        >
           {children}
         </CustomButton>
       ) : (

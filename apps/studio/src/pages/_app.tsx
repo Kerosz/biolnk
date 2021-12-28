@@ -1,5 +1,6 @@
 import queryClient from "../lib/reactQuery";
 import useTheme from "~/utils/hooks/useTheme";
+import ErrorBoundary from "~/components/common/ErrorBoundary";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { SupabaseProvider } from "~/lib/supabase";
@@ -17,7 +18,9 @@ function App({ Component, pageProps }: AppProps) {
       <ReactQueryDevtools initialIsOpen={false} />
       <SupabaseProvider>
         <Toaster position="bottom-right" />
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
       </SupabaseProvider>
     </QueryClientProvider>
   );
