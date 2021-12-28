@@ -1,13 +1,13 @@
 import DashboardLayout from "~/components/layout/DashboardLayout";
-import { Text } from "@biolnk/ui";
+import ComingSoon from "~/components/ComingSoon";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
 
-/**
- * @TODO Have a coming soon component to display
- */
-export default function AccountPage() {
+function AccountPage() {
   return (
     <DashboardLayout>
-      <Text>Coming Soon</Text>
+      <ComingSoon />
     </DashboardLayout>
   );
 }
+
+export default withAuthCheck(AccountPage);

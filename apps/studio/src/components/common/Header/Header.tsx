@@ -31,7 +31,7 @@ const Header = () => {
           />
           <div className={`${Styles["blui-separator"]} rotate-[30deg]`} />
 
-          <Link url={pageLinkUrl} variant="basic" external>
+          <Link url={pageLinkUrl} variant="basic" external noIcon>
             <Text as="span" className={Styles["blui-page--text"]}>
               {pageLinkLabel}
             </Text>
