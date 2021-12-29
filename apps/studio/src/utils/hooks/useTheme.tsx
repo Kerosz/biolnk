@@ -10,6 +10,9 @@ export type ThemeModeType = `${ThemeMode}`;
 const THEME_KEY = "dark-theme";
 const THEME_CLASS = "dark";
 
+/**
+ * @TODO needs to be moved in the UI library
+ */
 export default function useTheme() {
   const [isDark, setIsDark] = useState<boolean>(true);
 

@@ -11,7 +11,7 @@ import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
 
 const DraggableList: FC = () => {
   const { links, isLoading, isError } = useLinks();
-  const { openAddLinkDialog } = useAppContext();
+  const { addLinkDialog } = useAppContext();
   const { mutate } = useReorderLink();
 
   const [linksList, setLinksList] = useState([]);
@@ -44,7 +44,7 @@ const DraggableList: FC = () => {
       <EmptyShell
         text="Begin by adding your first link"
         icon={FilePlus}
-        onPress={openAddLinkDialog}
+        onPress={addLinkDialog.onOpen}
       />
     );
   }

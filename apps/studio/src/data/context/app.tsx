@@ -1,11 +1,11 @@
-import useDisclosure from "~/utils/hooks/useDisclosure";
+import useDisclosure, {
+  UseDisclosureReturn,
+} from "~/utils/hooks/useDisclosure";
 import { makeContext } from "~/utils/makeContext";
 import { ReactNode } from "react";
 
 export type AppContextState = {
-  openAddLinkDialog: () => void;
-  closeAddLinkDialog: () => void;
-  isAddLinkDialogOpen: boolean;
+  addLinkDialog: UseDisclosureReturn;
 };
 
 export type AppProviderProps = {
@@ -16,12 +16,10 @@ const [AppContext, Provider, useAppContext] =
   makeContext<AppContextState>("AppContext");
 
 function AppContextProvider({ children }: AppProviderProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const addLinkDialog = useDisclosure();
 
   const value: AppContextState = {
-    openAddLinkDialog: onOpen,
-    closeAddLinkDialog: onClose,
-    isAddLinkDialogOpen: isOpen,
+    addLinkDialog,
   };
 
   return <Provider value={value}>{children}</Provider>;

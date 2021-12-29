@@ -27,21 +27,13 @@ const LinkCard: FC<Link> = ({
   total_clicks,
   display_order,
 }) => {
-  const {
-    isOpen: isDeleteOpen,
-    onClose: onDeleteClose,
-    onOpen: onDeleteOpen,
-  } = useDisclosure();
-  const {
-    isOpen: isUpdateOpen,
-    onClose: onUpdateClose,
-    onOpen: onUpdateOpen,
-  } = useDisclosure();
+  const deleteDialog = useDisclosure();
+  const updateDialog = useDisclosure();
   const { mutate } = useDeleteLink();
 
   const handleDeleteLink = () => {
     mutate(id);
-    onDeleteClose();
+    deleteDialog.onClose();
   };
 
   const getItemStyle = (
@@ -58,8 +50,8 @@ const LinkCard: FC<Link> = ({
   return (
     <>
       <ConfirmDialog
-        open={isDeleteOpen}
-        onClose={onDeleteClose}
+        open={deleteDialog.isOpen}
+        onClose={deleteDialog.onClose}
         onConfirm={handleDeleteLink}
         message={
           <p>
@@ -69,8 +61,8 @@ const LinkCard: FC<Link> = ({
         }
       />
       <UpdateLinkDialog
-        open={isUpdateOpen}
-        onClose={onUpdateClose}
+        open={updateDialog.isOpen}
+        onClose={updateDialog.onClose}
         linkId={id}
         currentTitle={title}
         currentUrl={url}
@@ -117,14 +109,14 @@ const LinkCard: FC<Link> = ({
                       icon={Edit}
                       variant="text"
                       noSpace
-                      onClick={onUpdateOpen}
+                      onClick={updateDialog.onOpen}
                     />
                     <Button
                       aria-label="Delete"
                       icon={Trash2}
                       variant="text"
                       noSpace
-                      onClick={onDeleteOpen}
+                      onClick={deleteDialog.onOpen}
                     />
                   </div>
 

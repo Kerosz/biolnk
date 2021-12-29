@@ -9,12 +9,14 @@ import { Routes } from "~/data/enums/routes";
 const Menu = () => {
   const { user } = useUser();
   const { signOut } = useSupabase();
-  const { isAddLinkDialogOpen, closeAddLinkDialog, openAddLinkDialog } =
-    useAppContext();
+  const { addLinkDialog } = useAppContext();
 
   return (
     <>
-      <NewLinkDialog open={isAddLinkDialogOpen} onClose={closeAddLinkDialog} />
+      <NewLinkDialog
+        open={addLinkDialog.isOpen}
+        onClose={addLinkDialog.onClose}
+      />
 
       <Dropdown
         trigger={
@@ -33,7 +35,7 @@ const Menu = () => {
         <Dropdown.Group>
           <Dropdown.ListItem
             as="button"
-            onClick={openAddLinkDialog}
+            onClick={addLinkDialog.onOpen}
             rightIcon={Plus}
           >
             Add Link

@@ -6,7 +6,7 @@ import { useAppContext } from "~/data/context";
 import { memo } from "react";
 
 function OverviewPage() {
-  const { openAddLinkDialog } = useAppContext();
+  const { addLinkDialog } = useAppContext();
 
   return (
     <DashboardLayout>
@@ -15,7 +15,7 @@ function OverviewPage() {
           variant="primary"
           size="md"
           icon={Plus}
-          onClick={openAddLinkDialog}
+          onClick={addLinkDialog.onOpen}
           uppercase
         >
           Add link
