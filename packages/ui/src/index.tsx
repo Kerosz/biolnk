@@ -15,5 +15,6 @@ export * from "./components/Flex/Flex";
 export * from "./components/Dialog/Dialog";
 export * from "./components/Loading/Loading";
 export * from "./components/Toast/Toast";
+export * from "./components/Badge/Badge";
 // types
 export * from "./types/index";

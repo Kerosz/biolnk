@@ -1,4 +1,4 @@
-import { Heading, Text, Flex } from "@biolnk/ui";
+import { Heading, Text, Flex, Badge } from "@biolnk/ui";
 import { FC } from "react";
 import Link from "./common/Link";
 
@@ -32,9 +32,7 @@ const ComingSoon: FC<ComingSoonProps> = ({
             We are working on it
           </Heading>
         )}
-        <span className="bg-crimson-200 text-crimson-950 border border-crimson-600 rounded-full py-2 px-4 text-sm h-fit min-w-max max-w-max">
-          Coming soon
-        </span>
+        <Badge variant="crimson">Coming soon</Badge>
       </Flex>
 
       {showExtras && (
