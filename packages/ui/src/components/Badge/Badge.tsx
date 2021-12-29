@@ -8,7 +8,19 @@ import { ctl } from "@biolnk/utils";
 
 import Styles from "./Badge.module.css";
 
-export interface BadgeOwnProps {}
+export interface BadgeOwnProps {
+  variant?:
+    | "gray"
+    | "red"
+    | "yellow"
+    | "green"
+    | "blue"
+    | "indigo"
+    | "purple"
+    | "pink";
+  size?: "default" | "lg";
+  withDot?: boolean;
+}
 
 export type BadgeProps<C extends React.ElementType> = PolymorphicPropsWithRef<
   BadgeOwnProps,
@@ -32,6 +44,10 @@ export const Badge = forwardRef(
   <C extends React.ElementType = typeof DEFAULT_TAG>(
     {
       as,
+      size = "default",
+      variant = "gray",
+      withDot = false,
+      children,
       className,
       ...otherProps
     }: PolymorphicPropsWithoutRef<BadgeOwnProps, C>,
@@ -39,11 +55,30 @@ export const Badge = forwardRef(
   ) => {
     const Element = as ?? DEFAULT_TAG;
 
+    const isLarge = size === "lg";
+
     const rootClass = ctl(`
+      ${Styles["blui-badge"]}
+      ${Styles[`blui-badge--${variant}`]}
+      ${isLarge && Styles["blui-badge--large"]}
       ${className}
     `);
 
-    return <Element ref={ref} className={rootClass} {...otherProps} />;
+    const dotClass = ctl(`
+      ${Styles[`blui-badge-dot`]}
+      ${Styles[`blui-badge--${variant}`]}
+    `);
+
+    return (
+      <Element ref={ref} className={rootClass} {...otherProps}>
+        {withDot && (
+          <svg className={dotClass} fill="currentColor" viewBox="0 0 8 8">
+            <circle cx="4" cy="4" r="3" />
+          </svg>
+        )}
+        {children}
+      </Element>
+    );
   }
 );
 
