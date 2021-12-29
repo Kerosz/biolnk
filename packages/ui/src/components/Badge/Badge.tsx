@@ -15,9 +15,9 @@ export interface BadgeOwnProps {
     | "yellow"
     | "green"
     | "blue"
-    | "indigo"
-    | "purple"
-    | "pink";
+    | "crimson"
+    | "plum"
+    | "lime";
   size?: "default" | "lg";
   withDot?: boolean;
 }

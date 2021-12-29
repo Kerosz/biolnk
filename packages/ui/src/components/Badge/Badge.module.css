@@ -1,5 +1,5 @@
 .blui-badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs uppercase border;
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full font-medium text-xs uppercase border h-fit min-w-max max-w-max;
 }
 
 .blui-badge--large {
