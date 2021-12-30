@@ -1,4 +1,4 @@
-create extension "uuid-ossp" with schema extensions;
+-- create extension "uuid-ossp" with schema extensions;
 
 /** 
 * USERS
@@ -54,7 +54,6 @@ create type public.theme_state as enum ('PUBLISHED', 'PRIVATE');
 
 create table if not exists public.themes (
   id uuid primary key default uuid_generate_v4(),
-  -- UUID from public.users, cascading
   name varchar(50) unique not null,
   style jsonb not null,
   kind theme_kind default 'SYSTEM'::public.theme_kind,
@@ -64,7 +63,7 @@ create table if not exists public.themes (
 );
 alter table public.themes enable row level security;
 create policy "Allow public read-only access." on public.themes for select using (true);
-create policy "Can insert when authenticated." on public.themes for insert using (auth.role() = 'authenticated');
+create policy "Can insert when authenticated." on public.themes for insert with check (auth.role() = 'authenticated');
 
 
 /** 
@@ -138,7 +137,7 @@ alter table public.links enable row level security;
 create unique index links_userId_idx on public.links(user_id);
 create policy "Allow public read-only access." on public.links for select using (true);
 create policy "Can update own link data" on public.links for update using (auth.uid() = user_id);
-create policy "Can insert when authenticated" on public.links for insert using (auth.role() = 'authenticated');
+create policy "Can insert when authenticated" on public.links for insert with check (auth.role() = 'authenticated');
 
 /**
 * Updates all rows order according to the passed in JSON. Wraps update...from syntax
@@ -151,3 +150,11 @@ create or replace function update_links_order(payload json) returns setof public
   where l.id = x.id
   returning l.*;
 $$ language sql;
+
+/** 
+* Default Inserts
+* Note: Following section contains default inserts for the DB
+*/
+insert into public.themes (name, kind, state, style)
+values
+    ('Minimal', 'SYSTEM', 'PUBLISHED', '{"css":""}');
