@@ -35,7 +35,7 @@ const DEFAULT_TAG = "span";
  * @component
  * @example
  * return (
- *    <Badge>
+ *    <Badge variant="crimson" withDot>
  *      My Badge
  *    </Badge>
  * )
