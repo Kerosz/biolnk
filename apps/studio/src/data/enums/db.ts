@@ -1,17 +1,17 @@
 export enum UserStatus {
-  BASIC = "basic",
-  VERIFIED = "verified",
+  BASIC = "BASIC",
+  VERIFIED = "VERIFIED",
 }
 
 export enum PageLinkPreference {
-  PATH = "path",
-  SUBDOMAIN = "subdomain",
-  CUSTOM = "custom",
+  PATH = "PATH",
+  SUBDOMAIN = "SUBDOMAIN",
+  CUSTOM = "CUSTOM",
 }
 
 export enum LinkKind {
-  DEFAULT = "default",
-  ICON = "icon",
+  LINK = "LINK",
+  EMBED = "EMBED",
 }
 
 export enum CustomFunction {

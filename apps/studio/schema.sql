@@ -126,7 +126,7 @@ create table if not exists public.links (
   thumbnail_url text,
   visible boolean default true not null,
   metadata jsonb,
-  display_order int default 0,
+  display_order int default 9999,
   total_clicks int default 0,
   kind link_kind default 'LINK'::public.link_kind,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,

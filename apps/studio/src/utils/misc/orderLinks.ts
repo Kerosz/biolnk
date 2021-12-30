@@ -2,7 +2,7 @@ import { Link } from "~/types";
 
 export const getLinksWithOrder = (list: Link[]) => {
   /**
-   * When inserted in the DB the order defaults to 0
+   * When inserted in the DB the order defaults to 9999
    * we sort items on the order in case there was any
    * updates after they were inserted, and re-assign the order
    *

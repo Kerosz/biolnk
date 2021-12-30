@@ -17,7 +17,9 @@ const SectionShell: FC<SectionShellProps> = ({ children, title }) => {
         {title}
       </Heading>
 
-      <div className="bg-mauve-50 py-4 px-6 rounded-md">{children}</div>
+      <div className="bg-mauve-50 py-4 px-6 rounded-md shadow-sm">
+        {children}
+      </div>
     </section>
   );
 };

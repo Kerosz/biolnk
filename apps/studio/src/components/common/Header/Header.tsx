@@ -5,10 +5,14 @@ import Link from "../Link";
 import useUser from "~/utils/hooks/queries/useUser";
 import useClipboard from "~/utils/hooks/useClipboard";
 import getPageLink from "~/utils/misc/getPageLink";
+import { memo } from "react";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/ui";
 
 import Styles from "./Header.module.css";
 
+/**
+ * @TODO Improve the way user loading happens in this component
+ */
 const Header = () => {
   const [_, handleCopy] = useClipboard();
   const { user } = useUser();
@@ -57,4 +61,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
