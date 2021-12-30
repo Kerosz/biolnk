@@ -78,6 +78,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
           label="URL"
           srOnlyLabel
           placeholder="URL"
+          autoComplete="url"
           borderless
           error={errors.url?.message}
           valid={!errors.url && touchedFields.url}

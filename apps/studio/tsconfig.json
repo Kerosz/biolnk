@@ -6,7 +6,7 @@
       "~/*": ["./src/*"],
       "~components/*": ["./src/components/*"],
       "~assets/*": ["./src/assets/*"],
-      "~layout/*": ["./src/components/layout/*"]
+      "~layout/*": ["src/components/layouts/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/validator.js"],

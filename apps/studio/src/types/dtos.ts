@@ -24,3 +24,8 @@ export type ReorderLinkDto = {
   id: string;
   display_order: number;
 };
+
+export type SeoDto = {
+  seo_title: string;
+  seo_description: string;
+};

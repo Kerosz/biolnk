@@ -1,4 +1,4 @@
-import DashboardLayout from "~/components/layout/DashboardLayout";
+import DashboardLayout from "~/components/layouts/DashboardLayout";
 import DraggableList from "~/components/dashboard/DraggableList";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { Button, Flex, Plus } from "@biolnk/ui";
