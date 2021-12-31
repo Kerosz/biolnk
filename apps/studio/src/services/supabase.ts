@@ -7,6 +7,7 @@ import {
   PageWithMetadata,
   ReorderLinkDto,
   SignUpDto,
+  Theme,
   UpdateLinkDto,
   UpdatePageDto,
   UpdateUserDto,
@@ -236,6 +237,24 @@ export const updatePage = async (pageDto: UpdatePageDto, userId: string) => {
 
   if (error) {
     throw new Error(error.message);
+  }
+
+  return data;
+};
+
+/****************************************************
+ *             THEME CRUD OPERATIONS                *
+ ****************************************************/
+
+export const getThemes = async () => {
+  const { data, error } = await sbClient.from<Theme>(Tables.THEMES).select("*");
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("No theme record found");
   }
 
   return data;
