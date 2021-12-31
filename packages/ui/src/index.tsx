@@ -16,5 +16,6 @@ export * from "./components/Dialog/Dialog";
 export * from "./components/Loading/Loading";
 export * from "./components/Toast/Toast";
 export * from "./components/Badge/Badge";
+export * from "./components/Textarea/Textarea";
 // types
 export * from "./types/index";
