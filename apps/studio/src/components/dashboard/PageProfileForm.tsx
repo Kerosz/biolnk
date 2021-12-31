@@ -2,7 +2,16 @@ import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
 import { FC, ChangeEvent, memo, useState } from "react";
-import { Avatar, Button, Flex, Input, Textarea } from "@biolnk/ui";
+import {
+  Avatar,
+  BaseIcon,
+  Button,
+  Camera,
+  Flex,
+  Input,
+  Textarea,
+  X,
+} from "@biolnk/ui";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
 
@@ -21,7 +30,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
 
   const [previewImage, setPreviewImage] = useState(null);
 
-  const handleSeoUpdate = async ({ title, biography }: PageProfileDto) => {
+  async function handleSeoUpdate({ title, biography }: PageProfileDto) {
     // If any of the fields are different from the existing values -> send req
     if (title !== page.title) {
       await pageMutate({ data: { title }, userId: page.user.id });
@@ -29,7 +38,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     if (biography !== page.user.biography) {
       await userMutate({ data: { biography }, userId: page.user.id });
     }
-  };
+  }
 
   function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files[0];
@@ -45,6 +54,28 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
       }
     };
   }
+
+  function handleAvatarRemove() {
+    if (previewImage) {
+      setPreviewImage(null);
+      return;
+    }
+
+    /** @TODO Reset user `avatar_url` to the default one */
+    return null;
+  }
+
+  const AvatarRemoveButton = () => (
+    <button
+      type="button"
+      aria-label="Remove"
+      title="Remove"
+      className="w-6 h-6 rounded-full !bg-black border-2 border-mauve-50 absolute top-0 right-0 transform-gpu -translate-x-[45%] flex items-center justify-center"
+      onClick={handleAvatarRemove}
+    >
+      <BaseIcon icon={X} size="xs" stroke="white" strokeWidth={3} />
+    </button>
+  );
 
   const avatarAlt = `${page.user.username} profile`;
 
@@ -69,16 +100,31 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
               {previewImage ? (
                 <Avatar
                   src={previewImage}
+                  title={avatarAlt}
                   alt={avatarAlt}
                   fallback={page.user.username}
                   size="xl"
-                />
-              ) : (
+                >
+                  <AvatarRemoveButton />
+                </Avatar>
+              ) : page.user.avatar_url ? (
                 <Avatar
+                  src={page.user.avatar_url}
+                  title={avatarAlt}
                   alt={avatarAlt}
                   fallback={page.user.username}
                   size="xl"
-                />
+                >
+                  {page.user.avatar_url && <AvatarRemoveButton />}
+                </Avatar>
+              ) : (
+                <Flex
+                  align="center"
+                  justify="center"
+                  className="w-32 h-32 bg-gradient-avatar text-crimson-800 border border-dashed border-crimson-800 rounded-full"
+                >
+                  <BaseIcon icon={Camera} size="2xl" />
+                </Flex>
               )}
             </label>
 
