@@ -1,7 +1,7 @@
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { FC, memo } from "react";
-import { Button, Flex, Input } from "@biolnk/ui";
+import { Button, Flex, Input, Textarea } from "@biolnk/ui";
 import { PAGE_SEO_SCHEMA } from "~/data/validations";
 import { PageSeoDto, PageWithMetadata } from "~/types";
 
@@ -51,14 +51,14 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
             valid={!errors.seo_title && touchedFields.seo_title}
             {...register("seo_title")}
           />
-          <Input
+          <Textarea
             id="seo_description"
-            type="text"
             title="Please enter your page SEO description!"
             label="SEO Description"
             srOnlyLabel
             autoComplete="off"
             placeholder="SEO Description"
+            rows={3}
             borderless
             error={errors.seo_description?.message}
             valid={!errors.seo_description && touchedFields.seo_description}
@@ -67,7 +67,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
           <Flex justify="end" className="w-full">
             <Button
               type="submit"
-              className="mt-9"
+              className="mt-4"
               variant="primary"
               size="md"
               uppercase

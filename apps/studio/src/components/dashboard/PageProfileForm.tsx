@@ -2,7 +2,7 @@ import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
 import { FC, memo } from "react";
-import { Button, Flex, Input } from "@biolnk/ui";
+import { Button, Flex, Input, Textarea } from "@biolnk/ui";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
 
@@ -55,14 +55,14 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
             valid={!errors.title && touchedFields.title}
             {...register("title")}
           />
-          <Input
+          <Textarea
             id="page_biography"
-            type="text"
             title="Please enter your biography!"
-            label="Bio"
+            label="Biography"
             srOnlyLabel
             autoComplete="off"
             placeholder="Enter a bio description"
+            rows={3}
             borderless
             error={errors.biography?.message}
             valid={!errors.biography && touchedFields.biography}
@@ -71,7 +71,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
           <Flex justify="end" className="w-full">
             <Button
               type="submit"
-              className="mt-9"
+              className="mt-4"
               variant="primary"
               size="md"
               uppercase

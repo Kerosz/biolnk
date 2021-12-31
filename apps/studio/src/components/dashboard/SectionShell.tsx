@@ -7,7 +7,7 @@ export interface SectionShellProps {
 
 const SectionShell: FC<SectionShellProps> = ({ children, title }) => {
   return (
-    <section>
+    <section className="mb-10 last:mb-0">
       <Heading
         as="h2"
         variant="gray"
