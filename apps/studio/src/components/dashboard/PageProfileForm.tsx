@@ -1,7 +1,7 @@
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
-import { FC, memo, useState } from "react";
+import { FC, ChangeEvent, memo, useState } from "react";
 import { Avatar, Button, Flex, Input, Textarea } from "@biolnk/ui";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
@@ -31,7 +31,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     }
   };
 
-  function handleImageUpload(event) {
+  function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -45,6 +45,8 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
       }
     };
   }
+
+  const avatarAlt = `${page.user.username} profile`;
 
   return (
     <Form<PageProfileDto>
@@ -67,13 +69,15 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
               {previewImage ? (
                 <Avatar
                   src={previewImage}
-                  alt={page.user.username}
-                  className="!w-32 !h-32 text-3xl"
+                  alt={avatarAlt}
+                  fallback={page.user.username}
+                  size="xl"
                 />
               ) : (
                 <Avatar
-                  alt={page.user.username}
-                  className="!w-32 !h-32 text-3xl"
+                  alt={avatarAlt}
+                  fallback={page.user.username}
+                  size="xl"
                 />
               )}
             </label>

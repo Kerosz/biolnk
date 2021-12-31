@@ -8,8 +8,8 @@ import Styles from "./Avatar.module.css";
 const DEFAULT_TAG = "span";
 
 export type FallbackProps =
-  | { fallback?: string; src: string }
-  | { fallback: string; src?: string };
+  | { fallback?: string; src?: string }
+  | { fallback: string; src?: never };
 
 export type AvatarOwnProps = React.ComponentPropsWithRef<typeof DEFAULT_TAG> & {
   alt: string;
@@ -48,7 +48,7 @@ const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
       return fallbackValue.join("").toUpperCase();
     }, []);
 
-    const defaultFallback = fallback ?? getFallback(alt);
+    const defaultFallback = fallback ? getFallback(fallback) : getFallback(alt);
 
     const rootClass = ctl(`
       ${Styles["blui-avatar-root"]}
