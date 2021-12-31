@@ -50,7 +50,6 @@ export interface TextareaProps
  *    <Textarea
  *      label="My Label"
  *      srOnlyLabel
- *      leftAddon="My Addon"
  *      error={errorMessage}
  *      valid={isFormValid}
  *      borderless
@@ -58,7 +57,7 @@ export interface TextareaProps
  *    />
  * )
  */
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       id,
@@ -113,7 +112,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     };
 
     const inptuClass = ctl(`
-      ${Styles["blui-input"]}
+      ${Styles["blui-textarea"]}
       ${size && Styles[`blui-size-${size}`]}
     `);
 
@@ -183,5 +182,3 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 );
 
 Textarea.displayName = "TextareaComponent";
-
-export default Textarea;

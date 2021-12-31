@@ -5,7 +5,7 @@
   @apply focus-within:ring-gray-500 focus-within:border-inputBorderHover;
 }
 
-.blui-input {
+.blui-textarea {
   @apply block box-border w-full rounded-md text-sm font-normal transition-all border-transparent;
   @apply bg-transparent text-normalTextHover placeholder-inputPlaceholder;
   @apply focus:outline-none focus:ring-0 focus:border-transparent;
@@ -17,7 +17,7 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.blui-input:focus {
+.blui-textarea:focus {
   box-shadow: 0 0 0 1px rgba(62, 207, 142, 0.1);
 }
 
@@ -37,19 +37,7 @@
 }
 
 .blui-actions-container {
-  @apply absolute inset-y-0 right-0 pl-3 pr-1 flex flex-row items-center space-x-1;
-}
-
-.blui-icon-container {
-  @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-normalText;
-}
-
-.blui-addon--left {
-  @apply rounded-l-none border-l-0;
-}
-
-.blui-addon--right {
-  @apply rounded-r-none border-r-0;
+  @apply absolute inset-y-0 top-0 right-0 pl-3 pr-1 pt-1 flex flex-row space-x-1;
 }
 
 /*
@@ -59,38 +47,15 @@
 .blui-size-xs {
   @apply px-2.5 py-2 text-xs;
 }
-.blui-size-xs.blui-addon--tight {
-  @apply pl-0.5 pr-2.5;
-}
 .blui-size-sm {
   @apply px-3 py-2.5 text-sm leading-4;
-}
-.blui-size-sm.blui-addon--tight {
-  @apply pl-0.5 pr-3;
 }
 .blui-size-md {
   @apply px-4 py-2.5 text-sm leading-5;
 }
-.blui-size-md.blui-addon--tight {
-  @apply pl-1 pr-4;
-}
 .blui-size-lg {
   @apply px-4 py-2.5 text-base;
 }
-.blui-size-lg.blui-addon--tight {
-  @apply pl-1 pr-4;
-}
 .blui-size-xl {
   @apply px-6 py-3 text-base;
-}
-.blui-size-xl.blui-addon--tight {
-  @apply pl-1.5 pr-6;
-}
-
-/*
-  Input icon
-*/
-
-.blui--with-icon {
-  @apply pl-10;
 }
