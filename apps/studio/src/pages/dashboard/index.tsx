@@ -5,7 +5,7 @@ import { Button, Flex, Plus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
 import { memo } from "react";
 
-function OverviewPage() {
+function LinksScreen() {
   const { addLinkDialog } = useAppContext();
 
   return (
@@ -27,4 +27,4 @@ function OverviewPage() {
   );
 }
 
-export default withAuthCheck(memo(OverviewPage));
+export default withAuthCheck(memo(LinksScreen));
