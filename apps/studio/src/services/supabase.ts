@@ -3,11 +3,19 @@ import { Tables, CustomFunction } from "~/data/enums/index";
 import {
   CreateLinkDto,
   Link,
+  Page,
+  PageWithMetadata,
   ReorderLinkDto,
   SignUpDto,
   UpdateLinkDto,
+  UpdatePageDto,
+  UpdateUserDto,
   User,
 } from "~/types";
+
+/****************************************************
+ *             USER CRUD OPERATIONS                 *
+ ****************************************************/
 
 export const getUserByUsername = async (username: string) => {
   const { data, error } = await sbClient
@@ -23,32 +31,15 @@ export const getUserByUsername = async (username: string) => {
   return data;
 };
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (userId: string) => {
   const { data, error } = await sbClient
     .from<User>(Tables.USERS)
     .select("*")
-    .eq("id", id)
+    .eq("id", userId)
     .single();
 
   if (!data || error) {
     throw new Error("User record not found");
-  }
-
-  return data;
-};
-
-export const getLinksByUserId = async (id: string) => {
-  const { data, error } = await sbClient
-    .from<Link>(Tables.LINKS)
-    .select("*")
-    .eq("user_id", id);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  if (!data) {
-    throw new Error("No link record found");
   }
 
   return data;
@@ -101,6 +92,24 @@ export const createUserWithEmailAndPassword = async ({
   return user;
 };
 
+export const updateUser = async (userDto: UpdateUserDto, userId: string) => {
+  const { data, error } = await sbClient
+    .from<User>(Tables.USERS)
+    .update(userDto)
+    .match({ id: userId })
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+/****************************************************
+ *             LINK CRUD OPERATIONS                 *
+ ****************************************************/
+
 export const createNewLink = async (newLink: CreateLinkDto) => {
   const { data, error } = await sbClient
     .from<Link>(Tables.LINKS)
@@ -114,14 +123,18 @@ export const createNewLink = async (newLink: CreateLinkDto) => {
   return data;
 };
 
-export const deleteLink = async (linkId: string) => {
+export const getLinksByUserId = async (id: string) => {
   const { data, error } = await sbClient
     .from<Link>(Tables.LINKS)
-    .delete()
-    .eq("id", linkId);
+    .select("*")
+    .eq("user_id", id);
 
   if (error) {
     throw new Error(error.message);
+  }
+
+  if (!data) {
+    throw new Error("No link record found");
   }
 
   return data;
@@ -145,6 +158,81 @@ export const reorderLinks = async (listDto: ReorderLinkDto[]) => {
   const { data, error } = await sbClient.rpc(CustomFunction.REORDER, {
     payload: listDto,
   });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const deleteLink = async (linkId: string) => {
+  const { data, error } = await sbClient
+    .from<Link>(Tables.LINKS)
+    .delete()
+    .eq("id", linkId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+/****************************************************
+ *             PAGE CRUD OPERATIONS                 *
+ ****************************************************/
+
+export const getPageWithMetadata = async (
+  userId: string
+): Promise<PageWithMetadata> => {
+  const { data, error } = await sbClient
+    .from(Tables.PAGES)
+    .select(
+      `
+      id,
+      title,
+      seo_title,
+      seo_description,
+      nsfw_content,
+      show_branding,
+      social_link_position,
+      user:users(
+        id,
+        username,
+        email,
+        avatar_url,
+        full_name,
+        biography,
+        status,
+        page_link,
+        is_banned
+      ),
+      theme:themes(
+        id,
+        style,
+        name,
+        kind,
+        state
+      )
+    `
+    )
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const updatePage = async (pageDto: UpdatePageDto, userId: string) => {
+  const { data, error } = await sbClient
+    .from<Page>(Tables.PAGES)
+    .update(pageDto)
+    .match({ user_id: userId })
+    .single();
 
   if (error) {
     throw new Error(error.message);

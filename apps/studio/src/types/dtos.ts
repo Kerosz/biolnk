@@ -1,4 +1,8 @@
-import { LinkKind } from "~/data/enums/index";
+import {
+  LinkKind,
+  PageLinkPosition,
+  PageLinkPreference,
+} from "~/data/enums/index";
 
 export type CreateLinkDto = {
   user_id: string;
@@ -25,7 +29,31 @@ export type ReorderLinkDto = {
   display_order: number;
 };
 
-export type SeoDto = {
+export type UpdatePageDto = {
+  theme?: string;
+  title?: string;
+  seo_title?: string;
+  seo_description?: string;
+  nsfw_content?: boolean;
+  show_branding?: boolean;
+  social_link_position?: `${PageLinkPosition}`;
+};
+
+export type PageSeoDto = {
   seo_title: string;
   seo_description: string;
+};
+
+export type PageProfileDto = {
+  title: string;
+  biography: string;
+};
+
+export type UpdateUserDto = {
+  email?: string;
+  username?: string;
+  avatar_url?: string | null;
+  biography?: string | null;
+  full_name?: string | null;
+  page_link?: `${PageLinkPreference}`;
 };
