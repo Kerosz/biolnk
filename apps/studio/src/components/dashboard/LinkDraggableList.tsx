@@ -9,7 +9,7 @@ import { FilePlus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
 import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
 
-const DraggableList: FC = () => {
+const LinkDraggableList: FC = () => {
   const { links, isLoading, isError } = useLinks();
   const { addLinkDialog } = useAppContext();
   const { mutate } = useReorderLink();
@@ -71,4 +71,4 @@ const DraggableList: FC = () => {
   );
 };
 
-export default memo(DraggableList);
+export default memo(LinkDraggableList);

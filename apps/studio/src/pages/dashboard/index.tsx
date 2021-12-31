@@ -1,5 +1,5 @@
 import DashboardLayout from "~/components/layouts/DashboardLayout";
-import DraggableList from "~/components/dashboard/DraggableList";
+import LinkDraggableList from "~/components/dashboard/LinkDraggableList";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { Button, Flex, Plus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
@@ -22,7 +22,7 @@ function LinksScreen() {
         </Button>
       </Flex>
 
-      <DraggableList />
+      <LinkDraggableList />
     </DashboardLayout>
   );
 }
