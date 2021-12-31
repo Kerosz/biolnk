@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { makeToast } from "@biolnk/ui";
 import { sbClient } from "~/lib/supabase";
 import { createNewLink } from "~/services/supabase";
+import { LinkKind } from "~/data/enums";
 import type { CreateLinkDto, FormLinkDto } from "~/types";
 
 type NewLinkMutationArgs = {
@@ -18,7 +19,7 @@ export default function useCreateNewLink() {
       const createLinkDto: CreateLinkDto = {
         ...data,
         user_id: authUser?.id,
-        kind: kind ?? "default",
+        kind: kind ?? LinkKind.LINK,
       };
 
       return createNewLink(createLinkDto);

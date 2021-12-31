@@ -161,8 +161,20 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {/* Action Buttons */}
           {copy || error || valid ? (
             <div className={Styles["blui-actions-container"]}>
-              {error && <InputEndIcon icon={AlertCircle} stroke="#f56565" />}
-              {valid && <InputEndIcon icon={CheckCircle} stroke="#3d9a50" />}
+              {error && (
+                <InputEndIcon
+                  icon={AlertCircle}
+                  stroke="#f56565"
+                  centered={false}
+                />
+              )}
+              {valid && (
+                <InputEndIcon
+                  icon={CheckCircle}
+                  stroke="#3d9a50"
+                  centered={false}
+                />
+              )}
               {copy && (
                 <Button
                   size="xs"

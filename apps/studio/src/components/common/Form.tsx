@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  KeepStateOptions,
   SubmitHandler,
   useForm,
   UseFormProps,
@@ -16,6 +17,7 @@ export interface FormProps<Values>
   defaultValues: UseFormProps<Values>["defaultValues"];
   validationSchema: any;
   resetOnSubmit?: boolean;
+  resetOptions?: KeepStateOptions;
   mode?: UseFormProps<Values>["mode"];
   formProps?: UseFormProps<Values>;
   children?: (methods: UseFormReturn<Values>) => React.ReactNode;
@@ -29,6 +31,7 @@ const Form = <
   defaultValues,
   validationSchema,
   resetOnSubmit = false,
+  resetOptions = {},
   mode = "all",
   formProps,
   children,
@@ -51,7 +54,7 @@ const Form = <
     handleSubmit(onSubmit)(event);
 
     if (resetOnSubmit) {
-      reset(defaultValues);
+      reset(defaultValues, resetOptions);
     }
   };
 

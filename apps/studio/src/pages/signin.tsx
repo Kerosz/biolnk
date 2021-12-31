@@ -1,6 +1,6 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
+import CenteredPageLayout from "~/components/layouts/CenteredPageLayout";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { useSupabase } from "~/lib/supabase";
 import { Button, Input } from "@biolnk/ui";
@@ -12,7 +12,7 @@ function SignInPage() {
     username: "",
     password: "",
   };
-  
+
   const { signInWithEmail } = useSupabase();
 
   const handleSignIn = async (formData: SignInDto) => {

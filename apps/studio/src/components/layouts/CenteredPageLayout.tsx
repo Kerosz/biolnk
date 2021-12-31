@@ -21,7 +21,7 @@ const CenteredPageLayout: React.FC<CenteredPageLayoutProps> = ({
   social = true,
 }) => {
   return (
-    <section className="min-h-full flex flex-col items-center justify-center sm:py-11 py-7 px-3 sm:px-6 lg:px-8">
+    <main className="min-h-full flex flex-col items-center justify-center sm:py-11 py-7 px-3 sm:px-6 lg:px-8">
       <Image
         src={Logo}
         height={85}
@@ -82,7 +82,7 @@ const CenteredPageLayout: React.FC<CenteredPageLayoutProps> = ({
           </Text>
         </div>
       )}
-    </section>
+    </main>
   );
 };
 

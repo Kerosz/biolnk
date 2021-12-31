@@ -1,8 +1,8 @@
-import DashboardLayout from "~/components/layout/DashboardLayout";
+import DashboardLayout from "~/components/layouts/DashboardLayout";
 import ComingSoon from "~/components/ComingSoon";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 
-function AnalyticsPage() {
+function AnalyticsScreen() {
   return (
     <DashboardLayout>
       <ComingSoon />
@@ -10,4 +10,4 @@ function AnalyticsPage() {
   );
 }
 
-export default withAuthCheck(AnalyticsPage);
+export default withAuthCheck(AnalyticsScreen);

@@ -7,12 +7,12 @@ const PageNavigation: React.FC = () => {
     <Flex as="ul" className="space-x-8 mb-10 border-b-2 border-mauve-600">
       <li className="py-4">
         <Link url={Routes.DASHBOARD}>
-          <Text>Overview</Text>
+          <Text>Links</Text>
         </Link>
       </li>
       <li className="py-4">
-        <Link url={Routes.DESIGN}>
-          <Text>Design</Text>
+        <Link url={Routes.PAGE}>
+          <Text>Page</Text>
         </Link>
       </li>
       <li className="py-4">

@@ -1,19 +1,34 @@
 export enum UserStatus {
-  BASIC = "basic",
-  VERIFIED = "verified",
+  BASIC = "BASIC",
+  VERIFIED = "VERIFIED",
 }
 
 export enum PageLinkPreference {
-  PATH = "path",
-  SUBDOMAIN = "subdomain",
-  CUSTOM = "custom",
+  PATH = "PATH",
+  SUBDOMAIN = "SUBDOMAIN",
+  CUSTOM = "CUSTOM",
+}
+
+export enum PageLinkPosition {
+  TOP = "TOP",
+  BOTTOM = "BOTTOM",
 }
 
 export enum LinkKind {
-  DEFAULT = "default",
-  ICON = "icon",
+  LINK = "LINK",
+  EMBED = "EMBED",
 }
 
 export enum CustomFunction {
   REORDER = "update_links_order",
+}
+
+export enum ThemeKind {
+  SYSTEM = "SYSTEM",
+  CUSTOM = "CUSTOM",
+}
+
+export enum ThemeState {
+  PUBLISHED = "PUBLISHED",
+  PRIVATE = "PRIVATE",
 }

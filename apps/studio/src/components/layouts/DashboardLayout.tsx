@@ -13,7 +13,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     <>
       <Header />
       <Container
-        as="section"
+        as="main"
         maxWidth="3xl"
         className="py-8 md:grid grid-cols-5 lg:gap-12 md:gap-3"
       >

@@ -1,5 +1,5 @@
 .blui-root {
-  @apply bg-mauve-50 border-b border-mauve-600 py-4;
+  @apply bg-mauve-50 border-b border-mauve-400 py-4;
 }
 
 .blui-separator {

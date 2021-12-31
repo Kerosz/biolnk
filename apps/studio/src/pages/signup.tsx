@@ -1,6 +1,6 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
+import CenteredPageLayout from "~/components/layouts/CenteredPageLayout";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { useSupabase } from "~/lib/supabase";
 import { Button, Input, Text } from "@biolnk/ui";
@@ -18,7 +18,6 @@ function SignUpPage() {
   const handleSignUp = async (formData: SignUpDto) => {
     await signUpWithEmail(formData);
   };
-
 
   return (
     <CenteredPageLayout
@@ -115,4 +114,4 @@ function SignUpPage() {
   );
 }
 
-export default withAuthCheck(SignUpPage)
+export default withAuthCheck(SignUpPage);

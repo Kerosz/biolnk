@@ -11,6 +11,9 @@ const Menu = () => {
   const { signOut } = useSupabase();
   const { addLinkDialog } = useAppContext();
 
+  const avatarAlt = `${user?.username} profile`;
+  const avatarFallback = user?.username ?? "Biolnk";
+
   return (
     <>
       <NewLinkDialog
@@ -21,7 +24,11 @@ const Menu = () => {
       <Dropdown
         trigger={
           <button type="button">
-            <Avatar src={user?.avatar_url} alt={user?.username ?? "Biolnk"} />
+            <Avatar
+              src={user?.avatar_url}
+              alt={avatarAlt}
+              fallback={avatarFallback}
+            />
           </button>
         }
       >

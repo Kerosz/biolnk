@@ -1,4 +1,4 @@
-import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
+import CenteredPageLayout from "~/components/layouts/CenteredPageLayout";
 import { Text } from "@biolnk/ui";
 import { Button } from "@biolnk/ui";
 import { useSupabase } from "~/lib/supabase";
