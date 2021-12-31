@@ -28,6 +28,7 @@ const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
       size = "md",
       delay,
       className,
+      children,
       ...otherProps
     },
     ref
@@ -59,6 +60,7 @@ const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
 
     return (
       <AvatarPrimitive.Root ref={ref} className={rootClass} {...otherProps}>
+        {children}
         <AvatarPrimitive.Image
           className={Styles["blui-avatar---image"]}
           src={src}

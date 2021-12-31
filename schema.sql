@@ -58,8 +58,11 @@ create table if not exists public.themes (
   style jsonb not null,
   kind theme_kind default 'SYSTEM'::public.theme_kind,
   state theme_state default 'PUBLISHED'::public.theme_state,
+  owner uuid,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
+
+  constraint owner_theme_key foreign key(owner) references public.users(id) on delete cascade
 );
 alter table public.themes enable row level security;
 create policy "Allow public read-only access." on public.themes for select using (true);
@@ -78,7 +81,7 @@ create table if not exists public.pages (
   id uuid primary key default uuid_generate_v4(),
   -- UUID from public.users, cascading
   user_id uuid not null,
-  theme varchar(50) default 'Minimal'::text,
+  theme varchar(50) default 'Cirrus'::text,
   title varchar(60),
   seo_title varchar(55),
   seo_description varchar(180),
@@ -157,4 +160,12 @@ $$ language sql;
 */
 insert into public.themes (name, kind, state, style)
 values
-    ('Minimal', 'SYSTEM', 'PUBLISHED', '{"css":""}');
+    ('Cirrus', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(300 20.0% 99.0%); border-width: 0px; border-color: hsl(300 20.0% 99.0%); border-radius: 9999px; box-shadow: 0px 6px 14px -6px rgba(24, 39, 75, 0.12), 0px 10px 32px -4px rgba(24, 39, 75, 0.1), inset 0px 0px 2px 1px rgba(24, 39, 75, 0.05);"},"background":{"css":"background-color: hsl(300 20.0% 99.0%);"}}');
+    ('Minimal Blue', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(209 95.0% 90.1%);"}}');
+    ('Minimal Green', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(122 42.6% 86.5%);"}}');
+    ('Minimal Orange', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(25 100% 88.2%);"}}');
+    ('Carbon', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(243 4.9% 18.8%); border-width: 1px; border-color: hsl(245 4.9% 25.4%); border-radius: 6px;"},"background":{"css":"background-color: hsl(240 5.1% 11.6%);"}}');
+    ('Retro', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(25, 100%, 95%); border-width: 2px; border-color: hsl(228, 49%, 13%); border-radius: 0px;"},"background":{"css":"background-color: hsl(25, 100%, 95%);"}}');
+    ('New York', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(347, 92%, 85%, 1) linear-gradient(0deg, hsla(347, 92%, 85%, 1) 0%, hsla(251, 82%, 70%, 1) 100%);"}}');
+    ('Cypher', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(192, 80%, 51%, 1) linear-gradient(180deg, hsla(192, 80%, 51%, 1) 0%, hsla(355, 85%, 63%, 1) 100%);"}}');
+    ('Polymorph', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: rgba(196, 196, 196, 0.01); border-width: 0px; border-color: hsl(300 20.0% 99.0%); border-radius: 9999px; box-shadow: inset 0px 17.7895px 25.5438px -16.421px rgba(255, 255, 255, 0.2), inset 0px -5.92982px 4.10526px -6.38596px rgba(255, 255, 255, 0.3), inset 0px 3.19298px 5.01754px -1.82456px #FFFFFF, inset 0px -37.4035px 31.0175px -29.193px rgba(96, 68, 145, 0.3), inset 0px 44.7017px 45.614px -21.8947px rgba(202, 172, 255, 0.14), inset 0px 1.82456px 8.21052px rgba(154, 146, 210, 0.3), inset 0px 0.45614px 18.2456px rgba(227, 222, 255, 0.12);"},"background":{"css":"background: hsla(202, 98%, 20%, 1) linear-gradient(180deg, hsla(202, 98%, 20%, 1) 0%, hsla(176, 30%, 56%, 1) 100%);"}}');
