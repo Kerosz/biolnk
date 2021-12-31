@@ -32,6 +32,8 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
       onSubmit={handleSeoUpdate}
       defaultValues={DEFAULT_FORM_VALUES}
       validationSchema={PAGE_SEO_SCHEMA}
+      resetOnSubmit
+      resetOptions={{ keepValues: true }}
     >
       {({
         register,
@@ -58,7 +60,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
             srOnlyLabel
             autoComplete="off"
             placeholder="SEO Description"
-            rows={3}
+            rows={2}
             borderless
             error={errors.seo_description?.message}
             valid={!errors.seo_description && touchedFields.seo_description}

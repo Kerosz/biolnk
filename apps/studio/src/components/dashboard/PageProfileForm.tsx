@@ -1,8 +1,8 @@
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
-import { FC, memo } from "react";
-import { Button, Flex, Input, Textarea } from "@biolnk/ui";
+import { FC, memo, useState } from "react";
+import { Avatar, Button, Flex, Input, Textarea } from "@biolnk/ui";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
 
@@ -19,7 +19,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
   const { mutateAsync: pageMutate } = useUpdatePage();
   const { mutateAsync: userMutate } = useUpdateUser();
 
-  console.log(page);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const handleSeoUpdate = async ({ title, biography }: PageProfileDto) => {
     // If any of the fields are different from the existing values -> send req
@@ -31,43 +31,98 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     }
   };
 
+  function handleImageUpload(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    // setUploadedImage(file);
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readyState
+      if (reader.readyState === 2) {
+        setPreviewImage(reader.result);
+      }
+    };
+  }
+
   return (
     <Form<PageProfileDto>
       onSubmit={handleSeoUpdate}
       defaultValues={DEFAULT_FORM_VALUES}
       validationSchema={PAGE_PROFILE_SCHEMA}
+      resetOnSubmit
+      resetOptions={{ keepValues: true }}
     >
       {({
         register,
         formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
       }) => (
         <>
-          <Input
-            id="page_title"
-            type="text"
-            title="Please enter your page title!"
-            label="Page title"
-            srOnlyLabel
-            autoComplete="on"
-            placeholder="Page title"
-            borderless
-            error={errors.title?.message}
-            valid={!errors.title && touchedFields.title}
-            {...register("title")}
-          />
-          <Textarea
-            id="page_biography"
-            title="Please enter your biography!"
-            label="Biography"
-            srOnlyLabel
-            autoComplete="off"
-            placeholder="Enter a bio description"
-            rows={3}
-            borderless
-            error={errors.biography?.message}
-            valid={!errors.biography && touchedFields.biography}
-            {...register("biography")}
-          />
+          <Flex className="flex-col sm:flex-row">
+            <label
+              htmlFor="file_upload"
+              className="relative cursor-pointer max-w-max sm:mr-6 mb-3 sm:mb-0 sm:mt-3"
+            >
+              {previewImage ? (
+                <Avatar
+                  src={previewImage}
+                  alt={page.user.username}
+                  className="!w-32 !h-32 text-3xl"
+                />
+              ) : (
+                <Avatar
+                  alt={page.user.username}
+                  className="!w-32 !h-32 text-3xl"
+                />
+              )}
+            </label>
+
+            <div className="flex-grow">
+              <Input
+                id="file_upload"
+                name="file_upload"
+                accept="image/jpeg,image/png"
+                type="file"
+                className="sr-only"
+                onChange={handleImageUpload}
+              />
+
+              <Input
+                id="page_title"
+                type="text"
+                title="Please enter your page title!"
+                label="Page title"
+                srOnlyLabel
+                autoComplete="on"
+                placeholder="Page title"
+                borderless
+                error={errors.title?.message}
+                valid={!errors.title && touchedFields.title}
+                {...register("title")}
+              />
+              <Textarea
+                id="page_biography"
+                title="Please enter your biography!"
+                label="Biography"
+                srOnlyLabel
+                autoComplete="off"
+                placeholder="Enter a bio description"
+                rows={2}
+                borderless
+                error={errors.biography?.message}
+                valid={!errors.biography && touchedFields.biography}
+                {...register("biography")}
+              />
+
+              {previewImage && (
+                <span className="block sm:absolute text-sm mt-2 text-mauve-950">
+                  Image upload is disabled
+                </span>
+              )}
+            </div>
+          </Flex>
+
           <Flex justify="end" className="w-full">
             <Button
               type="submit"
