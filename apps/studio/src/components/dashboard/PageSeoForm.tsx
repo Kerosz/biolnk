@@ -1,25 +1,37 @@
 import Form from "~/components/common/Form";
-import { FC } from "react";
-import { Button, Input } from "@biolnk/ui";
+import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
+import { FC, memo } from "react";
+import { Button, Flex, Input } from "@biolnk/ui";
 import { PAGE_SEO_SCHEMA } from "~/data/validations";
-import { SeoDto } from "~/types";
+import { PageSeoDto, PageWithMetadata } from "~/types";
 
-const PageSeoForm: FC = () => {
-  const DEFAULT_FORM_VALUES: SeoDto = {
-    seo_title: "",
-    seo_description: "",
+export interface PageSeoFormProps {
+  page: PageWithMetadata;
+}
+
+const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
+  const DEFAULT_FORM_VALUES: PageSeoDto = {
+    seo_title: page.seo_title,
+    seo_description: page.seo_description,
   };
 
-  const handleSeoUpdate = (formData: SeoDto) => {
-    console.log(formData);
+  const { mutateAsync } = useUpdatePage();
+
+  const handleSeoUpdate = async (formData: PageSeoDto) => {
+    // If any of the fields are different from the existing values -> send req
+    if (
+      page.seo_title !== formData.seo_title ||
+      page.seo_description !== formData.seo_description
+    ) {
+      await mutateAsync({ data: formData, userId: page.user.id });
+    }
   };
 
   return (
-    <Form<SeoDto>
+    <Form<PageSeoDto>
       onSubmit={handleSeoUpdate}
       defaultValues={DEFAULT_FORM_VALUES}
       validationSchema={PAGE_SEO_SCHEMA}
-      resetOnSubmit
     >
       {({
         register,
@@ -52,21 +64,23 @@ const PageSeoForm: FC = () => {
             valid={!errors.seo_description && touchedFields.seo_description}
             {...register("seo_description")}
           />
-          <Button
-            type="submit"
-            className="mt-9"
-            variant="primary"
-            size="md"
-            uppercase
-            loading={isSubmitting}
-            disabled={isDirty && !isValid}
-          >
-            Save
-          </Button>
+          <Flex justify="end" className="w-full">
+            <Button
+              type="submit"
+              className="mt-9"
+              variant="primary"
+              size="md"
+              uppercase
+              loading={isSubmitting}
+              disabled={!isDirty || !isValid}
+            >
+              Save
+            </Button>
+          </Flex>
         </>
       )}
     </Form>
   );
 };
 
-export default PageSeoForm;
+export default memo(PageSeoForm);
