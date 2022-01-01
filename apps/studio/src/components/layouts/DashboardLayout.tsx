@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "~/components/common/Header/Header";
-import PreviewEmbed from "../dashboard/PreviewEmbed";
+import PreviewEmbed from "../dashboard/PreviewEmbed/PreviewEmbed";
 import PageNavigation from "../dashboard/PageNavigation";
 import { Container } from "@biolnk/ui";
 
@@ -15,7 +15,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       <Container
         as="main"
         maxWidth="3xl"
-        className="py-8 md:grid grid-cols-5 lg:gap-12 md:gap-3"
+        className="py-8 md:grid grid-cols-5 lg:gap-12 md:gap-3 relative"
       >
         <div className="col-span-3">
           <PageNavigation />
