@@ -14,6 +14,7 @@ const PreviewEmbed: React.FC = () => {
         style={{ transform: `scale(${scaleWidth / baseWidth})` }}
       >
         <iframe
+          key="iframe-preview"
           src="https://www.biolnk.me"
           className={Styles["blui-embed-iframe"]}
           sandbox="allow-scripts"

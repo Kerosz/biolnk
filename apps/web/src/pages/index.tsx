@@ -11,6 +11,8 @@ export default function HomePage() {
         width={140}
         alt="Biolnk.me branding"
         title="Biolnk.me branding"
+        priority
+        placeholder="blur"
       />
     </Flex>
   );
