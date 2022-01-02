@@ -18,6 +18,7 @@ export default function useUpdateUser() {
     {
       onSettled: () => {
         queryClient.invalidateQueries("user");
+        queryClient.invalidateQueries("page");
       },
       onSuccess: () =>
         makeToast({

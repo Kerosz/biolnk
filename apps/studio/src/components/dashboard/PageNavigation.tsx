@@ -1,30 +1,48 @@
-import { Text, Flex } from "@biolnk/ui";
-import { Routes } from "~/data/enums/routes";
 import Link from "../common/Link";
+import {
+  Text,
+  Flex,
+  BaseIcon,
+  Settings,
+  Link as LinkIcon,
+  BarChart2,
+  Trello,
+} from "@biolnk/ui";
+import { Routes } from "~/data/enums/routes";
 
 const PageNavigation: React.FC = () => {
   return (
-    <Flex as="ul" className="space-x-8 mb-10 border-b-2 border-mauve-600">
-      <li className="py-4">
-        <Link url={Routes.DASHBOARD}>
+    <Flex justify="between" className="mb-10 border-b-2 border-mauve-600">
+      <Flex className="space-x-8 ">
+        <Link
+          url={Routes.DASHBOARD}
+          className="pb-4 pt-1 flex items-center space-x-1.5"
+        >
+          <BaseIcon icon={LinkIcon} />
+
           <Text>Links</Text>
         </Link>
-      </li>
-      <li className="py-4">
-        <Link url={Routes.PAGE}>
+        <Link
+          url={Routes.PAGE}
+          className="pb-4 pt-1 flex items-center space-x-1.5"
+        >
+          <BaseIcon icon={Trello} />
+
           <Text>Page</Text>
         </Link>
-      </li>
-      <li className="py-4">
-        <Link url={Routes.ANALYTICS}>
+        <Link
+          url={Routes.ANALYTICS}
+          className="pb-4 pt-1 flex items-center space-x-1.5"
+        >
+          <BaseIcon icon={BarChart2} />
+
           <Text>Analytics</Text>
         </Link>
-      </li>
-      <li className="py-4">
-        <Link url={Routes.ACCOUNT}>
-          <Text>Account</Text>
-        </Link>
-      </li>
+      </Flex>
+
+      <Link url={Routes.ACCOUNT} className="text-mauveDark-700">
+        <BaseIcon icon={Settings} size="lg" />
+      </Link>
     </Flex>
   );
 };

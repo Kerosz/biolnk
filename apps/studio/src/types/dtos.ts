@@ -57,3 +57,15 @@ export type UpdateUserDto = {
   full_name?: string | null;
   page_link?: `${PageLinkPreference}`;
 };
+
+export type AccountGeneralDto = {
+  email: string;
+  full_name: string;
+  username: string;
+};
+
+export type ChangePassowrdDto = {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+};

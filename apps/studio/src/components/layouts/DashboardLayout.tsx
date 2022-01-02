@@ -15,7 +15,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       <Container
         as="main"
         maxWidth="3xl"
-        className="py-8 md:grid grid-cols-5 lg:gap-12 md:gap-3 relative"
+        className="py-6 md:grid grid-cols-5 lg:gap-12 md:gap-3 relative"
       >
         <div className="col-span-3">
           <PageNavigation />

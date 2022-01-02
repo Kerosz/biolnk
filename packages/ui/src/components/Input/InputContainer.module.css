@@ -35,7 +35,7 @@
 */
 
 .blui-label {
-  @apply block text-sm text-normalTextHover font-semibold
+  @apply block text-sm font-semibold;
 }
 
 .blui-label-horizontal {
@@ -58,7 +58,6 @@
   @apply text-right;
 }
 
-
 .blui-error {
   @apply mt-2 ml-0.5 text-sm text-dangerText;
 }
@@ -66,7 +65,6 @@
 .blui-desc {
   @apply mt-2 ml-0.5 text-sm text-normalText font-semibold dark:text-gray-300;
 }
-
 
 /*
   Layout sizes
