@@ -1,18 +1,24 @@
 import Form from "../common/Form";
+import useChangePassword from "~/utils/hooks/mutations/useChangePassword";
 import { Button, Flex, Heading, Input, Text } from "@biolnk/ui";
-import { ChangePassowrdDto } from "~/types";
+import { ChangePasswordForm } from "~/types";
 import { CHANGE_PASSWORD_SCHEMA } from "~/data/validations";
 import { FC } from "react";
 
 const ChangePasswordSection: FC = () => {
-  const DEFAULT_FORM_VALUES: ChangePassowrdDto = {
+  const DEFAULT_FORM_VALUES: ChangePasswordForm = {
     old_password: "",
     new_password: "",
     confirm_password: "",
   };
 
-  const handlePasswordChange = () => {
-    return null;
+  const { mutate, isLoading } = useChangePassword();
+
+  const handlePasswordChange = async ({
+    old_password,
+    new_password,
+  }: ChangePasswordForm) => {
+    mutate({ old_password, new_password });
   };
 
   return (
@@ -32,17 +38,14 @@ const ChangePasswordSection: FC = () => {
       </Text>
 
       {/* Content */}
-      <Form<ChangePassowrdDto>
+      <Form<ChangePasswordForm>
         onSubmit={handlePasswordChange}
         defaultValues={DEFAULT_FORM_VALUES}
         validationSchema={CHANGE_PASSWORD_SCHEMA}
         resetOnSubmit
         className="space-y-6 text-mauveDark-950"
       >
-        {({
-          register,
-          formState: { errors, isSubmitting, isValid, isDirty },
-        }) => (
+        {({ register, formState: { errors, isValid, isDirty } }) => (
           <>
             <Input
               id="old_password"
@@ -83,14 +86,14 @@ const ChangePasswordSection: FC = () => {
               {...register("confirm_password")}
             />
 
-            {isDirty && isValid ? (
+            {(isDirty && isValid) || isLoading ? (
               <Flex justify="end" className="w-full">
                 <Button
                   type="submit"
                   variant="primary"
                   size="md"
                   uppercase
-                  loading={isSubmitting}
+                  loading={isLoading}
                   disabled={!isDirty || !isValid}
                 >
                   Save Changes
