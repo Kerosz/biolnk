@@ -41,7 +41,7 @@ const ChangePasswordSection: FC = () => {
       >
         {({
           register,
-          formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+          formState: { errors, isSubmitting, isValid, isDirty },
         }) => (
           <>
             <Input
@@ -54,7 +54,6 @@ const ChangePasswordSection: FC = () => {
               placeholder="************"
               borderless
               error={errors.old_password?.message}
-              valid={!errors.old_password && touchedFields.old_password}
               {...register("old_password")}
             />
 
@@ -68,7 +67,6 @@ const ChangePasswordSection: FC = () => {
               placeholder="************"
               borderless
               error={errors.new_password?.message}
-              valid={!errors.new_password && touchedFields.new_password}
               {...register("new_password")}
             />
 
@@ -82,7 +80,6 @@ const ChangePasswordSection: FC = () => {
               placeholder="************"
               borderless
               error={errors.confirm_password?.message}
-              valid={!errors.confirm_password && touchedFields.confirm_password}
               {...register("confirm_password")}
             />
 

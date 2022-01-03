@@ -15,7 +15,7 @@ function AccountPage() {
 
   return (
     <AccountLayout>
-      <GeneralSection page={page} />
+      <GeneralSection {...page.user} />
       <PreferenceSection page={page} />
       <ChangePasswordSection />
       <SecuritySection {...page.user} />

@@ -4,15 +4,15 @@ import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
 import { AccountGeneralDto, PageWithMetadata } from "~/types";
 import { FC } from "react";
 
-export interface GeneralSectionProps {
-  page: PageWithMetadata;
-}
-
-const GeneralSection: FC<GeneralSectionProps> = ({ page }) => {
+const GeneralSection: FC<PageWithMetadata["user"]> = ({
+  email,
+  full_name,
+  username,
+}) => {
   const DEFAULT_FORM_VALUES: AccountGeneralDto = {
-    email: page.user.email,
-    full_name: page.user.full_name,
-    username: page.user.username,
+    email: email,
+    full_name: full_name,
+    username: username,
   };
 
   const handleAccountUpdate = () => {
@@ -42,7 +42,7 @@ const GeneralSection: FC<GeneralSectionProps> = ({ page }) => {
       >
         {({
           register,
-          formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+          formState: { errors, isSubmitting, isValid, isDirty },
         }) => (
           <>
             <Input

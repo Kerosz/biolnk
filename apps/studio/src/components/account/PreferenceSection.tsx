@@ -39,7 +39,7 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
           Domain
         </Heading>
         <Text size="sm" variant="light" className="mb-10">
-          Select your preffered way to generate and access your page
+          Select your prefered way to generate and access your page
         </Text>
 
         <div className="space-y-4">
@@ -128,6 +128,7 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
         <Heading as="h2" size="sm" className="pb-4 font-medium">
           Show support
         </Heading>
+
         <Text size="sm" variant="light">
           Show your support towards Biolnk by displaying our branding on your
           page
