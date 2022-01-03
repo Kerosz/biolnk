@@ -3,6 +3,8 @@ import ConfirmDialog from "../ConfirmDialog";
 import UpdateLinkDialog from "./UpdateLinkDialog";
 import useDeleteLink from "~/utils/hooks/mutations/useDeleteLink";
 import useDisclosure from "~/utils/hooks/useDisclosure";
+import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
+import useUpdateLink from "~/utils/hooks/mutations/useUpdateLink";
 import {
   Draggable,
   DraggingStyle,
@@ -16,6 +18,7 @@ import {
   Flex,
   MoreVertical,
   Text,
+  Toggle,
   Trash2,
 } from "@biolnk/ui";
 import { Link } from "~/types";
@@ -26,13 +29,17 @@ const LinkCard: FC<Link> = ({
   id,
   total_clicks,
   display_order,
+  visible,
 }) => {
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
-  const { mutate } = useDeleteLink();
+  const previewToggle = useDisclosure({ defaultIsOpen: visible });
+
+  const updateLink = useUpdateLink();
+  const deleteLink = useDeleteLink();
 
   const handleDeleteLink = () => {
-    mutate(id);
+    deleteLink.mutate(id);
     deleteDialog.onClose();
   };
 
@@ -47,12 +54,22 @@ const LinkCard: FC<Link> = ({
     opacity: isDragging ? "25%" : "100%",
   });
 
+  useUpdateEffect(() => {
+    if (previewToggle.isOpen !== visible) {
+      updateLink.mutate({
+        data: { visible: previewToggle.isOpen },
+        linkId: id,
+      });
+    }
+  }, [previewToggle.isOpen]);
+
   return (
     <>
       <ConfirmDialog
         open={deleteDialog.isOpen}
         onClose={deleteDialog.onClose}
         onConfirm={handleDeleteLink}
+        loading={deleteLink.isLoading}
         message={
           <p>
             Are you sure you want to delete the following link:{" "}
@@ -95,10 +112,21 @@ const LinkCard: FC<Link> = ({
               className="px-3.5 sm:px-5 pt-5 pb-4 w-full"
             >
               <div className="w-full">
-                <Text as="p" className="font-medium mb-1.5">
-                  {title}
-                </Text>
-                <Text as="p" variant="light" size="sm">
+                <Flex justify="between" align="center">
+                  <Text as="p" className="font-medium mb-1.5">
+                    {title}
+                  </Text>
+
+                  <Toggle
+                    aria-label="Toggle visibility"
+                    label="Toggle visibility"
+                    checked={previewToggle.isOpen}
+                    onCheckedChange={previewToggle.onToggle}
+                    size="sm"
+                    variant="blue"
+                  />
+                </Flex>
+                <Text as="p" variant="light" size="sm" className="truncate">
                   {url}
                 </Text>
 
@@ -121,7 +149,7 @@ const LinkCard: FC<Link> = ({
                   </div>
 
                   <Flex
-                    className="flex xs:!hidden text-mauve-800 sm:mr-3 md:mr-0 lg:mr-3"
+                    className="text-mauve-800 sm:mr-1 md:mr-0 lg:mr-1"
                     align="center"
                   >
                     <BaseIcon icon={Eye} size="lg" />
@@ -131,14 +159,6 @@ const LinkCard: FC<Link> = ({
                   </Flex>
                 </Flex>
               </div>
-
-              <Flex
-                className="!hidden xs:!flex text-mauve-800 sm:mr-3 md:mr-0 lg:mr-3"
-                align="center"
-              >
-                <BaseIcon icon={Eye} size="lg" />
-                <span className="text-mauve-1000 ml-2.5">{total_clicks}</span>
-              </Flex>
             </Flex>
           </Flex>
         )}
