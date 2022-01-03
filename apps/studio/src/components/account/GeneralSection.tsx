@@ -1,10 +1,23 @@
 import Form from "../common/Form";
-import { Button, Flex, Heading, Input, Text } from "@biolnk/ui";
+import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
+import {
+  AlertCircle,
+  BaseIcon,
+  Button,
+  Flex,
+  Heading,
+  Input,
+  makeToast,
+  Text,
+} from "@biolnk/ui";
+import { useSupabase } from "~/lib/supabase";
+import { doesUsernameExist } from "~/services/supabase";
 import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
-import { AccountGeneralDto, PageWithMetadata } from "~/types";
 import { FC } from "react";
+import { AccountGeneralDto, PageWithMetadata } from "~/types";
 
 const GeneralSection: FC<PageWithMetadata["user"]> = ({
+  id,
   email,
   full_name,
   username,
@@ -15,9 +28,41 @@ const GeneralSection: FC<PageWithMetadata["user"]> = ({
     username: username,
   };
 
-  const handleAccountUpdate = () => {
-    return null;
+  const { authUser } = useSupabase();
+  const { mutate, isLoading } = useUpdateUser();
+
+  const handleAccountUpdate = async (formData: AccountGeneralDto) => {
+    const updateDto = {
+      full_name: formData.full_name,
+    } as AccountGeneralDto;
+    const setEmail = formData.email !== email;
+
+    // if curr username is different from new username -> add
+    if (formData.username !== username) {
+      // check db to see if the new username doesn't already exist
+      const checkUsername = await doesUsernameExist(formData.username);
+
+      if (checkUsername) {
+        makeToast({
+          duration: 2500,
+          kind: "error",
+          title: "Error",
+          message: "Username already exists!",
+        });
+
+        return;
+      }
+      updateDto.username = formData.username;
+    }
+
+    mutate({
+      data: updateDto,
+      userId: id,
+      newEmail: setEmail ? formData.email : null,
+    });
   };
+
+  const emailNotConfirmed = !!(authUser as any)?.new_email;
 
   return (
     <section
@@ -33,17 +78,28 @@ const GeneralSection: FC<PageWithMetadata["user"]> = ({
       </Text>
 
       {/* Content */}
+      <div className={emailNotConfirmed ? "block" : "hidden"}>
+        <Flex
+          role="alert"
+          align="center"
+          className="bg-yellow-200 shadow rounded-md px-4 py-2.5 mb-5 text-yellow-950"
+        >
+          <BaseIcon icon={AlertCircle} className="mr-2" />
+          <span>
+            You must confirm the changes on both your old and new email address.
+          </span>
+        </Flex>
+      </div>
+
       <Form<AccountGeneralDto>
         onSubmit={handleAccountUpdate}
         defaultValues={DEFAULT_FORM_VALUES}
         validationSchema={ACCOUNT_GENERAL_SCHEMA}
         resetOnSubmit
+        resetOptions={{ keepValues: true }}
         className="space-y-6 text-mauveDark-950"
       >
-        {({
-          register,
-          formState: { errors, isSubmitting, isValid, isDirty },
-        }) => (
+        {({ register, formState: { errors, isValid, isDirty } }) => (
           <>
             <Input
               id="username"
@@ -86,14 +142,14 @@ const GeneralSection: FC<PageWithMetadata["user"]> = ({
               {...register("full_name")}
             />
 
-            {isDirty && isValid ? (
+            {(isDirty && isValid) || isLoading ? (
               <Flex justify="end" className="w-full">
                 <Button
                   type="submit"
                   variant="primary"
                   size="md"
                   uppercase
-                  loading={isSubmitting}
+                  loading={isLoading}
                   disabled={!isDirty || !isValid}
                 >
                   Save Changes

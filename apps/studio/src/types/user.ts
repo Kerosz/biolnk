@@ -13,3 +13,9 @@ export type User = {
   updated_at: string;
   inserted_at: string;
 };
+
+export type ChangePasswordForm = {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+};
