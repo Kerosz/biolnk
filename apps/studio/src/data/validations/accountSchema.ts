@@ -1,6 +1,6 @@
 import isEmail from "validator/lib/isEmail";
 import { create, test, enforce, only, optional } from "vest";
-import { AccountGeneralDto, ChangePassowrdDto } from "~/types";
+import { AccountGeneralDto, ChangePasswordForm } from "~/types";
 
 export const ACCOUNT_GENERAL_SCHEMA: any = create(
   ({ email, full_name, username }: AccountGeneralDto, currentField: string) => {
@@ -50,40 +50,66 @@ export const ACCOUNT_GENERAL_SCHEMA: any = create(
 
 export const CHANGE_PASSWORD_SCHEMA: any = create(
   (
-    { old_password, new_password, confirm_password }: ChangePassowrdDto,
+    { old_password, new_password, confirm_password }: ChangePasswordForm,
     currentField: string
   ) => {
     only(currentField);
 
-    // Password validation
-    test("new_password", "Password must not be empty!", () => {
+    // Old password validation
+    test("old_password", "Old Password must not be empty!", () => {
+      enforce(old_password).isNotBlank();
+    });
+
+    // New password validation
+    test("new_password", "New Password must not be empty!", () => {
       enforce(new_password).isNotBlank();
-    });
-    test("new_password", "Password must be at least 8 characters long!", () => {
-      enforce(new_password).longerThanOrEquals(8);
-    });
-    test("new_password", "Password must be at most 40 characters long!", () => {
-      enforce(new_password).shorterThanOrEquals(40);
-    });
-    test("new_password", "Password must contain one special character!", () => {
-      enforce(new_password).matches(/[*@!#%&()^~{}]+/);
     });
     test(
       "new_password",
-      "Password must contain at least one uppercase character!",
+      "New Password must be at least 8 characters long!",
+      () => {
+        enforce(new_password).longerThanOrEquals(8);
+      }
+    );
+    test(
+      "new_password",
+      "New Password must be at most 40 characters long!",
+      () => {
+        enforce(new_password).shorterThanOrEquals(40);
+      }
+    );
+    test(
+      "new_password",
+      "New Password must contain one special character!",
+      () => {
+        enforce(new_password).matches(/[*@!#%&()^~{}]+/);
+      }
+    );
+    test(
+      "new_password",
+      "New Password must contain at least one uppercase character!",
       () => {
         enforce(new_password).matches(/[A-Z]+/);
       }
     );
     test(
       "new_password",
-      "Password must contain at least one lowercase character!",
+      "New Password must contain at least one lowercase character!",
       () => {
         enforce(new_password).matches(/[a-z]+/);
       }
     );
-    test("new_password", "Password must contain at least one number!", () => {
-      enforce(new_password).matches(/[0-9]+/);
+    test(
+      "new_password",
+      "New Password must contain at least one number!",
+      () => {
+        enforce(new_password).matches(/[0-9]+/);
+      }
+    );
+
+    // Confirm password validation
+    test("confirm_password", "Passwords do not match!", () => {
+      enforce(confirm_password).equals(new_password);
     });
   }
 );

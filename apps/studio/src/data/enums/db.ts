@@ -21,6 +21,8 @@ export enum LinkKind {
 
 export enum CustomFunction {
   REORDER = "update_links_order",
+  CHANGE_PASSWORD = "change_user_password",
+  DELETE_ACCOUNT = "delete_user_account",
 }
 
 export enum ThemeKind {

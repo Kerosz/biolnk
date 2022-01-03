@@ -5,9 +5,10 @@ export interface ConfirmDialogProps {
   onClose: () => void;
   onConfirm: () => void;
   open: boolean;
-  title?: string;
   message: string | ReactNode;
+  title?: string;
   confirmText?: string;
+  loading?: boolean;
 }
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
@@ -16,6 +17,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   onConfirm,
   title = "Confirm",
   confirmText = "Delete",
+  loading = false,
   message,
 }) => {
   return (
@@ -42,6 +44,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             block
             className="!bg-red-800 hover:!bg-red-900 active:!bg-red-800"
             onClick={onConfirm}
+            loading={loading}
           >
             {confirmText}
           </Dialog.Button>

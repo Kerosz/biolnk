@@ -3,6 +3,7 @@ import {
   PageLinkPosition,
   PageLinkPreference,
 } from "~/data/enums/index";
+import { ChangePasswordForm } from ".";
 
 export type CreateLinkDto = {
   user_id: string;
@@ -64,8 +65,4 @@ export type AccountGeneralDto = {
   username: string;
 };
 
-export type ChangePassowrdDto = {
-  old_password: string;
-  new_password: string;
-  confirm_password: string;
-};
+export type ChangePasswordDto = Omit<ChangePasswordForm, "confirm_password">;

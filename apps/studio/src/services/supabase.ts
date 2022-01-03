@@ -1,6 +1,7 @@
 import { sbClient } from "~/lib/supabase/index";
 import { Tables, CustomFunction } from "~/data/enums/index";
 import {
+  ChangePasswordDto,
   CreateLinkDto,
   Link,
   Page,
@@ -17,6 +18,20 @@ import {
 /****************************************************
  *             USER CRUD OPERATIONS                 *
  ****************************************************/
+
+export const doesUsernameExist = async (username: string) => {
+  const { data, error } = await sbClient
+    .from<User>(Tables.USERS)
+    .select("*")
+    .eq("username", username)
+    .single();
+
+  if (!data || error) {
+    return false;
+  }
+
+  return true;
+};
 
 export const getUserByUsername = async (username: string) => {
   const { data, error } = await sbClient
@@ -99,6 +114,42 @@ export const updateUser = async (userDto: UpdateUserDto, userId: string) => {
     .update(userDto)
     .match({ id: userId })
     .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const updateAuthEmail = async (email: string) => {
+  const { user, error } = await sbClient.auth.update({ email });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return user;
+};
+
+export const changePassword = async ({
+  old_password,
+  new_password,
+}: ChangePasswordDto) => {
+  const { data, error } = await sbClient.rpc(CustomFunction.CHANGE_PASSWORD, {
+    current_plain_password: old_password,
+    new_plain_password: new_password,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export const _UNSAFE_deleteAccount = async () => {
+  const { data, error } = await sbClient.rpc(CustomFunction.DELETE_ACCOUNT);
 
   if (error) {
     throw new Error(error.message);
