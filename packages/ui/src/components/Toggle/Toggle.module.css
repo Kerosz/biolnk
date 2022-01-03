@@ -11,13 +11,13 @@
 */
 
 .blui-toggle-size--sm.blui-toggle-root {
-  @apply h-[20px] w-[44px];
+  @apply h-[20px] w-[38px];
 }
 .blui-toggle-size--sm.blui-toggle {
   @apply h-[16px] w-[16px];
 }
 .blui-toggle-translate--sm {
-  @apply translate-x-6;
+  @apply translate-x-[18px];
 }
 
 .blui-toggle-size--md.blui-toggle-root {
