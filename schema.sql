@@ -9,7 +9,7 @@ create type public.page_link_preference as enum ('PATH', 'SUBDOMAIN', 'CUSTOM');
 
 create table if not exists public.users (
   -- UUID from auth.users
-  id uuid primary key references auth.users not null,
+  id uuid primary key references auth.users on delete cascade,
   email varchar(255) unique not null,
   username varchar(18) unique not null,
   full_name varchar(100),
@@ -24,10 +24,9 @@ create table if not exists public.users (
   constraint username_length check (char_length(username) >= 3)
 );
 alter table public.users enable row level security;
-create unique index users_username_idx on public.users(username); 
 create policy "Allow public read-only access." on public.users for select using (true);
 create policy "Can update own user data." on public.users for update using (auth.uid() = id);
-comment on column public.users.status is 'Shows a checkmark on profile if the user is varified.';
+create unique index users_username_idx on public.users(username); 
 
 /**
 * This trigger automatically creates a user entry when a new user signs up via Supabase Auth.
@@ -44,6 +43,78 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
+/**
+* This trigger automatically updates `public.users.email` when a user changes his 
+* email via Supabase Auth.
+*/ 
+create or replace function public.handle_email_update()
+returns trigger as $$
+begin
+  update public.users set email = new.email
+  where id = new.id;
+  return new;
+end;
+$$ language plpgsql security definer;
+create trigger on_auth_email_change
+  after update on auth.users
+  for each row when (old.email is distinct from new.email)
+  execute procedure public.handle_email_update();
+
+/**
+* This fn checks the current password of an auth.user before updating the new password. The fn
+* is required because Supabase Auth API doesn't provide a way to know what the current password
+* of a user is. Used with `supabaseClient.rpc()`
+*/ 
+create or replace function change_user_password(current_plain_password varchar, new_plain_password varchar)
+returns json
+language plpgsql
+security definer
+as $$
+DECLARE
+_uid uuid; -- for checking 'User is not found'
+user_id uuid; -- to store the user id from the request
+BEGIN
+  -- not empty
+  IF (new_plain_password = '') IS NOT FALSE THEN
+    RAISE EXCEPTION 'New password is empty!';
+  -- minimum 8 chars
+  ELSIF char_length(new_plain_password) < 8 THEN
+    RAISE EXCEPTION 'New password must be at least 8 characters long!';
+  -- maximum 8 chars
+  ELSIF char_length(new_plain_password) > 40 THEN
+    RAISE EXCEPTION 'New password must be at most 40 characters long!';
+  END IF;
+  
+  -- Get user by his current auth.uid and current password
+  user_id := auth.uid();
+  SELECT id INTO _uid
+  FROM auth.users
+  WHERE id = user_id
+  AND encrypted_password =
+  crypt(current_plain_password::text, auth.users.encrypted_password);
+
+  -- Check the currect password
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Old password is incorrect!';
+  END IF;
+
+  -- Then set the new password
+  UPDATE auth.users SET 
+  encrypted_password =
+  crypt(new_plain_password, gen_salt('bf'))
+  WHERE id = user_id;
+  
+  RETURN '{"data":true}';
+END;
+$$
+
+/**
+* This function deletes the current user and all it's data by cascading
+* to all the tables that references `auth.users.id`
+*/ 
+create or replace function delete_user_account() returns void as $$
+  delete from auth.users where id = auth.uid();
+$$ language plpgsql security definer;
 
 /** 
 * Themes
@@ -160,12 +231,12 @@ $$ language sql;
 */
 insert into public.themes (name, kind, state, style)
 values
-    ('Cirrus', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(300 20.0% 99.0%); border-width: 0px; border-color: hsl(300 20.0% 99.0%); border-radius: 9999px; box-shadow: 0px 6px 14px -6px rgba(24, 39, 75, 0.12), 0px 10px 32px -4px rgba(24, 39, 75, 0.1), inset 0px 0px 2px 1px rgba(24, 39, 75, 0.05);"},"background":{"css":"background-color: hsl(300 20.0% 99.0%);"}}');
-    ('Minimal Blue', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(209 95.0% 90.1%);"}}');
-    ('Minimal Green', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(122 42.6% 86.5%);"}}');
-    ('Minimal Orange', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(25 100% 88.2%);"}}');
-    ('Carbon', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(243 4.9% 18.8%); border-width: 1px; border-color: hsl(245 4.9% 25.4%); border-radius: 6px;"},"background":{"css":"background-color: hsl(240 5.1% 11.6%);"}}');
-    ('Retro', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(25, 100%, 95%); border-width: 2px; border-color: hsl(228, 49%, 13%); border-radius: 0px;"},"background":{"css":"background-color: hsl(25, 100%, 95%);"}}');
-    ('New York', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(347, 92%, 85%, 1) linear-gradient(0deg, hsla(347, 92%, 85%, 1) 0%, hsla(251, 82%, 70%, 1) 100%);"}}');
-    ('Cypher', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(192, 80%, 51%, 1) linear-gradient(180deg, hsla(192, 80%, 51%, 1) 0%, hsla(355, 85%, 63%, 1) 100%);"}}');
+    ('Cirrus', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(300 20.0% 99.0%); border-width: 0px; border-color: hsl(300 20.0% 99.0%); border-radius: 9999px; box-shadow: 0px 6px 14px -6px rgba(24, 39, 75, 0.12), 0px 10px 32px -4px rgba(24, 39, 75, 0.1), inset 0px 0px 2px 1px rgba(24, 39, 75, 0.05);"},"background":{"css":"background-color: hsl(300 20.0% 99.0%);"}}'),
+    ('Minimal Blue', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(209 95.0% 90.1%);"}}'),
+    ('Minimal Green', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(122 42.6% 86.5%);"}}'),
+    ('Minimal Orange', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(252 4.0% 57.3%); border-radius: 9999px;"},"background":{"css":"background-color: hsl(25 100% 88.2%);"}}'),
+    ('Carbon', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(243 4.9% 18.8%); border-width: 1px; border-color: hsl(245 4.9% 25.4%); border-radius: 6px;"},"background":{"css":"background-color: hsl(240 5.1% 11.6%);"}}'),
+    ('Retro', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: hsl(25, 100%, 95%); border-width: 2px; border-color: hsl(228, 49%, 13%); border-radius: 0px;"},"background":{"css":"background-color: hsl(25, 100%, 95%);"}}'),
+    ('New York', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(347, 92%, 85%, 1) linear-gradient(0deg, hsla(347, 92%, 85%, 1) 0%, hsla(251, 82%, 70%, 1) 100%);"}}'),
+    ('Cypher', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: transparent; border-width: 2px; border-color: hsl(300 20.0% 99.0%); border-radius: 0px;"},"background":{"css":"background: hsla(192, 80%, 51%, 1) linear-gradient(180deg, hsla(192, 80%, 51%, 1) 0%, hsla(355, 85%, 63%, 1) 100%);"}}'),
     ('Polymorph', 'SYSTEM', 'PUBLISHED', '{"button":{"css":"background-color: rgba(196, 196, 196, 0.01); border-width: 0px; border-color: hsl(300 20.0% 99.0%); border-radius: 9999px; box-shadow: inset 0px 17.7895px 25.5438px -16.421px rgba(255, 255, 255, 0.2), inset 0px -5.92982px 4.10526px -6.38596px rgba(255, 255, 255, 0.3), inset 0px 3.19298px 5.01754px -1.82456px #FFFFFF, inset 0px -37.4035px 31.0175px -29.193px rgba(96, 68, 145, 0.3), inset 0px 44.7017px 45.614px -21.8947px rgba(202, 172, 255, 0.14), inset 0px 1.82456px 8.21052px rgba(154, 146, 210, 0.3), inset 0px 0.45614px 18.2456px rgba(227, 222, 255, 0.12);"},"background":{"css":"background: hsla(202, 98%, 20%, 1) linear-gradient(180deg, hsla(202, 98%, 20%, 1) 0%, hsla(176, 30%, 56%, 1) 100%);"}}');
