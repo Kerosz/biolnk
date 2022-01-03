@@ -67,8 +67,6 @@ create trigger on_auth_email_change
 */ 
 create or replace function change_user_password(current_plain_password varchar, new_plain_password varchar)
 returns json
-language plpgsql
-security definer
 as $$
 DECLARE
 _uid uuid; -- for checking 'User is not found'
@@ -106,7 +104,7 @@ BEGIN
   
   RETURN '{"data":true}';
 END;
-$$
+$$ language plpgsql security definer;
 
 /**
 * This function deletes the current user and all it's data by cascading
@@ -114,7 +112,7 @@ $$
 */ 
 create or replace function delete_user_account() returns void as $$
   delete from auth.users where id = auth.uid();
-$$ language plpgsql security definer;
+$$ language sql security definer;
 
 /** 
 * Themes
