@@ -1,9 +1,11 @@
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
 import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
-import { Heading, Text, Flex } from "@biolnk/ui";
+import useDisclosure from "~/utils/hooks/useDisclosure";
+import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
+import { ChangeEvent, FC, useState } from "react";
+import { Heading, Text, Flex, Toggle } from "@biolnk/ui";
 import { PageLinkPreference } from "~/data/enums";
 import { PageWithMetadata } from "~/types";
-import { ChangeEvent, FC, useState } from "react";
 
 export interface PreferenceSectionProps {
   page: PageWithMetadata;
@@ -12,19 +14,47 @@ export interface PreferenceSectionProps {
 const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
   const [domainPreference, setDomainPreference] = useState(page.user.page_link);
 
-  const { mutate, isLoading } = useUpdateUser();
-
   const username = page.user.username;
+
+  const sensitiveToggle = useDisclosure({ defaultIsOpen: page.nsfw_content });
+  const supportToggle = useDisclosure({ defaultIsOpen: page.show_branding });
+
+  const updateUser = useUpdateUser();
+  const updatePage = useUpdatePage();
 
   const handleDomainChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDomainPreference(event.currentTarget.id as `${PageLinkPreference}`);
   };
 
+  // Update page link preference
   useUpdateEffect(() => {
     if (page.user.page_link !== domainPreference) {
-      mutate({ data: { page_link: domainPreference }, userId: page.user.id });
+      updateUser.mutate({
+        data: { page_link: domainPreference },
+        userId: page.user.id,
+      });
     }
   }, [domainPreference]);
+
+  // Update sensitive [nsfw_content] content
+  useUpdateEffect(() => {
+    if (sensitiveToggle.isOpen !== page.nsfw_content) {
+      updatePage.mutate({
+        data: { nsfw_content: sensitiveToggle.isOpen },
+        userId: page.user.id,
+      });
+    }
+  }, [sensitiveToggle.isOpen]);
+
+  // Update support [show_branding]
+  useUpdateEffect(() => {
+    if (supportToggle.isOpen !== page.show_branding) {
+      updatePage.mutate({
+        data: { show_branding: supportToggle.isOpen },
+        userId: page.user.id,
+      });
+    }
+  }, [supportToggle.isOpen]);
 
   return (
     <section
@@ -57,8 +87,8 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
               value={PageLinkPreference.PATH}
               checked={domainPreference === PageLinkPreference.PATH}
               onChange={handleDomainChange}
-              disabled={isLoading}
-              aria-disabled={isLoading}
+              disabled={updateUser.isLoading}
+              aria-disabled={updateUser.isLoading}
             />
             <Text
               className="py-2 px-4 bg-mauve-200 rounded-lg max-w-max"
@@ -83,8 +113,8 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
               value={PageLinkPreference.SUBDOMAIN}
               checked={domainPreference === PageLinkPreference.SUBDOMAIN}
               onChange={handleDomainChange}
-              disabled={isLoading}
-              aria-disabled={isLoading}
+              disabled={updateUser.isLoading}
+              aria-disabled={updateUser.isLoading}
             />
             <Text
               className="py-2 px-4 bg-mauve-200 rounded-lg max-w-max"
@@ -125,9 +155,18 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
       <div className="w-full h-0.5 bg-mauve-300 mt-7 mb-6" />
 
       <div>
-        <Heading as="h2" size="sm" className="pb-4 font-medium">
-          Show support
-        </Heading>
+        <Flex justify="between">
+          <Heading as="h2" size="sm" className="pb-4 font-medium">
+            Show support
+          </Heading>
+
+          <Toggle
+            checked={supportToggle.isOpen}
+            onCheckedChange={supportToggle.onToggle}
+            variant="blue"
+            size="md"
+          />
+        </Flex>
 
         <Text size="sm" variant="light">
           Show your support towards Biolnk by displaying our branding on your
@@ -139,9 +178,19 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
       <div className="w-full h-0.5 bg-mauve-300 mt-7 mb-6" />
 
       <div>
-        <Heading as="h2" size="sm" className="pb-4 font-medium">
-          Sensitive Content
-        </Heading>
+        <Flex justify="between">
+          <Heading as="h2" size="sm" className="pb-4 font-medium">
+            Sensitive Content
+          </Heading>
+
+          <Toggle
+            checked={sensitiveToggle.isOpen}
+            onCheckedChange={sensitiveToggle.onToggle}
+            variant="blue"
+            size="md"
+          />
+        </Flex>
+
         <Text size="sm" variant="light">
           Visitors of your Biolnk will see a Sensitive Content message before
           being able to view your page.
