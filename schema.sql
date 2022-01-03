@@ -209,6 +209,7 @@ alter table public.links enable row level security;
 create unique index links_userId_idx on public.links(user_id);
 create policy "Allow public read-only access." on public.links for select using (true);
 create policy "Can update own link data" on public.links for update using (auth.uid() = user_id);
+create policy "Can delete own link data" on public.links for delete using (auth.uid() = user_id);
 create policy "Can insert when authenticated" on public.links for insert with check (auth.role() = 'authenticated');
 
 /**
