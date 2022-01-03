@@ -27,7 +27,7 @@ const UpdateLinkDialog: React.FC<UpdateLinkDialogProps> = ({
 
   const {
     register,
-    formState: { errors, touchedFields, isValid, isDirty },
+    formState: { errors, isValid, isDirty },
     handleSubmit,
     reset,
   } = useForm<Partial<FormLinkDto>>({
@@ -87,7 +87,6 @@ const UpdateLinkDialog: React.FC<UpdateLinkDialogProps> = ({
           placeholder={currentTitle}
           borderless
           error={errors.title?.message}
-          valid={!errors.title && touchedFields.title}
           {...register("title")}
         />
         <Input
@@ -99,7 +98,6 @@ const UpdateLinkDialog: React.FC<UpdateLinkDialogProps> = ({
           placeholder={currentUrl}
           borderless
           error={errors.url?.message}
-          valid={!errors.url && touchedFields.url}
           {...register("url")}
         />
       </form>
