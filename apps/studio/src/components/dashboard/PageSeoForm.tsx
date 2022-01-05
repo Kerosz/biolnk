@@ -1,3 +1,4 @@
+import Skeleton from "react-loading-skeleton";
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { FC, memo } from "react";
@@ -11,8 +12,8 @@ export interface PageSeoFormProps {
 
 const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
   const DEFAULT_FORM_VALUES: PageSeoDto = {
-    seo_title: page.seo_title,
-    seo_description: page.seo_description,
+    seo_title: page?.seo_title,
+    seo_description: page?.seo_description,
   };
 
   const { mutateAsync } = useUpdatePage();
@@ -20,12 +21,24 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
   const handleSeoUpdate = async (formData: PageSeoDto) => {
     // If any of the fields are different from the existing values -> send req
     if (
-      page.seo_title !== formData.seo_title ||
-      page.seo_description !== formData.seo_description
+      page?.seo_title !== formData.seo_title ||
+      page?.seo_description !== formData.seo_description
     ) {
-      await mutateAsync({ data: formData, userId: page.user.id });
+      await mutateAsync({ data: formData, userId: page?.user.id });
     }
   };
+
+  if (!page) {
+    return (
+      <Flex layout="vertical" align="end">
+        <Flex layout="vertical" className="w-full mt-3">
+          <Skeleton height={40} />
+          <Skeleton containerClassName="mt-3" height={74} />
+        </Flex>
+        <Skeleton containerClassName="mt-3" width={76} height={38} />
+      </Flex>
+    );
+  }
 
   return (
     <Form<PageSeoDto>

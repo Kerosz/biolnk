@@ -1,10 +1,11 @@
 import React, { FC, useState, memo } from "react";
-import LinkCard from "~/components/dashboard/LinkCard";
+import Skeleton from "react-loading-skeleton";
 import EmptyShell from "../EmptyShell";
 import useLinks from "~/utils/hooks/queries/useLinks";
 import useReorderLink from "~/utils/hooks/mutations/useReorderLink";
 import useSafeLayoutEffect from "~/utils/hooks/useSafeLayoutEffect";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { LinkCard } from "~/components/dashboard";
 import { FilePlus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
 import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
@@ -34,9 +35,14 @@ const LinkDraggableList: FC = () => {
     }
   }, [links]);
 
-  /** @TODO Implement <Skeleton /> component */
   if (isLoading) {
-    return <span>Skeleton loading</span>;
+    return (
+      <Skeleton
+        count={3}
+        height={136}
+        containerClassName="mt-2 block space-y-4"
+      />
+    );
   }
 
   if (!isLoading && links.length < 1) {
