@@ -5,6 +5,6 @@ export enum Routes {
   ACCOUNT = "/account",
   DASHBOARD = "/dashboard",
   PAGE = "/dashboard/page",
-  ANALYTICS = "/dashboard/analytics",
+  STATS = "/dashboard/stats",
   EMAIL_VERIFICATION = "/email-verification",
 }
