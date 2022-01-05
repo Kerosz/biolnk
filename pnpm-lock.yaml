@@ -36,6 +36,7 @@ importers:
       react-beautiful-dnd: ^13.1.0
       react-dom: 17.0.2
       react-hook-form: ^7.21.0
+      react-loading-skeleton: ^3.0.2
       react-query: ^3.34.0
       react-test-renderer: ^17.0.2
       sharp: ^0.29.3
@@ -56,6 +57,7 @@ importers:
       react-beautiful-dnd: 13.1.0_react-dom@17.0.2+react@17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.22.5_react@17.0.2
+      react-loading-skeleton: 3.0.2_react@17.0.2
       react-query: 3.34.6_react-dom@17.0.2+react@17.0.2
       sharp: 0.29.3
       validator: 13.7.0
@@ -10489,6 +10491,14 @@ packages:
 
   /react-is/17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+
+  /react-loading-skeleton/3.0.2_react@17.0.2:
+    resolution: {integrity: sha512-rlALwuZEcjazUDeIy3+fEhm20Uk9Yd/zZGeITU034K2ts5/yEf7RuZaV2FyrPWypIII4LAsFEo9WDTPKp6G0fQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /react-query/3.34.6_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-2UKldH8T2PjmLxaOzANok7yITQn9FF1pBbrZFF1hvukBjYefHtCjUur+GOVAWMhrsskcCoKRviei4hcpvj9wLQ==}
