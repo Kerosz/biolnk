@@ -20,7 +20,6 @@ import {
   Text,
   Toggle,
   Trash2,
-  ArrowUpLeft,
   Eye,
 } from "@biolnk/ui";
 import { Link } from "~/types";
