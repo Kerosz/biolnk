@@ -1,5 +1,5 @@
 .blui-root {
-  @apply lg:px-14 md:px-12 px-4 mx-auto w-full;
+  @apply lg:px-14 md:px-9 sm:px-6 px-4 mx-auto w-full;
 }
 
 /*

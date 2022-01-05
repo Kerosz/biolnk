@@ -11,8 +11,13 @@ const nextConfig = {
     // Only run ESLint on following directories during production builds
     dirs: ["pages", "utils", "lib", "components"],
   },
-  /** @see https://nextjs.org/docs/advanced-features/compiler#minification */
-  swcMinify: true,
+  /**
+   * Investigating an issue with using `swcMinify` where `vest` form validation
+   * throws an error caused by the minification of `swc`
+   *
+   * @see https://nextjs.org/docs/advanced-features/compiler#minification
+   */
+  // swcMinify: true,
   optimizeFonts: true,
   async Headers() {
     return [

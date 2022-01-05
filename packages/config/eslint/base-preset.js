@@ -17,7 +17,6 @@ module.exports = {
       {
         forbid: [">", "}", '"'],
       },
-    ],
-    "react-hooks/exhaustive-deps": 0,
+    ]
   },
 };

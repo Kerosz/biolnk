@@ -1,11 +1,12 @@
 import React from "react";
 import {
+  KeepStateOptions,
   SubmitHandler,
   useForm,
   UseFormProps,
   UseFormReturn,
 } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { vestResolver } from "@hookform/resolvers/vest";
 
 export interface FormProps<Values>
   extends Omit<
@@ -14,8 +15,9 @@ export interface FormProps<Values>
   > {
   onSubmit: SubmitHandler<Values>;
   defaultValues: UseFormProps<Values>["defaultValues"];
-  validationSchema?: any;
+  validationSchema: any;
   resetOnSubmit?: boolean;
+  resetOptions?: KeepStateOptions;
   mode?: UseFormProps<Values>["mode"];
   formProps?: UseFormProps<Values>;
   children?: (methods: UseFormReturn<Values>) => React.ReactNode;
@@ -29,6 +31,7 @@ const Form = <
   defaultValues,
   validationSchema,
   resetOnSubmit = false,
+  resetOptions = {},
   mode = "all",
   formProps,
   children,
@@ -38,7 +41,7 @@ const Form = <
   const methods = useForm<Values>(
     formProps ?? {
       defaultValues,
-      resolver: zodResolver(validationSchema),
+      resolver: vestResolver(validationSchema),
       mode,
     }
   );
@@ -51,7 +54,7 @@ const Form = <
     handleSubmit(onSubmit)(event);
 
     if (resetOnSubmit) {
-      reset(defaultValues);
+      reset(defaultValues, resetOptions);
     }
   };
 

@@ -257,6 +257,8 @@ module.exports = {
           "linear-gradient(to right, #e03177, #d72c87, #ca2e97, #ba34a6, #a43cb4);",
         "gradient-btn-active":
           "linear-gradient(to right top, #f04f88, #e94c98, #de4ba7, #d04fb7, #bd54c6);",
+        "gradient-avatar":
+          "linear-gradient(315deg, hsla(322, 31%, 93%, 1) 0%, hsla(300, 100%, 99%, 1) 100%);",
       },
     },
   },

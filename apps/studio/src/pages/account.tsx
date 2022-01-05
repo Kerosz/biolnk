@@ -1,13 +1,29 @@
-import DashboardLayout from "~/components/layout/DashboardLayout";
-import { Text } from "@biolnk/ui";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
+import usePage from "~/utils/hooks/queries/usePage";
+import { AccountLayout } from "~/components/layouts";
+import {
+  ChangePasswordSection,
+  GeneralSection,
+  PreferenceSection,
+  SecuritySection,
+  AccountSkeleton,
+} from "~/components/account";
 
-/**
- * @TODO Have a coming soon component to display
- */
-export default function AccountPage() {
+function AccountPage() {
+  const { page, isLoading } = usePage();
+
+  if (!page || isLoading) {
+    return <AccountSkeleton />;
+  }
+
   return (
-    <DashboardLayout>
-      <Text>Coming Soon</Text>
-    </DashboardLayout>
+    <AccountLayout>
+      <GeneralSection user={page.user} />
+      <PreferenceSection page={page} />
+      <ChangePasswordSection />
+      <SecuritySection user={page.user} />
+    </AccountLayout>
   );
 }
+
+export default withAuthCheck(AccountPage);

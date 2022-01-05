@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, useCallback } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { ctl } from "@biolnk/utils";
@@ -6,16 +7,32 @@ import Styles from "./Avatar.module.css";
 
 const DEFAULT_TAG = "span";
 
-export interface AvatarOwnProps
-  extends React.ComponentPropsWithRef<typeof DEFAULT_TAG> {
-  src?: string;
+export type FallbackProps =
+  | { fallback?: string; src?: string }
+  | { fallback: string; src?: never };
+
+export type AvatarOwnProps = React.ComponentPropsWithRef<typeof DEFAULT_TAG> & {
   alt: string;
-  fallback?: string;
   delay?: number;
-}
+  withBorder?: boolean;
+  size?: "sm" | "md" | "lg" | "xl";
+} & FallbackProps;
 
 const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
-  ({ src, alt, fallback, delay, className, ...otherProps }, ref) => {
+  (
+    {
+      src,
+      alt,
+      fallback,
+      withBorder = true,
+      size = "md",
+      delay,
+      className,
+      children,
+      ...otherProps
+    },
+    ref
+  ) => {
     const getFallback = useCallback((value: string) => {
       const fallbackValue = [];
       const splitValue = value.split(" ");
@@ -32,23 +49,26 @@ const Avatar = forwardRef<HTMLSpanElement, AvatarOwnProps>(
       return fallbackValue.join("").toUpperCase();
     }, []);
 
-    const defaultFallback = fallback ?? getFallback(alt);
+    const defaultFallback = fallback ? getFallback(fallback) : getFallback(alt);
 
     const rootClass = ctl(`
-      ${Styles["blui-root"]}
+      ${Styles["blui-avatar-root"]}
+      ${withBorder && Styles["blui-avatar--border"]}
+      ${size && Styles[`blui-avatar-size--${size}`]}
       ${className}
     `);
 
     return (
       <AvatarPrimitive.Root ref={ref} className={rootClass} {...otherProps}>
+        {children}
         <AvatarPrimitive.Image
-          className={Styles["blui-image"]}
+          className={Styles["blui-avatar---image"]}
           src={src}
           alt={alt}
         />
         <AvatarPrimitive.Fallback
           delayMs={delay}
-          className={Styles["blui-fallback"]}
+          className={Styles["blui-avatar--fallback"]}
         >
           {defaultFallback}
         </AvatarPrimitive.Fallback>

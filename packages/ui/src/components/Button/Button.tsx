@@ -8,6 +8,8 @@ import Styles from "./Button.module.css";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: "button" | "submit" | "reset";
+  /** Used to control and outisde form by it's ID */
+  form?: string;
   /**
    * Allows any component/string to be passed as the button tag
    *
@@ -17,7 +19,9 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   as?: keyof JSX.IntrinsicElements;
   /** Gives the button full width */
   block?: boolean;
-  className?: any;
+  /** Gives the button no padding */
+  noSpace?: boolean;
+  className?: string;
   children?: React.ReactNode;
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -36,6 +40,8 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   shadow?: boolean;
   /** Makes the button text uppercase and gives it letter tracking/spacing */
   uppercase?: boolean;
+  /** Gives the button a rounded border */
+  rounded?: boolean;
   /** Aligns the button text on the specified side.
    * @default `center`
    */
@@ -101,7 +107,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loadingCentered = false,
       customLoadingText = undefined,
       block = false,
+      noSpace = false,
       uppercase = false,
+      rounded = true,
       shadow = true,
       danger = false,
       disabled = false,
@@ -128,13 +136,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ${Styles["blui-btn"]}
       ${Styles[`blui-btn-${variant}`]}
       ${block && Styles["blui-btn--w-full"]}
+      ${rounded && Styles["blui-btn--rounded"]}
       ${danger && Styles["blui-btn--danger"]}
       ${
         shadow && isLink && isText
           ? Styles["blui-btn-container--shadow"]
           : undefined
       }
-      ${size && Styles[`blui-btn--${size}`]}
+      ${size && Styles[`blui-btn_text--${size}`]}
+      ${size && !noSpace && Styles[`blui-btn_space--${size}`]}
       ${loading && loadingCentered && Styles[`blui-btn--text-fade-out`]}
       ${Styles[`blui-btn--text-align-${textAlign}`]}
       ${className && className}
@@ -157,7 +167,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const RenderedButton = ({ children }: any) =>
       as ? (
-        <CustomButton className={rootClass} onClick={onClick} style={style}>
+        <CustomButton
+          role={role}
+          className={rootClass}
+          onClick={onClick}
+          style={style}
+          aria-selected={ariaSelected}
+          aria-controls={ariaControls}
+          tabIndex={tabIndex}
+          {...otherProps}
+        >
           {children}
         </CustomButton>
       ) : (

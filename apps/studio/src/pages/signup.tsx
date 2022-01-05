@@ -1,34 +1,23 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import CenteredPageLayout from "~/components/layout/CenteredPageLayout";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useSupabase } from "~/lib/supabase";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { Button, Input, Text } from "@biolnk/ui";
+import { CenteredPageLayout } from "~/components/layouts";
+import { useSupabase } from "~/lib/supabase";
 import { SIGNUP_SCHEMA } from "~/data/validations";
-import { Routes } from "~/data/enums/routes";
 import type { SignUpDto } from "~/types";
 
-export default function SignUpPage() {
+function SignUpPage() {
   const DEFAULT_FORM_VALUES: SignUpDto = {
     email: "",
     username: "",
     password: "",
   };
-  const { signUpWithEmail, isAuthenticated } = useSupabase();
-  const router = useRouter();
+  const { signUpWithEmail } = useSupabase();
 
   const handleSignUp = async (formData: SignUpDto) => {
     await signUpWithEmail(formData);
   };
-
-  /**
-   * @TODO
-   * use middleware or next 'api' to enable route redirects on SSR
-   */
-  useEffect(() => {
-    if (isAuthenticated) router.replace(Routes.DASHBOARD);
-  }, []);
 
   return (
     <CenteredPageLayout
@@ -124,3 +113,5 @@ export default function SignUpPage() {
     </CenteredPageLayout>
   );
 }
+
+export default withAuthCheck(SignUpPage);

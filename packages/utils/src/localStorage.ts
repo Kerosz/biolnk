@@ -6,12 +6,13 @@ import { isBrowser } from "./dom";
  * @returns the value or null
  */
 export function get(key: string): any | null {
-  if (isBrowser) {
-    const storageItem = window.localStorage.getItem(key);
-
-    return storageItem ? JSON.parse(storageItem) : null;
+  if (!isBrowser) {
+    throw new Error(`localStorage cannot be used outside the browser`);
   }
-  throw new Error(`localStorage cannot be used outside the browser`);
+
+  const storageItem = window.localStorage.getItem(key);
+
+  return storageItem ? JSON.parse(storageItem) : null;
 }
 
 /**
@@ -21,11 +22,12 @@ export function get(key: string): any | null {
  */
 export function has(key: string): boolean {
   if (isBrowser) {
-    const storageItem = window.localStorage.getItem(key);
-
-    return !!storageItem;
+    throw new Error(`localStorage cannot be used outside the browser`);
   }
-  throw new Error(`localStorage cannot be used outside the browser`);
+
+  const storageItem = window.localStorage.getItem(key);
+
+  return !!storageItem;
 }
 
 /**
@@ -35,14 +37,15 @@ export function has(key: string): boolean {
  * @returns {boolean} true
  */
 export function set(key: string, value: unknown): boolean {
-  if (isBrowser) {
-    const parsedValue = JSON.stringify(value);
-
-    window.localStorage.setItem(key, parsedValue);
-
-    return true;
+  if (!isBrowser) {
+    throw new Error(`localStorage cannot be used outside the browser`);
   }
-  throw new Error(`localStorage cannot be used outside the browser`);
+
+  const parsedValue = JSON.stringify(value);
+
+  window.localStorage.setItem(key, parsedValue);
+
+  return true;
 }
 
 /**
@@ -50,8 +53,8 @@ export function set(key: string, value: unknown): boolean {
  * @param key Key of the item
  */
 export function remove(key: string): void {
-  if (isBrowser) {
-    window.localStorage.removeItem(key);
+  if (!isBrowser) {
+    throw new Error(`localStorage cannot be used outside the browser`);
   }
-  throw new Error(`localStorage cannot be used outside the browser`);
+  window.localStorage.removeItem(key);
 }
