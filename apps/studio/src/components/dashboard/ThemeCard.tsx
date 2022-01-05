@@ -22,7 +22,7 @@ const ThemeCard: FC<ThemeCardProps> = ({
     userCurrentTheme.toLowerCase().trim() === name.toLowerCase().trim();
 
   const rootClass = ctl(`
-      rounded-xl relative p-1 cursor-pointer transform-gpu duration-300
+      rounded-xl relative p-0.5 xs:p-1 cursor-pointer transform-gpu duration-300
       ${!isSelected && "hover:scale-105"}
       ${disableSelect && "select-none opacity-70"}
     `);
