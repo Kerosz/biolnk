@@ -1,6 +1,5 @@
-import CenteredPageLayout from "~/components/layouts/CenteredPageLayout";
-import { Text } from "@biolnk/ui";
-import { Button } from "@biolnk/ui";
+import { Text, Button } from "@biolnk/ui";
+import { CenteredPageLayout } from "~/components/layouts";
 import { useSupabase } from "~/lib/supabase";
 
 export default function EmailVerificationPage() {
