@@ -9,7 +9,11 @@ import { Routes } from "~/data/enums";
 import { PageWithMetadata } from "~/types";
 import { FC } from "react";
 
-const SecuritySection: FC<PageWithMetadata["user"]> = ({ username }) => {
+export interface SecuritySectionProps {
+  user: PageWithMetadata["user"] | null;
+}
+
+const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
   const { mutateAsync, isLoading } = useDeleteUser();
   const { session } = useSupabase();
   const { replace } = useRouter();
@@ -45,8 +49,8 @@ const SecuritySection: FC<PageWithMetadata["user"]> = ({ username }) => {
         message={
           <p>
             Are you sure you want to delete the account, including all the data
-            for <span className="font-medium">{username}</span> ? This action
-            cannot be undone!
+            for <span className="font-medium">{user?.username}</span> ? This
+            action cannot be undone!
           </p>
         }
       />

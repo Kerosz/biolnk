@@ -16,16 +16,15 @@ import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
 import { FC } from "react";
 import { AccountGeneralDto, PageWithMetadata } from "~/types";
 
-const GeneralSection: FC<PageWithMetadata["user"]> = ({
-  id,
-  email,
-  full_name,
-  username,
-}) => {
+export interface GeneralSectionProps {
+  user: PageWithMetadata["user"] | null;
+}
+
+const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
   const DEFAULT_FORM_VALUES: AccountGeneralDto = {
-    email: email,
-    full_name: full_name,
-    username: username,
+    email: user?.email,
+    full_name: user?.full_name,
+    username: user?.username,
   };
 
   const { authUser } = useSupabase();
@@ -35,10 +34,10 @@ const GeneralSection: FC<PageWithMetadata["user"]> = ({
     const updateDto = {
       full_name: formData.full_name,
     } as AccountGeneralDto;
-    const setEmail = formData.email !== email;
+    const setEmail = formData.email !== user?.email;
 
     // if curr username is different from new username -> add
-    if (formData.username !== username) {
+    if (formData.username !== user?.username) {
       // check db to see if the new username doesn't already exist
       const checkUsername = await doesUsernameExist(formData.username);
 
@@ -57,12 +56,12 @@ const GeneralSection: FC<PageWithMetadata["user"]> = ({
 
     mutate({
       data: updateDto,
-      userId: id,
+      userId: user?.id,
       newEmail: setEmail ? formData.email : null,
     });
   };
 
-  const emailNotConfirmed = !!(authUser as any)?.new_email;
+  const emailNotConfirmed = !!authUser?.new_email;
 
   return (
     <section
