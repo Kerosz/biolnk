@@ -1,9 +1,9 @@
-import DashboardLayout from "~/components/layouts/DashboardLayout";
-import LinkDraggableList from "~/components/dashboard/LinkDraggableList";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
+import { memo } from "react";
+import { DashboardLayout } from "~/components/layouts";
+import { LinkDraggableList } from "~/components/dashboard";
 import { Button, Flex, Plus } from "@biolnk/ui";
 import { useAppContext } from "~/data/context";
-import { memo } from "react";
 
 function LinksScreen() {
   const { addLinkDialog } = useAppContext();

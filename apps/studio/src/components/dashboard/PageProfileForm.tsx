@@ -1,3 +1,4 @@
+import Skeleton from "react-loading-skeleton";
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
@@ -16,14 +17,16 @@ import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
 
 export interface PageProfileFormProps {
-  page: PageWithMetadata;
+  page: PageWithMetadata | undefined;
 }
 
 const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
   const DEFAULT_FORM_VALUES: PageProfileDto = {
-    title: page.title,
-    biography: page.user.biography,
+    title: page?.title,
+    biography: page?.user.biography,
   };
+
+  const avatarAlt = `${page?.user.username} profile`;
 
   const { mutateAsync: pageMutate } = useUpdatePage();
   const { mutateAsync: userMutate } = useUpdateUser();
@@ -32,11 +35,11 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
 
   async function handleSeoUpdate({ title, biography }: PageProfileDto) {
     // If any of the fields are different from the existing values -> send req
-    if (title !== page.title) {
-      await pageMutate({ data: { title }, userId: page.user.id });
+    if (title !== page?.title) {
+      await pageMutate({ data: { title }, userId: page?.user.id });
     }
-    if (biography !== page.user.biography) {
-      await userMutate({ data: { biography }, userId: page.user.id });
+    if (biography !== page?.user.biography) {
+      await userMutate({ data: { biography }, userId: page?.user.id });
     }
   }
 
@@ -77,7 +80,20 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     </button>
   );
 
-  const avatarAlt = `${page.user.username} profile`;
+  if (!page) {
+    return (
+      <Flex layout="vertical" align="end">
+        <Flex className="w-full mt-3">
+          <Skeleton circle width={129} height={129} />
+          <Flex layout="vertical" className="w-full">
+            <Skeleton containerClassName="ml-5" height={40} />
+            <Skeleton containerClassName="ml-5 mt-3" height={74} />
+          </Flex>
+        </Flex>
+        <Skeleton containerClassName="mt-3" width={76} height={38} />
+      </Flex>
+    );
+  }
 
   return (
     <Form<PageProfileDto>

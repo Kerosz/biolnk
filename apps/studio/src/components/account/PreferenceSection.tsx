@@ -14,7 +14,7 @@ export interface PreferenceSectionProps {
 const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
   const [domainPreference, setDomainPreference] = useState(page.user.page_link);
 
-  const username = page.user.username;
+  const username = page?.user.username;
 
   const sensitiveToggle = useDisclosure({ defaultIsOpen: page.nsfw_content });
   const supportToggle = useDisclosure({ defaultIsOpen: page.show_branding });
@@ -28,30 +28,30 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
 
   // Update page link preference
   useUpdateEffect(() => {
-    if (page.user.page_link !== domainPreference) {
+    if (page?.user.page_link !== domainPreference) {
       updateUser.mutate({
         data: { page_link: domainPreference },
-        userId: page.user.id,
+        userId: page?.user.id,
       });
     }
   }, [domainPreference]);
 
   // Update sensitive [nsfw_content] content
   useUpdateEffect(() => {
-    if (sensitiveToggle.isOpen !== page.nsfw_content) {
+    if (sensitiveToggle.isOpen !== page?.nsfw_content) {
       updatePage.mutate({
         data: { nsfw_content: sensitiveToggle.isOpen },
-        userId: page.user.id,
+        userId: page?.user.id,
       });
     }
   }, [sensitiveToggle.isOpen]);
 
   // Update support [show_branding]
   useUpdateEffect(() => {
-    if (supportToggle.isOpen !== page.show_branding) {
+    if (supportToggle.isOpen !== page?.show_branding) {
       updatePage.mutate({
         data: { show_branding: supportToggle.isOpen },
-        userId: page.user.id,
+        userId: page?.user.id,
       });
     }
   }, [supportToggle.isOpen]);

@@ -11,4 +11,4 @@ export type SignInDto = {
   password: string;
 };
 
-export type AuthUser = User;
+export type AuthUser = User & { new_email?: string | null };

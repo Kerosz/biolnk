@@ -14,12 +14,14 @@ import {
   BaseIcon,
   Button,
   Edit,
-  Eye,
   Flex,
   MoreVertical,
+  Tooltip,
   Text,
   Toggle,
   Trash2,
+  ArrowUpLeft,
+  Eye,
 } from "@biolnk/ui";
 import { Link } from "~/types";
 
@@ -89,7 +91,7 @@ const LinkCard: FC<Link> = ({
         {({ innerRef, draggableProps, dragHandleProps }, snapshot) => (
           <Flex
             as="li"
-            className="bg-white shadow-sm rounded border border-mauve-200"
+            className="bg-white shadow-sm rounded border border-mauve-200 !cursor-default"
             ref={innerRef}
             {...draggableProps}
             {...dragHandleProps}
@@ -117,14 +119,16 @@ const LinkCard: FC<Link> = ({
                     {title}
                   </Text>
 
-                  <Toggle
-                    aria-label="Toggle visibility"
-                    label="Toggle visibility"
-                    checked={previewToggle.isOpen}
-                    onCheckedChange={previewToggle.onToggle}
-                    size="sm"
-                    variant="blue"
-                  />
+                  <Tooltip content="Preview Mode">
+                    <Toggle
+                      aria-label="Toggle visibility"
+                      label="Toggle visibility"
+                      checked={previewToggle.isOpen}
+                      onCheckedChange={previewToggle.onToggle}
+                      size="sm"
+                      variant="blue"
+                    />
+                  </Tooltip>
                 </Flex>
                 <Text as="p" variant="light" size="sm" className="truncate">
                   {url}
@@ -132,31 +136,38 @@ const LinkCard: FC<Link> = ({
 
                 <Flex className="mt-5" align="center" justify="between">
                   <div className="space-x-3">
-                    <Button
-                      aria-label="Edit"
-                      icon={Edit}
-                      variant="text"
-                      noSpace
-                      onClick={updateDialog.onOpen}
-                    />
-                    <Button
-                      aria-label="Delete"
-                      icon={Trash2}
-                      variant="text"
-                      noSpace
-                      onClick={deleteDialog.onOpen}
-                    />
+                    <Tooltip content="Edit link">
+                      <Button
+                        aria-label="Edit"
+                        icon={Edit}
+                        variant="text"
+                        noSpace
+                        onClick={updateDialog.onOpen}
+                      />
+                    </Tooltip>
+
+                    <Tooltip content="Delete link">
+                      <Button
+                        aria-label="Delete"
+                        icon={Trash2}
+                        variant="text"
+                        noSpace
+                        onClick={deleteDialog.onOpen}
+                      />
+                    </Tooltip>
                   </div>
 
-                  <Flex
-                    className="text-mauve-800 sm:mr-1 md:mr-0 lg:mr-1"
-                    align="center"
-                  >
-                    <BaseIcon icon={Eye} size="lg" />
-                    <span className="text-mauve-1000 ml-2.5">
-                      {total_clicks}
-                    </span>
-                  </Flex>
+                  <Tooltip content="Total link clicks">
+                    <Flex
+                      className="text-mauve-800 sm:mr-1 md:mr-0 lg:mr-1 cursor-help"
+                      align="center"
+                    >
+                      <BaseIcon icon={Eye} size="lg" />
+                      <span className="text-mauve-1000 ml-2.5">
+                        {total_clicks}
+                      </span>
+                    </Flex>
+                  </Tooltip>
                 </Flex>
               </div>
             </Flex>

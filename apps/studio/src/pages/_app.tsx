@@ -10,6 +10,7 @@ import { Toaster } from "@biolnk/ui";
 import type { AppProps } from "next/app";
 
 import "~/globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function App({ Component, pageProps }: AppProps) {
   useTheme();

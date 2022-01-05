@@ -12,19 +12,22 @@ export interface ThemeListProps {
 const ThemeList: FC<ThemeListProps> = ({ page, themes }) => {
   const [selectedTheme, setSelectedTheme] = useState(page.theme.name);
 
-  const { mutateAsync, isLoading } = useUpdatePage();
+  const { mutate, isLoading } = useUpdatePage();
 
   const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedTheme(event.currentTarget.value);
   };
 
-  const handleThemeUpdate = async () => {
-    await mutateAsync({ data: { theme: selectedTheme }, userId: page.user.id });
+  const handleThemeUpdate = () => {
+    mutate({
+      data: { theme: selectedTheme },
+      userId: page?.user.id,
+    });
   };
 
   useUpdateEffect(() => {
     // if selected theme is different from the current theme -> send req
-    if (page.theme.name !== selectedTheme) {
+    if (page?.theme.name !== selectedTheme) {
       handleThemeUpdate();
     }
   }, [selectedTheme]);

@@ -1,9 +1,9 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
-import CenteredPageLayout from "~/components/layouts/CenteredPageLayout";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
-import { useSupabase } from "~/lib/supabase";
 import { Button, Input, Text } from "@biolnk/ui";
+import { CenteredPageLayout } from "~/components/layouts";
+import { useSupabase } from "~/lib/supabase";
 import { SIGNUP_SCHEMA } from "~/data/validations";
 import type { SignUpDto } from "~/types";
 
