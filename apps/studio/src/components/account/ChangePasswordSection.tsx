@@ -24,7 +24,7 @@ const ChangePasswordSection: FC = () => {
   return (
     <section
       id="change-password"
-      className="bg-mauve-50 rounded pt-4 pb-5 px-6 shadow-sm -translate-y-1"
+      className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm -translate-y-1"
     >
       {/* Divider */}
       <div className="w-full h-0.5 bg-mauve-300 mb-6" />

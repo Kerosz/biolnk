@@ -12,7 +12,7 @@ import {
 function AccountPage() {
   const { page, isLoading } = usePage();
 
-  if (isLoading) {
+  if (!page || isLoading) {
     return <AccountSkeleton />;
   }
 

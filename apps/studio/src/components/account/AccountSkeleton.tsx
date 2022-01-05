@@ -11,19 +11,19 @@ const AccountSkeleton: FC = () => {
         <Skeleton width={220} height={15} />
 
         <Flex className="mt-9 space-y-4" layout="vertical">
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
 
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
 
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
         </Flex>
       </section>
@@ -81,19 +81,19 @@ const AccountSkeleton: FC = () => {
         <Skeleton width={220} height={15} />
 
         <Flex className="mt-9 space-y-4" layout="vertical">
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
 
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
 
-          <Flex className="w-full">
+          <Flex className="w-full flex-col md:flex-row">
             <Skeleton width={135} height={16} />
-            <Skeleton containerClassName="block w-full ml-20" height={37} />
+            <Skeleton containerClassName="block w-full md:ml-20" height={37} />
           </Flex>
         </Flex>
       </section>

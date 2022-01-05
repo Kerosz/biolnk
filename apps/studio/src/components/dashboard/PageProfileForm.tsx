@@ -83,11 +83,11 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
   if (!page) {
     return (
       <Flex layout="vertical" align="end">
-        <Flex className="w-full mt-3">
+        <Flex className="flex-col sm:flex-row w-full sm:mt-3">
           <Skeleton circle width={129} height={129} />
-          <Flex layout="vertical" className="w-full">
-            <Skeleton containerClassName="ml-5" height={40} />
-            <Skeleton containerClassName="ml-5 mt-3" height={74} />
+          <Flex layout="vertical" className="w-full mt-3.5 sm:mt-0">
+            <Skeleton containerClassName="sm:ml-5" height={40} />
+            <Skeleton containerClassName="sm:ml-5 mt-3" height={74} />
           </Flex>
         </Flex>
         <Skeleton containerClassName="mt-3" width={76} height={38} />
