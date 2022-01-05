@@ -57,7 +57,7 @@ const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
 
       <section
         id="security"
-        className="bg-mauve-50 rounded pt-4 pb-5 px-6 shadow-sm mt-12"
+        className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm mt-12"
       >
         {/* Title */}
         <Heading as="h2" size="sm" className="pb-1 font-medium">

@@ -59,7 +59,7 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
   return (
     <section
       id="preferences"
-      className="bg-mauve-50 rounded pt-4 pb-5 px-6 shadow-sm -translate-y-1"
+      className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm -translate-y-1 sm:scroll-mt-12"
     >
       {/* Divider */}
       <div className="w-full h-0.5 bg-mauve-300 mb-6 mt-1" />

@@ -66,7 +66,7 @@ const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
   return (
     <section
       id="general"
-      className="bg-mauve-50 rounded pt-4 pb-5 px-6 shadow-sm"
+      className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm sm:scroll-mt-20"
     >
       {/* Title */}
       <Heading as="h2" size="sm" className="pb-1 font-medium">
