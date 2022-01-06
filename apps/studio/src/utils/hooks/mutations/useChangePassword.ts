@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { changePassword } from "~/services/supabase";
 import { ChangePasswordDto } from "~/types";
 import { PostgrestError } from "@supabase/supabase-js";

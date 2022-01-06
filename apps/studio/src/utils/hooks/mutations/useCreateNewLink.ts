@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { sbClient } from "~/lib/supabase";
 import { createNewLink } from "~/services/supabase";
 import { LinkKind } from "~/data/enums";

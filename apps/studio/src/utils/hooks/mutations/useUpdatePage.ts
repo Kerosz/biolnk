@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { updatePage } from "~/services/supabase";
 import type { UpdatePageDto } from "~/types";
 
