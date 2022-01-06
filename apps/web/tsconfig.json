@@ -1,5 +1,5 @@
 {
-  "extends": "@biolnk/config/ts/nextjs.json",
+  "extends": "./node_modules/@biolnk/core/src/config/ts/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

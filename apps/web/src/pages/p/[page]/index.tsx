@@ -1,5 +1,6 @@
 import sbClient from "~/lib/supabase";
 import { Loading } from "@biolnk/gamut";
+import { Page } from "@biolnk/core";
 import { useRouter } from "next/router";
 import { PageLayout } from "~/components/layouts";
 
@@ -12,22 +13,6 @@ export default function PageScreen({ domain, page }) {
 
   return <PageLayout theme={page.theme} />;
 }
-
-export type Page = {
-  id: string;
-  user_id: string;
-  theme: string;
-  title: string;
-  subdomain: string;
-  custom_domain: string;
-  seo_title: string | null;
-  seo_description: string | null;
-  nsfw_content: boolean;
-  show_branding: boolean;
-  social_link_position: any;
-  inserted_at: string;
-  updated_at: string;
-};
 
 export async function getStaticPaths() {
   // get all sites that have subdomains set up
