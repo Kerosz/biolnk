@@ -34,7 +34,7 @@
     }
   ],
   "devDependencies": {
-    "@biolnk/config": "*",
+    "@biolnk/core": "*",
     "@size-limit/preset-small-lib": "^7.0.3",
     "@types/minimist": "^1.2.2",
     "size-limit": "^7.0.4",
