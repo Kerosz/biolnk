@@ -1,6 +1,5 @@
 import Link from "../common/Link";
 import { useRouter } from "next/router";
-import { FC } from "react";
 import {
   Activity,
   ArrowLeft,
@@ -11,8 +10,9 @@ import {
   Lock,
   Sliders,
   Text,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { Routes } from "~/data/enums";
+import type { FC } from "react";
 
 const SideNavigation: FC = () => {
   const { push } = useRouter();

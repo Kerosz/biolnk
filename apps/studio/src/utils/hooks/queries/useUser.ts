@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { sbClient } from "~/lib/supabase";
 import { getUserById } from "~/services/supabase";
-import type { User } from "~/types";
+import type { User } from "@biolnk/core";
 
 export default function useUser() {
   const authUser = sbClient.auth.user();

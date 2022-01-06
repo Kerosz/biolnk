@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import { AccountLayout } from "~/components/layouts";
-import { Flex } from "@biolnk/ui";
-import { FC } from "react";
+import { Flex } from "@biolnk/gamut";
+import type { FC } from "react";
 
 const AccountSkeleton: FC = () => {
   return (

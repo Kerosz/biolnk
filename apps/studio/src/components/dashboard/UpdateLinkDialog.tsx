@@ -1,7 +1,7 @@
 import useUpdateLink from "~/utils/hooks/mutations/useUpdateLink";
 import { useForm } from "react-hook-form";
 import { vestResolver } from "@hookform/resolvers/vest";
-import { Dialog, Input } from "@biolnk/ui";
+import { Dialog, Input } from "@biolnk/gamut";
 import { UPDATE_LINK_SCHEMA } from "~/data/validations";
 import type { FormLinkDto } from "~/types";
 

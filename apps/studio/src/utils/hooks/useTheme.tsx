@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { isBrowser, storage } from "@biolnk/utils";
+import { isBrowser, storage } from "@biolnk/core";
 
 export enum ThemeMode {
   DARK = "dark",

@@ -1,13 +1,11 @@
 import ConfirmDialog from "~components/ConfirmDialog";
-import useDisclosure from "~/utils/hooks/useDisclosure";
 import useDeleteUser from "~/utils/hooks/mutations/useDeleteUser";
 import { useRouter } from "next/router";
+import { Button, Heading, makeToast, Text } from "@biolnk/gamut";
+import { PageWithMetadata, storage, useDisclosure } from "@biolnk/core";
 import { useSupabase } from "~/lib/supabase";
-import { storage } from "@biolnk/utils";
-import { Button, Heading, makeToast, Text } from "@biolnk/ui";
 import { Routes } from "~/data/enums";
-import { PageWithMetadata } from "~/types";
-import { FC } from "react";
+import type { FC } from "react";
 
 export interface SecuritySectionProps {
   user: PageWithMetadata["user"] | null;

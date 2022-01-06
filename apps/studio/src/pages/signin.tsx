@@ -1,7 +1,7 @@
 import Link from "~components/common/Link";
 import Form from "~components/common/Form";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
-import { Button, Input } from "@biolnk/ui";
+import { Button, Input } from "@biolnk/gamut";
 import { CenteredPageLayout } from "~/components/layouts";
 import { useSupabase } from "~/lib/supabase";
 import { SIGNIN_SCHEMA } from "~/data/validations";

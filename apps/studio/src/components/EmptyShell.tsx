@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { BaseIcon, Flex, Icon } from "@biolnk/ui";
+import { BaseIcon, Flex, Icon } from "@biolnk/gamut";
+import type { FC } from "react";
 
 export interface EmptyShellProps {
   icon?: Icon;

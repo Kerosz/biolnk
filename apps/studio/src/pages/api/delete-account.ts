@@ -1,6 +1,6 @@
-import { isString } from "@biolnk/utils";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { isString } from "@biolnk/core";
 import { sbClient } from "~/lib/supabase";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

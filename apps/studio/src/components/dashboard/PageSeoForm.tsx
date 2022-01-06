@@ -2,9 +2,10 @@ import Skeleton from "react-loading-skeleton";
 import Form from "~/components/common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { FC, memo } from "react";
-import { Button, Flex, Input, Textarea } from "@biolnk/ui";
+import { Button, Flex, Input, Textarea } from "@biolnk/gamut";
 import { PAGE_SEO_SCHEMA } from "~/data/validations";
-import { PageSeoDto, PageWithMetadata } from "~/types";
+import type { PageWithMetadata } from "@biolnk/core";
+import type { PageSeoDto } from "~/types";
 
 export interface PageSeoFormProps {
   page: PageWithMetadata;

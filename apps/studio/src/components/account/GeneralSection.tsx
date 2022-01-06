@@ -9,12 +9,13 @@ import {
   Input,
   makeToast,
   Text,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { useSupabase } from "~/lib/supabase";
 import { doesUsernameExist } from "~/services/supabase";
 import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
-import { FC } from "react";
-import { AccountGeneralDto, PageWithMetadata } from "~/types";
+import type { PageWithMetadata } from "@biolnk/core";
+import type { FC } from "react";
+import type { AccountGeneralDto } from "~/types";
 
 export interface GeneralSectionProps {
   user: PageWithMetadata["user"] | null;

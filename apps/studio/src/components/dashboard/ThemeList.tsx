@@ -1,8 +1,7 @@
 import ThemeCard from "./ThemeCard";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
-import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
 import { ChangeEvent, FC, useState } from "react";
-import { PageWithMetadata, Theme } from "~/types";
+import { PageWithMetadata, Theme, useUpdateEffect } from "@biolnk/core";
 
 export interface ThemeListProps {
   page: PageWithMetadata;

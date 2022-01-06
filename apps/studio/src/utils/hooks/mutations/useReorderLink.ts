@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { reorderLinks } from "~/services/supabase";
-import { Link, ReorderLinkDto } from "~/types";
+import { ReorderLinkDto } from "~/types";
+import type { Link } from "@biolnk/core";
 
 export default function useReorderLink() {
   const queryClient = useQueryClient();

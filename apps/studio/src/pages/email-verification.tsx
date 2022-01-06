@@ -1,4 +1,4 @@
-import { Text, Button } from "@biolnk/ui";
+import { Text, Button } from "@biolnk/gamut";
 import { CenteredPageLayout } from "~/components/layouts";
 import { useSupabase } from "~/lib/supabase";
 

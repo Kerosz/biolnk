@@ -12,15 +12,14 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "@biolnk/ui": "*",
-    "@biolnk/utils": "*",
+    "@biolnk/gamut": "*",
+    "@biolnk/core": "*",
     "@supabase/supabase-js": "^1.28.4",
     "next": "^12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@biolnk/config": "*",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@types/node": "^16.11.17",

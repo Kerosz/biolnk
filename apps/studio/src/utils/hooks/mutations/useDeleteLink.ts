@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { deleteLink } from "~/services/supabase";
 
 export default function useDeleteLink() {

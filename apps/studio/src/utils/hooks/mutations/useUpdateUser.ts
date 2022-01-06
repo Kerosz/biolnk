@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { updateAuthEmail, updateUser } from "~/services/supabase";
+import type { PostgrestError } from "@supabase/supabase-js";
 import type { UpdateUserDto } from "~/types";
-import { PostgrestError } from "@supabase/supabase-js";
 
 type UpdateUserMutationArgs = {
   data: UpdateUserDto;

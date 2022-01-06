@@ -1,7 +1,7 @@
 import SideNavigation from "../account/SideNavigation";
 import Header from "../common/Header/Header";
-import { FC } from "react";
-import { Container } from "@biolnk/ui";
+import { Container } from "@biolnk/gamut";
+import type { FC } from "react";
 
 const AccountLayout: FC = ({ children }) => {
   return (

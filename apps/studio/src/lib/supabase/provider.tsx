@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
 import {
@@ -14,9 +14,9 @@ import {
   getUserById,
   getUserByUsername,
 } from "~/services/supabase";
-import { makeContext } from "~/utils/makeContext";
+import { makeContext, User } from "@biolnk/core";
 import type { Session } from "@supabase/supabase-js";
-import type { SignInDto, SignUpDto, User, AuthUser } from "~/types";
+import type { SignInDto, SignUpDto, AuthUser } from "~/types";
 
 export type SupabaseContextState = {
   user: User;

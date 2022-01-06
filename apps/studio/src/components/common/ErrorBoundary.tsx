@@ -1,6 +1,6 @@
 import Link from "./Link";
 import { Component, ErrorInfo, ReactNode } from "react";
-import { Button, Container, Heading, Text } from "@biolnk/ui";
+import { Button, Container, Heading, Text } from "@biolnk/gamut";
 
 interface Props {
   children?: ReactNode;

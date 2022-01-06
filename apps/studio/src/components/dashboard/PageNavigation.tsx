@@ -7,9 +7,9 @@ import {
   Link as LinkIcon,
   BarChart2,
   Trello,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
+import { ctl } from "@biolnk/core";
 import { Routes } from "~/data/enums/routes";
-import { ctl } from "@biolnk/utils";
 
 const PageNavigation: React.FC = () => {
   const { pathname } = useRouter();

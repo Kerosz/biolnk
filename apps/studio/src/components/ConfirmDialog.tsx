@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Dialog, Flex } from "@biolnk/ui";
+import { Dialog, Flex } from "@biolnk/gamut";
 
 export interface ConfirmDialogProps {
   onClose: () => void;

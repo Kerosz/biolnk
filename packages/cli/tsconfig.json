@@ -1,5 +1,5 @@
 {
-  "extends": "@biolnk/config/ts/react-lib.json",
+  "extends": "./node_modules/@biolnk/core/src/config/ts/lib.json",
   "include": ["src", "types"],
   "compilerOptions": {
     "lib": ["dom", "esnext"],

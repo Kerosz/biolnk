@@ -1,11 +1,13 @@
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
-import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
-import useDisclosure from "~/utils/hooks/useDisclosure";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { ChangeEvent, FC, useState } from "react";
-import { Heading, Text, Flex, Toggle } from "@biolnk/ui";
-import { PageLinkPreference } from "~/data/enums";
-import { PageWithMetadata } from "~/types";
+import { Heading, Text, Flex, Toggle } from "@biolnk/gamut";
+import {
+  PageLinkPreference,
+  PageWithMetadata,
+  useUpdateEffect,
+  useDisclosure,
+} from "@biolnk/core";
 
 export interface PreferenceSectionProps {
   page: PageWithMetadata;

@@ -5,7 +5,7 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AppContextProvider } from "~/data/context";
 import { SupabaseProvider } from "~/lib/supabase";
-import { Toaster } from "@biolnk/ui";
+import { Toaster } from "@biolnk/gamut";
 
 import type { AppProps } from "next/app";
 

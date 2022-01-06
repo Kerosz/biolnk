@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { ctl } from "@biolnk/utils";
-import { BaseIcon, ExternalLink } from "@biolnk/ui";
+import { ctl } from "@biolnk/core";
+import { BaseIcon, ExternalLink } from "@biolnk/gamut";
 
 export interface LinkProps
   extends Omit<NextLinkProps, "href" | "as">,

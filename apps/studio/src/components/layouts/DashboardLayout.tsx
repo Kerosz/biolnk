@@ -2,7 +2,7 @@ import React from "react";
 import Header from "~/components/common/Header/Header";
 import PreviewEmbed from "../dashboard/PreviewEmbed/PreviewEmbed";
 import PageNavigation from "../dashboard/PageNavigation";
-import { Container } from "@biolnk/ui";
+import { Container } from "@biolnk/gamut";
 
 export interface DashboardLayoutProps {
   children?: React.ReactNode;
