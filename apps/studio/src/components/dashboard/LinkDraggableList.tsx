@@ -3,10 +3,10 @@ import Skeleton from "react-loading-skeleton";
 import EmptyShell from "../EmptyShell";
 import useLinks from "~/utils/hooks/queries/useLinks";
 import useReorderLink from "~/utils/hooks/mutations/useReorderLink";
-import useSafeLayoutEffect from "~/utils/hooks/useSafeLayoutEffect";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { LinkCard } from "~/components/dashboard";
+import { useSafeLayoutEffect } from "@biolnk/core";
 import { FilePlus } from "@biolnk/gamut";
+import { LinkCard } from "~/components/dashboard";
 import { useAppContext } from "~/data/context";
 import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
 

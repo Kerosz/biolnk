@@ -2,14 +2,13 @@ import React, { FC, memo } from "react";
 import ConfirmDialog from "../ConfirmDialog";
 import UpdateLinkDialog from "./UpdateLinkDialog";
 import useDeleteLink from "~/utils/hooks/mutations/useDeleteLink";
-import useDisclosure from "~/utils/hooks/useDisclosure";
-import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
 import useUpdateLink from "~/utils/hooks/mutations/useUpdateLink";
 import {
   Draggable,
   DraggingStyle,
   NotDraggingStyle,
 } from "react-beautiful-dnd";
+import { useDisclosure, useUpdateEffect, Link } from "@biolnk/core";
 import {
   BaseIcon,
   Button,
@@ -22,7 +21,6 @@ import {
   Trash2,
   Eye,
 } from "@biolnk/gamut";
-import { Link } from "~/types";
 
 const LinkCard: FC<Link> = ({
   title,

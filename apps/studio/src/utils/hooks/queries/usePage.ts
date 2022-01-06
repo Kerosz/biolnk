@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { sbClient } from "~/lib/supabase";
 import { getPageWithMetadata } from "~/services/supabase";
-import { PageWithMetadata } from "~/types";
+import { PageWithMetadata } from "@biolnk/core";
 
 export default function usePage() {
   const authUser = sbClient.auth.user();

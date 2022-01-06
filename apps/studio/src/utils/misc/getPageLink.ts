@@ -1,4 +1,4 @@
-import { PageLinkPreference } from "~/data/enums/db";
+import { PageLinkPreference } from "@biolnk/core";
 
 export type PageLinkReturn = [label: string, url: string];
 export type GetPageLinkSignature = (

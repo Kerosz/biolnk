@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { sbClient } from "~/lib/supabase";
 import { getLinksByUserId } from "~/services/supabase";
-import type { Link } from "~/types";
+import type { Link } from "@biolnk/core";
 
 export default function useLinks() {
   const authUser = sbClient.auth.user();

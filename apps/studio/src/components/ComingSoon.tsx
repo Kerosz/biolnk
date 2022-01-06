@@ -1,6 +1,6 @@
-import { Heading, Text, Flex, Badge } from "@biolnk/gamut";
-import { FC } from "react";
 import Link from "./common/Link";
+import { Heading, Text, Flex, Badge } from "@biolnk/gamut";
+import type { FC } from "react";
 
 export interface ComingSoonProps {
   size?: "default" | "lg" | "xs" | "sm" | "md" | "xl";

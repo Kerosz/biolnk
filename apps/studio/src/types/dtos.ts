@@ -1,9 +1,4 @@
-import {
-  LinkKind,
-  PageLinkPosition,
-  PageLinkPreference,
-} from "~/data/enums/index";
-import { ChangePasswordForm } from ".";
+import { LinkKind, PageLinkPosition, PageLinkPreference } from "@biolnk/core";
 
 export type CreateLinkDto = {
   user_id: string;
@@ -63,6 +58,12 @@ export type AccountGeneralDto = {
   email: string;
   full_name: string;
   username: string;
+};
+
+export type ChangePasswordForm = {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 };
 
 export type ChangePasswordDto = Omit<ChangePasswordForm, "confirm_password">;

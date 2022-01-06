@@ -1,5 +1,5 @@
 import { Heading } from "@biolnk/gamut";
-import { FC } from "react";
+import type { FC } from "react";
 
 export interface SectionShellProps {
   title: string;

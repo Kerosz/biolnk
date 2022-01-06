@@ -1,8 +1,9 @@
-import useWindowResize from "~/utils/hooks/useWindowSize";
+import { useWindowSize } from "@biolnk/core";
+
 import Styles from "./PreviewEmbed.module.css";
 
 const PreviewEmbed: React.FC = () => {
-  const { width } = useWindowResize();
+  const { width } = useWindowSize();
 
   const baseWidth = 1200;
   const scaleWidth = width > 1160 ? baseWidth : width;

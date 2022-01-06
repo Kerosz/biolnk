@@ -1,18 +1,21 @@
 import { sbClient } from "~/lib/supabase/index";
-import { Tables, CustomFunction } from "~/data/enums/index";
 import {
-  ChangePasswordDto,
-  CreateLinkDto,
+  Tables,
+  CustomFunction,
   Link,
   Page,
   PageWithMetadata,
+  Theme,
+  User,
+} from "@biolnk/core";
+import {
+  ChangePasswordDto,
+  CreateLinkDto,
   ReorderLinkDto,
   SignUpDto,
-  Theme,
   UpdateLinkDto,
   UpdatePageDto,
   UpdateUserDto,
-  User,
 } from "~/types";
 
 /****************************************************

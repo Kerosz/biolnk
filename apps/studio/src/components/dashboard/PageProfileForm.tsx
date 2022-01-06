@@ -14,7 +14,8 @@ import {
   X,
 } from "@biolnk/gamut";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
-import { PageProfileDto, PageWithMetadata } from "~/types";
+import type { PageWithMetadata } from "@biolnk/core";
+import type { PageProfileDto } from "~/types";
 
 export interface PageProfileFormProps {
   page: PageWithMetadata | undefined;

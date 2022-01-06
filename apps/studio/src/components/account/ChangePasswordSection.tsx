@@ -3,7 +3,7 @@ import useChangePassword from "~/utils/hooks/mutations/useChangePassword";
 import { Button, Flex, Heading, Input, Text } from "@biolnk/gamut";
 import { ChangePasswordForm } from "~/types";
 import { CHANGE_PASSWORD_SCHEMA } from "~/data/validations";
-import { FC } from "react";
+import type { FC } from "react";
 
 const ChangePasswordSection: FC = () => {
   const DEFAULT_FORM_VALUES: ChangePasswordForm = {

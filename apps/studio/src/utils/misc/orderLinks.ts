@@ -1,4 +1,4 @@
-import { Link } from "~/types";
+import { Link } from "@biolnk/core";
 
 export const getLinksWithOrder = (list: Link[]) => {
   /**
