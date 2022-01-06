@@ -11,7 +11,7 @@ create table if not exists public.users (
   -- UUID from auth.users
   id uuid primary key references auth.users on delete cascade,
   email varchar(255) unique not null,
-  username varchar(18) unique not null,
+  username varchar(20) unique not null,
   full_name varchar(100),
   biography varchar(120),
   avatar_url text,
@@ -152,8 +152,8 @@ create table if not exists public.pages (
   user_id uuid not null,
   theme varchar(50) default 'Cirrus'::text,
   title varchar(60),
-  url varchar(100) unique not null,
-  custom_domain varchar(255) unique,
+  subdomain varchar(50) unique not null,
+  custom_domain varchar(180) unique,
   seo_title varchar(55),
   seo_description varchar(180),
   nsfw_content boolean default false not null,
@@ -175,7 +175,7 @@ create policy "Can update own page data." on public.pages for update using (auth
 create or replace function public.handle_new_page() 
 returns trigger as $$
 begin
-  insert into public.pages (user_id, title, url)
+  insert into public.pages (user_id, title, subdomain)
   values (new.id, new.username, new.username);
   return new;
 end;
@@ -186,13 +186,13 @@ create trigger on_public_user_insert
 
 
 /**
-* This trigger automatically updates `public.pages.url` when a user changes his 
+* This trigger automatically updates `public.pages.subdomain` when a user changes his 
 * username.
 */ 
-create or replace function public.handle_page_url_update()
+create or replace function public.handle_page_subdomain_update()
 returns trigger as $$
 begin
-  update public.pages set url = new.username
+  update public.pages set subdomain = new.username
   where user_id = new.id;
   return new;
 end;
@@ -200,7 +200,7 @@ $$ language plpgsql security definer;
 create trigger on_user_username_change
   after update on public.users
   for each row when (old.username is distinct from new.username)
-  execute procedure public.handle_page_url_update();
+  execute procedure public.handle_page_subdomain_update();
 
 /** 
 * Links
