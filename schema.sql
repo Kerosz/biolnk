@@ -152,6 +152,8 @@ create table if not exists public.pages (
   user_id uuid not null,
   theme varchar(50) default 'Cirrus'::text,
   title varchar(60),
+  url varchar(100) unique not null,
+  custom_domain varchar(255) unique,
   seo_title varchar(55),
   seo_description varchar(180),
   nsfw_content boolean default false not null,
@@ -173,14 +175,32 @@ create policy "Can update own page data." on public.pages for update using (auth
 create or replace function public.handle_new_page() 
 returns trigger as $$
 begin
-  insert into public.pages (user_id, title)
-  values (new.id, new.username);
+  insert into public.pages (user_id, title, url)
+  values (new.id, new.username, new.username);
   return new;
 end;
 $$ language plpgsql security definer;
 create trigger on_public_user_insert
   after insert on public.users
   for each row execute procedure public.handle_new_page();
+
+
+/**
+* This trigger automatically updates `public.pages.url` when a user changes his 
+* username.
+*/ 
+create or replace function public.handle_page_url_update()
+returns trigger as $$
+begin
+  update public.pages set url = new.username
+  where user_id = new.id;
+  return new;
+end;
+$$ language plpgsql security definer;
+create trigger on_user_username_change
+  after update on public.users
+  for each row when (old.username is distinct from new.username)
+  execute procedure public.handle_page_url_update();
 
 /** 
 * Links
