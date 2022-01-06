@@ -1,0 +1,39 @@
+.blui-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full font-medium text-xs uppercase border h-fit min-w-max max-w-max;
+}
+
+.blui-badge--large {
+  @apply px-3 py-0.5 rounded-full text-sm;
+}
+
+.blui-badge-dot {
+  @apply -ml-0.5 mr-1.5 h-2 w-2;
+}
+
+/*
+  Variants
+*/
+.blui-badge--gray {
+  @apply bg-gray-200 text-gray-950 border-gray-600;
+}
+.blui-badge--red {
+  @apply bg-red-200 text-red-950 border-red-600;
+}
+.blui-badge--yellow {
+  @apply bg-yellow-200 text-yellow-950 border-yellow-600;
+}
+.blui-badge--green {
+  @apply bg-green-200 text-green-950 border-green-600;
+}
+.blui-badge--blue {
+  @apply bg-blue-200 text-blue-950 border-blue-600;
+}
+.blui-badge--crimson {
+  @apply bg-crimson-200 text-crimson-950 border-crimson-600;
+}
+.blui-badge--plum {
+  @apply bg-plum-200 text-plum-950 border-plum-600;
+}
+.blui-badge--lime {
+  @apply bg-lime-200 text-lime-950 border-lime-600;
+}

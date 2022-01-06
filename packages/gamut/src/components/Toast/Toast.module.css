@@ -1,0 +1,39 @@
+.blui-toast {
+  @apply flex max-w-md w-full bg-mauve-100 shadow-lg rounded-md pointer-events-auto;
+}
+
+.blui-toast-btn {
+  @apply flex items-center justify-center text-sm py-2 focus:outline-none text-mauve-950 hover:text-mauve-1000;
+}
+
+.blui-toast-container__text {
+  @apply flex-1 h-full pl-3.5 xs:pl-5 py-2 xs:py-4 pr-2 border-l border-mauve-400;
+}
+
+.blui-toast-container__icon {
+  @apply flex h-full items-center justify-center flex-shrink-0 px-3 xs:px-5;
+}
+
+.blui-toast-actions--desktop {
+  @apply hidden xs:flex flex-col justify-center items-center border-l border-mauve-300 divide-y divide-mauve-300;
+}
+
+.blui-toast-actions--mobile {
+  @apply flex xs:!hidden space-x-4 mt-1.5;
+}
+
+.blui-toast-text__color--default {
+  @apply text-mauve-1000;
+}
+.blui-toast-text__color--success {
+  @apply text-lime-950;
+}
+.blui-toast-text__color--warning {
+  @apply text-yellow-900;
+}
+.blui-toast-text__color--info {
+  @apply text-blue-950;
+}
+.blui-toast-text__color--error {
+  @apply text-red-950;
+}

@@ -1,0 +1,28 @@
+.blui-avatar-root {
+  @apply inline-flex items-center justify-center overflow-hidden select-none rounded-full bg-mauve-200 border;
+}
+
+.blui-avatar-size--sm {
+  @apply w-9 h-9 text-sm;
+}
+.blui-avatar-size--md {
+  @apply w-11 h-11;
+}
+.blui-avatar-size--lg {
+  @apply w-20 h-20 text-lg;
+}
+.blui-avatar-size--xl {
+  @apply w-32 h-32 text-3xl;
+}
+
+.blui-avatar--border {
+  @apply border-mauve-300;
+}
+
+.blui-avatar---image {
+  @apply w-full h-full object-cover rounded-full;
+}
+
+.blui-avatar--fallback {
+  @apply w-full h-full flex items-center justify-center text-plum-800 font-medium;
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@biolnk/ui",
+  "name": "@biolnk/gamut",
   "version": "0.16.0",
   "license": "MIT",
   "main": "dist/index.js",
