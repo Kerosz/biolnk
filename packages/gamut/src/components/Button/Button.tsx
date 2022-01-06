@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import BaseIcon, { BaseIconProps } from "../BaseIcon";
 import { Icon } from "react-feather";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 import { Loader } from "react-feather";
 
 import Styles from "./Button.module.css";

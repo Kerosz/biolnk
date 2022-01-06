@@ -40,8 +40,7 @@
     "react-hot-toast": "^2.1.1"
   },
   "devDependencies": {
-    "@biolnk/config": "*",
-    "@biolnk/utils": "*",
+    "@biolnk/core": "*",
     "@headlessui/react": "^1.4.2",
     "@size-limit/preset-small-lib": "^7.0.3",
     "@tailwindcss/forms": "^0.4.0",

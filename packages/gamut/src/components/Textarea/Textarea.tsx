@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 import InputContainer from "../Input/InputContainer";
 import InputEndIcon from "../Input/InputEndIcon";
 import Button from "../Button/Button";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 import { Copy, AlertCircle, CheckCircle } from "react-feather";
 
 import Styles from "./Textarea.module.css";

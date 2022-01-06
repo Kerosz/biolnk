@@ -8,7 +8,7 @@ import {
   Icon,
   Info,
 } from "react-feather";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 import Styles from "./Toast.module.css";
 

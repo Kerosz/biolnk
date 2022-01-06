@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Switch } from "@headlessui/react";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 import {
   PolymorphicPropsWithRef,
   PolymorphicPropsWithoutRef,

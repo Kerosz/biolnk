@@ -4,7 +4,7 @@ import {
   PolymorphicPropsWithRef,
   PolymorphicRef,
 } from "@/types";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 import Styles from "./Heading.module.css";
 

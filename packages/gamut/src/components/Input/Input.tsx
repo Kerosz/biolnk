@@ -4,7 +4,7 @@ import InputEndIcon from "./InputEndIcon";
 import InputAddon from "./InputAddon";
 import Button from "../Button/Button";
 import BaseIcon from "../BaseIcon";
-import { ctl, isUndefined } from "@biolnk/utils";
+import { ctl, isUndefined } from "@biolnk/core";
 import {
   Copy,
   Eye,
@@ -129,14 +129,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const onCopy = (copyValue: any) => {
       navigator.clipboard.writeText(copyValue).then(
-        function() {
+        function () {
           /* clipboard successfully set */
           setCopyLabel("Copied");
           setTimeout(() => {
             setCopyLabel("Copy");
           }, 3000);
         },
-        function() {
+        function () {
           /* clipboard write failed */
           setCopyLabel("Failed to copy");
         }

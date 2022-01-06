@@ -1,5 +1,5 @@
 import * as React from "react";
-import { isString } from "@biolnk/utils";
+import { isString } from "@biolnk/core";
 import { Icon } from "react-feather";
 
 export interface BaseIconProps extends React.SVGAttributes<SVGElement> {

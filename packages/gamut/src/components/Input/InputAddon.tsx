@@ -1,5 +1,5 @@
 import React from "react";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 import Styles from "./InputAddon.module.css";
 

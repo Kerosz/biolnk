@@ -7,7 +7,7 @@ import {
   Arrow,
   TooltipContentProps,
 } from "@radix-ui/react-tooltip";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 import Styles from "./Tooltip.module.css";
 

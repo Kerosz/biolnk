@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 import type {
   PolymorphicPropsWithoutRef,
   PolymorphicPropsWithRef,

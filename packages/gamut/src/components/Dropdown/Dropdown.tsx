@@ -3,7 +3,7 @@ import BaseIcon from "../BaseIcon";
 import { Menu, Transition } from "@headlessui/react";
 import { Button } from "../Button";
 import { Menu as MenuIcon, Icon } from "react-feather";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 import type {
   PolymorphicPropsWithoutRef,
   PolymorphicPropsWithRef,

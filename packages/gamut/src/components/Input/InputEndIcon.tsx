@@ -1,6 +1,6 @@
 import React from "react";
 import BaseIcon, { BaseIconProps } from "../BaseIcon";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 interface InputEndIconProps extends BaseIconProps {
   style?: React.CSSProperties;

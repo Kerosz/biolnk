@@ -4,7 +4,7 @@ import {
   PolymorphicPropsWithRef,
   PolymorphicRef,
 } from "@/types";
-import { ctl } from "@biolnk/utils";
+import { ctl } from "@biolnk/core";
 
 import Styles from "./Container.module.css";
 
@@ -13,9 +13,8 @@ export interface ContainerOwnProps {
   resetBaseStyle?: boolean;
 }
 
-export type ContainerProps<
-  C extends React.ElementType
-> = PolymorphicPropsWithRef<ContainerOwnProps, C>;
+export type ContainerProps<C extends React.ElementType> =
+  PolymorphicPropsWithRef<ContainerOwnProps, C>;
 
 const DEFAULT_TAG = "section";
 
@@ -54,4 +53,3 @@ export const Container = forwardRef(
 );
 
 Container.displayName = "ContainerUIComponent";
-
