@@ -12,7 +12,7 @@ import {
   Input,
   Textarea,
   X,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import { PageProfileDto, PageWithMetadata } from "~/types";
 

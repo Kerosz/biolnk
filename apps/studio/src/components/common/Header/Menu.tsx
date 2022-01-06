@@ -1,7 +1,7 @@
 import Link from "../Link";
 import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
 import useUser from "~/utils/hooks/queries/useUser";
-import { Plus, Dropdown, Avatar } from "@biolnk/ui";
+import { Plus, Dropdown, Avatar } from "@biolnk/gamut";
 import { useAppContext } from "~/data/context";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";

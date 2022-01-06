@@ -2,7 +2,7 @@ import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { memo } from "react";
 import { DashboardLayout } from "~/components/layouts";
 import { LinkDraggableList } from "~/components/dashboard";
-import { Button, Flex, Plus } from "@biolnk/ui";
+import { Button, Flex, Plus } from "@biolnk/gamut";
 import { useAppContext } from "~/data/context";
 
 function LinksScreen() {

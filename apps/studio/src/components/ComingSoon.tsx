@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Badge } from "@biolnk/ui";
+import { Heading, Text, Flex, Badge } from "@biolnk/gamut";
 import { FC } from "react";
 import Link from "./common/Link";
 

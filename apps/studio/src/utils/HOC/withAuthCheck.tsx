@@ -2,7 +2,7 @@ import useUser from "~/utils/hooks/queries/useUser";
 import useSafeLayoutEffect from "../hooks/useSafeLayoutEffect";
 import { ComponentType, useState } from "react";
 import { useRouter } from "next/router";
-import { Loading } from "@biolnk/ui";
+import { Loading } from "@biolnk/gamut";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
 

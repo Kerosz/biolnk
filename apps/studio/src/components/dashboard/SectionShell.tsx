@@ -1,4 +1,4 @@
-import { Heading } from "@biolnk/ui";
+import { Heading } from "@biolnk/gamut";
 import { FC } from "react";
 
 export interface SectionShellProps {

@@ -1,5 +1,5 @@
 import sbClient from "~/lib/supabase";
-import { Loading } from "@biolnk/ui";
+import { Loading } from "@biolnk/gamut";
 import { useRouter } from "next/router";
 import { PageLayout } from "~/components/layouts";
 

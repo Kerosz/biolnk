@@ -6,7 +6,7 @@ import useReorderLink from "~/utils/hooks/mutations/useReorderLink";
 import useSafeLayoutEffect from "~/utils/hooks/useSafeLayoutEffect";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { LinkCard } from "~/components/dashboard";
-import { FilePlus } from "@biolnk/ui";
+import { FilePlus } from "@biolnk/gamut";
 import { useAppContext } from "~/data/context";
 import { getLinksWithOrder, reorderList } from "~/utils/misc/orderLinks";
 

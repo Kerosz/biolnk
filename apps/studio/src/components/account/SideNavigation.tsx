@@ -11,7 +11,7 @@ import {
   Lock,
   Sliders,
   Text,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { Routes } from "~/data/enums";
 
 const SideNavigation: FC = () => {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Logo from "~assets/images/biolnk.png";
-import { Flex } from "@biolnk/ui";
+import { Flex } from "@biolnk/gamut";
 
 export default function HomePage() {
   return (

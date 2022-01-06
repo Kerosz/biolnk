@@ -1,6 +1,6 @@
 import CSSstring from "~/utils/CSSstring";
 import { ChangeEvent, FC } from "react";
-import { Flex, Input } from "@biolnk/ui";
+import { Flex, Input } from "@biolnk/gamut";
 import { ctl } from "@biolnk/utils";
 import { Theme } from "~/types";
 

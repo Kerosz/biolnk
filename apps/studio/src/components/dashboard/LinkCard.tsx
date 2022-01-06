@@ -21,7 +21,7 @@ import {
   Toggle,
   Trash2,
   Eye,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { Link } from "~/types";
 
 const LinkCard: FC<Link> = ({

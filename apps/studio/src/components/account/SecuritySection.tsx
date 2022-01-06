@@ -4,7 +4,7 @@ import useDeleteUser from "~/utils/hooks/mutations/useDeleteUser";
 import { useRouter } from "next/router";
 import { useSupabase } from "~/lib/supabase";
 import { storage } from "@biolnk/utils";
-import { Button, Heading, makeToast, Text } from "@biolnk/ui";
+import { Button, Heading, makeToast, Text } from "@biolnk/gamut";
 import { Routes } from "~/data/enums";
 import { PageWithMetadata } from "~/types";
 import { FC } from "react";

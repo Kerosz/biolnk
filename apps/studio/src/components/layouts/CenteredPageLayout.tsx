@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
-import { Button, Heading, Text, Facebook, Twitter } from "@biolnk/ui";
+import { Button, Heading, Text, Facebook, Twitter } from "@biolnk/gamut";
 
 export interface CenteredPageLayoutProps {
   children?: React.ReactNode;

@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import { makeToast } from "@biolnk/ui";
+import { makeToast } from "@biolnk/gamut";
 import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
 import {

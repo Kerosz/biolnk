@@ -3,7 +3,7 @@ import useUpdateEffect from "~/utils/hooks/useUpdateEffect";
 import useDisclosure from "~/utils/hooks/useDisclosure";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { ChangeEvent, FC, useState } from "react";
-import { Heading, Text, Flex, Toggle } from "@biolnk/ui";
+import { Heading, Text, Flex, Toggle } from "@biolnk/gamut";
 import { PageLinkPreference } from "~/data/enums";
 import { PageWithMetadata } from "~/types";
 

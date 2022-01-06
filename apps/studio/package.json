@@ -12,7 +12,7 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "@biolnk/ui": "*",
+    "@biolnk/gamut": "*",
     "@biolnk/utils": "*",
     "@headlessui/react": "^1.4.2",
     "@hookform/resolvers": "^2.8.4",

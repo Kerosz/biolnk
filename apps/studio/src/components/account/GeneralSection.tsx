@@ -9,7 +9,7 @@ import {
   Input,
   makeToast,
   Text,
-} from "@biolnk/ui";
+} from "@biolnk/gamut";
 import { useSupabase } from "~/lib/supabase";
 import { doesUsernameExist } from "~/services/supabase";
 import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
