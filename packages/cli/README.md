@@ -2,4 +2,4 @@
 
 ## About The Project
 
-Provides cli codegen
+Provides cli codegen to scaffold components and projects

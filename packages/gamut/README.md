@@ -2,4 +2,4 @@
 
 ## About The Project
 
-Internal UI component library built on top of `TailwindCSS` and `Radix-UI`
+Internal UI component library & design system for Biolnk, built on top of `TailwindCSS` and `Radix-UI` ✨
