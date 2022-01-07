@@ -12,7 +12,7 @@
 <p align="center">
   <a href="#about-the-project">About</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#getting-started">Getting Started</a> •
+  <a href="#contributing">Contributing</a> •
   <a href="#feedback">Feedback</a> •
   <a href="#license">License</a>
 </p>
@@ -80,17 +80,18 @@ See the [open issues](https://github.com/Kerosz/biolnk/issues) for a list of pro
 
 <!-- CONTRIBUTING -->
 
-## Getting Started
-
-### Contributing
+## Contributing
 
 Any contributions you make are **greatly appreciated**. There are many ways in which you can participate in this project, for example:
 
 - [Submit bugs and feature requests](https://github.com/Kerosz/biolnk/issues/new/choose), and help us verify as they are checked in
 - Review [source code changes](https://github.com/Kerosz/biolnk/pulls)
 
-If you are interested in fixing issues and contributing directly to the code base,
-please see the document [How to Contribute](./CONTRIBUTING.md), which covers the following:
+If you are interested in fixing issues and contributing directly to the code base, see the below section on how to get started.
+
+<!-- GETTING-STARTED -->
+
+## Getting Started
 
 ### Prerequisites
 
@@ -133,7 +134,7 @@ We require all new PRs to follow these guidelines. Any PR should use [git keywor
 Resolves #<issue_number>
 ```
 
-### Feedback
+## Feedback
 
 - [Request a new feature](https://github.com/Kerosz/biolnk/issues/new?assignees=&labels=feature-request&template=feature_request.md&title=%5BRequest%5D+My+feature+request+title)
 - Upvote [feature requests](https://github.com/Kerosz/biolnk/labels/feature-request)
