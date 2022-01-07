@@ -23,7 +23,7 @@ const nextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: require("@biolnk/config/security-headers"),
+        headers: require("@biolnk/core/config/next/headers"),
       },
     ];
   },

@@ -1,5 +1,6 @@
 {
-  "include": ["src", "types"],
+  "extends": "./config/ts/lib.json",
+  "include": ["src", "types", "config"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
