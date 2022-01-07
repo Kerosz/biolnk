@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/@biolnk/core/src/config/ts/nextjs.json",
+  "extends": "./node_modules/@biolnk/core/config/ts/nextjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -9,6 +9,6 @@
       "~layout/*": ["src/components/layouts/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/validator.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
