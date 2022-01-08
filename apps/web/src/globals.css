@@ -20,3 +20,31 @@
     @apply bg-crimson-400 text-normalTextHover;
   }
 }
+
+@layer utilities {
+  .animate-scale-up {
+    transition-property: transform, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  .animate-scale-out {
+    transition-property: transform, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .animate-scale-in {
+    transition-property: transform, box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0, 0.89, 0.44, 1);
+  }
+  .animate-decelerate {
+    transition-property: transform, box-shadow;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+  .animate-accelerate {
+    transition-property: transform, box-shadow;
+    transition-duration: 80ms;
+    transition-timing-function: cubic-bezier(0.7, 0, 1, 0.5);
+  }
+}

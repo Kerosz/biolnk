@@ -1,94 +1,36 @@
-import sbClient from "~/lib/supabase";
-import { Loading } from "@biolnk/gamut";
-import { Page } from "@biolnk/core";
+import PageContent from "~/components/page/PageContent";
 import { useRouter } from "next/router";
-import { PageLayout } from "~/components/layouts";
+import { Loading } from "@biolnk/gamut";
+import { UserPageLayout } from "~/components/layouts";
+import type { NextPage } from "next";
+import type { Link, PageWithMetadata } from "@biolnk/core";
 
-export default function PageScreen({ domain, page }) {
+interface PageScreenProps {
+  domain: string;
+  page: PageWithMetadata;
+  links: Link[];
+}
+
+const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
   const { isFallback } = useRouter();
 
   if (isFallback) {
     return <Loading />;
   }
 
-  return <PageLayout theme={page.theme} />;
-}
+  return (
+    <UserPageLayout backgroundCss={page.theme.style.background.css}>
+      <PageContent
+        title={page.title}
+        bio={page.user.biography}
+        links={links}
+        style={page.theme.style}
+      />
+    </UserPageLayout>
+  );
+};
 
-export async function getStaticPaths() {
-  // get all sites that have subdomains set up
-  const subdomains = await sbClient.from<Page>("pages").select("subdomain");
+export { getStaticPaths } from "~/components/page/getStaticPaths";
+export { getStaticProps } from "~/components/page/getStaticProps";
 
-  // get all sites that have custom domains set up
-  const customDomains = await sbClient
-    .from<Page>("pages")
-    .select("custom_domain")
-    .not("custom_domain", "is", null);
-
-  const paths = [
-    ...(subdomains.data || []).map((p) => {
-      return p.subdomain;
-    }),
-    ...(customDomains.data || []).map((p) => {
-      return p.custom_domain;
-    }),
-  ];
-
-  return {
-    paths: paths.map((path) => {
-      return { params: { page: path } };
-    }),
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params: { page } }) {
-  let filter: "subdomain" | "custom_domain" = "subdomain";
-  if (page.includes(".")) {
-    filter = "custom_domain";
-  }
-
-  const { data, error } = await sbClient
-    .from<Page>("pages")
-    .select(
-      `
-    id,
-    title,
-    subdomain,
-    custom_domain,
-    seo_title,
-    seo_description,
-    nsfw_content,
-    show_branding,
-    social_link_position,
-    user:users(
-      username,
-      avatar_url,
-      full_name,
-      biography,
-      status
-    ),
-    theme:themes(
-      id,
-      style,
-      name,
-      kind,
-      state
-    )
-  `
-    )
-    .eq(filter, page)
-    .limit(1)
-    .single();
-
-  if (!data || error) {
-    return { notFound: true, revalidate: 1 };
-  }
-
-  return {
-    props: {
-      domain: page,
-      page: data,
-    },
-    revalidate: 1,
-  };
-}
+export default PageScreen;
