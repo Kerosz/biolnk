@@ -10,9 +10,11 @@ import {
   Camera,
   Flex,
   Input,
+  makeToast,
   Textarea,
   X,
 } from "@biolnk/gamut";
+import { removeAvatar } from "~/services/supabase";
 import { PAGE_PROFILE_SCHEMA } from "~/data/validations";
 import type { PageWithMetadata } from "@biolnk/core";
 import type { PageProfileDto } from "~/types";
@@ -27,45 +29,82 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     biography: page?.user.biography,
   };
 
-  const avatarAlt = `${page?.user.username} profile`;
-
-  const { mutateAsync: pageMutate } = useUpdatePage();
   const { mutateAsync: userMutate } = useUpdateUser();
 
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewAvatar, setPreviewAvatar] = useState<string | null>(null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
-  async function handleSeoUpdate({ title, biography }: PageProfileDto) {
+  const avatarAlt = `${page?.user.username} profile`;
+
+  async function handleProfileUpdate({ title, biography }: PageProfileDto) {
     // If any of the fields are different from the existing values -> send req
+    const updateDto = {} as PageProfileDto;
+
     if (title !== page?.title) {
-      await pageMutate({ data: { title }, userId: page?.user.id });
+      updateDto.title = title;
     }
     if (biography !== page?.user.biography) {
-      await userMutate({ data: { biography }, userId: page?.user.id });
+      updateDto.biography = biography;
     }
+
+    await userMutate({
+      data: updateDto,
+      userId: page?.user.id,
+      newAvatar: avatarFile ? avatarFile : null,
+    });
+    setPreviewAvatar(null);
+    setAvatarFile(null);
   }
 
   function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    // setUploadedImage(file);
+    setAvatarFile(file);
 
     reader.readAsDataURL(file);
     reader.onload = () => {
       // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readyState
       if (reader.readyState === 2) {
-        setPreviewImage(reader.result);
+        setPreviewAvatar(reader.result as string);
       }
     };
   }
 
-  function handleAvatarRemove() {
-    if (previewImage) {
-      setPreviewImage(null);
+  async function handleAvatarRemove() {
+    if (previewAvatar) {
+      setPreviewAvatar(null);
       return;
     }
 
-    /** @TODO Reset user `avatar_url` to the default one */
+    if (page.user.avatar_url) {
+      try {
+        /**
+         * Removing the url to get only the storage path
+         * https://biolnk-storage-url/avatars/[userId]/[avatarName].png ->
+         * -> [userId]/[avatarName].png
+         *
+         */
+        const storageAvatarName = page.user.avatar_url.replace(
+          `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/avatars/`,
+          ""
+        );
+
+        await removeAvatar(storageAvatarName);
+        await userMutate({
+          data: { avatar_url: null },
+          userId: page?.user.id,
+        });
+      } catch (error) {
+        makeToast({
+          duration: 2500,
+          kind: "error",
+          title: "Error",
+          message: error.message,
+        });
+      }
+    }
+
     return null;
   }
 
@@ -98,7 +137,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
 
   return (
     <Form<PageProfileDto>
-      onSubmit={handleSeoUpdate}
+      onSubmit={handleProfileUpdate}
       defaultValues={DEFAULT_FORM_VALUES}
       validationSchema={PAGE_PROFILE_SCHEMA}
       resetOnSubmit
@@ -114,9 +153,9 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
               htmlFor="file_upload"
               className="relative cursor-pointer max-w-max sm:mr-6 mb-3 sm:mb-0 sm:mt-3"
             >
-              {previewImage ? (
+              {previewAvatar ? (
                 <Avatar
-                  src={previewImage}
+                  src={previewAvatar}
                   title={avatarAlt}
                   alt={avatarAlt}
                   fallback={page.user.username}
@@ -182,9 +221,9 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
                 {...register("biography")}
               />
 
-              {previewImage && (
+              {previewAvatar && (
                 <span className="block sm:absolute text-sm mt-2 text-mauve-950">
-                  Image upload is disabled
+                  Preview mode, save now!
                 </span>
               )}
             </div>
@@ -198,7 +237,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
               size="md"
               uppercase
               loading={isSubmitting}
-              disabled={!isDirty || !isValid}
+              disabled={!isValid || !avatarFile}
             >
               Save
             </Button>
