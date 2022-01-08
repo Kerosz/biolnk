@@ -49,7 +49,7 @@ const ComingSoon: FC<ComingSoonProps> = ({
           </Link>
           . If you find any bugs feel free to{" "}
           <Link
-            url={FEATURE_REQUEST_URL}
+            url={BUG_REPORT_URL}
             variant="hover"
             className="text-crimson-950"
           >
@@ -58,7 +58,7 @@ const ComingSoon: FC<ComingSoonProps> = ({
           , we also appreciate if you could share any ideas on how we can
           improve the app experience{" "}
           <Link
-            url={BUG_REPORT_URL}
+            url={FEATURE_REQUEST_URL}
             variant="hover"
             className="text-crimson-950"
             external

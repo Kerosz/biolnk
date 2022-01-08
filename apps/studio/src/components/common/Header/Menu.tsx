@@ -1,13 +1,18 @@
 import Link from "../Link";
 import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
-import useUser from "~/utils/hooks/queries/useUser";
-import { Plus, Dropdown, Avatar } from "@biolnk/gamut";
+import { Plus, Dropdown, Avatar, Feather, Trello } from "@biolnk/gamut";
 import { useAppContext } from "~/data/context";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
+import type { FC } from "react";
+import type { User } from "@biolnk/core";
 
-const Menu = () => {
-  const { user } = useUser();
+export interface MenuProps {
+  user: User | undefined;
+  pageLink: string;
+}
+
+const Menu: FC<MenuProps> = ({ user, pageLink }) => {
   const { signOut } = useSupabase();
   const { addLinkDialog } = useAppContext();
 
@@ -37,9 +42,17 @@ const Menu = () => {
           <Dropdown.ListItem as={Link} url={Routes.DASHBOARD}>
             Dashboard
           </Dropdown.ListItem>
+          {/* @ts-ignore */}
+          <Dropdown.ListItem as={Link} url={Routes.ACCOUNT}>
+            Settings
+          </Dropdown.ListItem>
         </Dropdown.Group>
 
         <Dropdown.Group>
+          {/* @ts-ignore */}
+          <Dropdown.ListItem as={Link} url={pageLink} isExternal noIcon>
+            My Page
+          </Dropdown.ListItem>
           <Dropdown.ListItem
             as="button"
             onClick={addLinkDialog.onOpen}
@@ -47,9 +60,16 @@ const Menu = () => {
           >
             Add Link
           </Dropdown.ListItem>
-          {/* @ts-ignore */}
-          <Dropdown.ListItem as={Link} url={Routes.ACCOUNT}>
-            Settings
+
+          <Dropdown.ListItem
+            as={Link}
+            // @ts-ignore
+            url="https://github.com/Kerosz/biolnk/issues/new?assignees=&labels=bug&template=bug-report-template.md&title="
+            rightIcon={Feather}
+            isExternal
+            noIcon
+          >
+            Submit an Issue
           </Dropdown.ListItem>
         </Dropdown.Group>
 
