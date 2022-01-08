@@ -30,18 +30,22 @@ const PageNavigation: React.FC = () => {
     return paths.includes(value);
   };
 
+  const linkClass =
+    "pb-3 pt-1 pl-2 pr-3.5 flex items-center space-x-1.5 border-b-2 hover:text-mauve-1000 active:text-mauve-950";
+
   return (
     <Flex justify="between" className="mb-10 border-b-2 border-mauve-600">
-      <Flex className="space-x-5 xs:space-x-8 transform-gpu translate-y-0.5">
+      <Flex className="space-x-0 xs:space-x-5 transform-gpu translate-y-0.5">
         <Link
           url={Routes.DASHBOARD}
-          className={ctl(
-            `pb-3 pt-1 flex items-center space-x-1.5 border-b-2 ${
+          className={ctl(`
+            ${linkClass}
+            ${
               getActiveLink("links")
                 ? "text-mauve-1000 border-mauve-1000"
                 : "text-mauve-950 border-transparent"
-            }`
-          )}
+            }
+          `)}
         >
           <BaseIcon icon={LinkIcon} />
 
@@ -49,13 +53,14 @@ const PageNavigation: React.FC = () => {
         </Link>
         <Link
           url={Routes.PAGE}
-          className={ctl(
-            `pb-3 pt-1 flex items-center space-x-1.5 border-b-2 ${
+          className={ctl(`
+            ${linkClass}
+            ${
               getActiveLink("page")
                 ? "text-mauve-1000 border-mauve-1000"
                 : "text-mauve-950 border-transparent"
-            }`
-          )}
+            }
+          `)}
         >
           <BaseIcon icon={Trello} />
 
@@ -63,13 +68,14 @@ const PageNavigation: React.FC = () => {
         </Link>
         <Link
           url={Routes.STATS}
-          className={ctl(
-            `pb-3 pt-1 flex items-center space-x-1.5 border-b-2 ${
+          className={ctl(`
+            ${linkClass}
+            ${
               getActiveLink("stats")
                 ? "text-mauve-1000 border-mauve-1000"
                 : "text-mauve-950 border-transparent"
-            }`
-          )}
+            }
+          `)}
         >
           <BaseIcon icon={BarChart2} />
 
@@ -77,7 +83,10 @@ const PageNavigation: React.FC = () => {
         </Link>
       </Flex>
 
-      <Link url={Routes.ACCOUNT} className="text-mauveDark-700 pb-1">
+      <Link
+        url={Routes.ACCOUNT}
+        className="text-mauveDark-700 pb-1 hover:text-mauve-1000 active:text-mauveDark-600"
+      >
         <BaseIcon icon={Settings} size="lg" />
       </Link>
     </Flex>
