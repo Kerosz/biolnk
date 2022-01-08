@@ -245,6 +245,24 @@ create or replace function update_links_order(payload json) returns setof public
 $$ language sql;
 
 /** 
+* Storage
+* Note: This sets up storage. Anyone can view avatars, but only authenticated can upload!
+*/
+insert into storage.buckets (id, name)
+values ('avatars', 'avatars');
+
+create policy "Allow public read-only access."
+  on storage.objects for select
+  using ( bucket_id = 'avatars' );
+create policy "Can upload when authenticated"
+  on storage.objects for insert
+  with check ( bucket_id = 'avatars' and auth.role() = 'authenticated' );
+create policy "Can delete it's own avatar"
+  on storage.objects for delete
+  using ( bucket_id = 'avatars' and auth.uid()::text = (storage.foldername(name))[1]);
+
+
+/** 
 * Default Inserts
 * Note: Following section contains default inserts for the DB
 */
