@@ -19,6 +19,32 @@ import {
 } from "~/types";
 
 /****************************************************
+ *               STORAGE OPERATIONS                 *
+ ****************************************************/
+
+export const uploadAvatar = async (name: string, file: File) => {
+  const { data, error } = await sbClient.storage
+    .from("avatars")
+    .upload(name, file);
+
+  if (!data || error) {
+    throw new Error("Avatar upload failed!");
+  }
+
+  return data.Key;
+};
+
+export const removeAvatar = async (name: string) => {
+  const { data, error } = await sbClient.storage.from("avatars").remove([name]);
+
+  if (!data || error) {
+    throw new Error("Avatar could not be removed!");
+  }
+
+  return true;
+};
+
+/****************************************************
  *             USER CRUD OPERATIONS                 *
  ****************************************************/
 
