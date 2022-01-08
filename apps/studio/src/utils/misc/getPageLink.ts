@@ -1,4 +1,4 @@
-import { PageLinkPreference } from "@biolnk/core";
+import { PageLinkPreference, __DEV__ } from "@biolnk/core";
 
 export type PageLinkReturn = [label: string, url: string];
 export type GetPageLinkSignature = (
@@ -27,11 +27,15 @@ const getPageLink: GetPageLinkSignature = (
   switch (preference) {
     case PageLinkPreference.PATH:
       pageLinkLabel = `biolnk.me/${user}`;
-      pageLinkUrl = `https://biolnk.me/${user}`;
+      pageLinkUrl = __DEV__
+        ? `http://localhost:3000/p/${user}`
+        : `https://biolnk.me/p/${user}`;
       break;
     case PageLinkPreference.SUBDOMAIN:
       pageLinkLabel = `${user}.biolnk.me`;
-      pageLinkUrl = `https://${user}.biolnk.me`;
+      pageLinkUrl = __DEV__
+        ? `http://${user}.localhost:3000`
+        : `https://${user}.biolnk.me`;
       break;
     case PageLinkPreference.CUSTOM:
       pageLinkLabel = customDomain;

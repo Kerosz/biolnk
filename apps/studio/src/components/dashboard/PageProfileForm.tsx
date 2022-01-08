@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import Form from "~/components/common/Form";
-import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
+import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { FC, ChangeEvent, memo, useState } from "react";
 import {
   Avatar,
@@ -29,7 +29,8 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     biography: page?.user.biography,
   };
 
-  const { mutateAsync: userMutate } = useUpdateUser();
+  const { mutateAsync: mutateUser } = useUpdateUser();
+  const { mutateAsync: mutatePage } = useUpdatePage();
 
   const [previewAvatar, setPreviewAvatar] = useState<string | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -38,22 +39,38 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
 
   async function handleProfileUpdate({ title, biography }: PageProfileDto) {
     // If any of the fields are different from the existing values -> send req
-    const updateDto = {} as PageProfileDto;
-
     if (title !== page?.title) {
-      updateDto.title = title;
-    }
-    if (biography !== page?.user.biography) {
-      updateDto.biography = biography;
+      try {
+        await mutatePage({ data: { title }, userId: page?.user.id });
+      } catch (error) {
+        makeToast({
+          duration: 2500,
+          kind: "error",
+          title: "Error",
+          message: error.message,
+        });
+      }
     }
 
-    await userMutate({
-      data: updateDto,
-      userId: page?.user.id,
-      newAvatar: avatarFile ? avatarFile : null,
-    });
-    setPreviewAvatar(null);
-    setAvatarFile(null);
+    if (biography !== page?.user.biography || avatarFile) {
+      try {
+        await mutateUser({
+          data: { biography },
+          userId: page?.user.id,
+          newAvatar: avatarFile ? avatarFile : null,
+        });
+
+        setPreviewAvatar(null);
+        setAvatarFile(null);
+      } catch (error) {
+        makeToast({
+          duration: 2500,
+          kind: "error",
+          title: "Error",
+          message: error.message,
+        });
+      }
+    }
   }
 
   function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
@@ -83,7 +100,6 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
          * Removing the url to get only the storage path
          * https://biolnk-storage-url/avatars/[userId]/[avatarName].png ->
          * -> [userId]/[avatarName].png
-         *
          */
         const storageAvatarName = page.user.avatar_url.replace(
           `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}/avatars/`,
@@ -91,7 +107,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
         );
 
         await removeAvatar(storageAvatarName);
-        await userMutate({
+        await mutateUser({
           data: { avatar_url: null },
           userId: page?.user.id,
         });
@@ -145,7 +161,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
     >
       {({
         register,
-        formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+        formState: { errors, touchedFields, isValid, isSubmitting },
       }) => (
         <>
           <Flex className="flex-col sm:flex-row">
@@ -237,7 +253,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
               size="md"
               uppercase
               loading={isSubmitting}
-              disabled={!isValid || !avatarFile}
+              disabled={!isValid && !avatarFile}
             >
               Save
             </Button>

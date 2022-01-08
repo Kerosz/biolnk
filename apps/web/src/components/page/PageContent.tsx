@@ -6,6 +6,7 @@ import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
 
 export interface PageContentProps {
+  avatar: string;
   title: string;
   bio: string;
   links: LinkType[];
@@ -14,7 +15,13 @@ export interface PageContentProps {
 
 export type TextType = "title" | "bio" | "button";
 
-const PageContent: FC<PageContentProps> = ({ title, bio, links, style }) => {
+const PageContent: FC<PageContentProps> = ({
+  avatar,
+  title,
+  bio,
+  links,
+  style,
+}) => {
   const getTextStyles = (type: TextType) => {
     const fontSize =
       type === "title"
@@ -33,6 +40,19 @@ const PageContent: FC<PageContentProps> = ({ title, bio, links, style }) => {
   return (
     <Container className="!max-w-screen-md pt-14 min-h-screen z-10 flex flex-col justify-between">
       <div>
+        {avatar && (
+          <Flex justify="center" className="pb-3.5">
+            <Image
+              src={avatar}
+              alt={title}
+              priority
+              width={80}
+              height={80}
+              className="rounded-full border border-mauve-400"
+            />
+          </Flex>
+        )}
+
         {title && (
           <Heading
             as="h1"
@@ -54,7 +74,7 @@ const PageContent: FC<PageContentProps> = ({ title, bio, links, style }) => {
         )}
 
         {links.length > 0 ? (
-          <div className="mt-8 mb-28">
+          <div className="mt-6 mb-28">
             {links.map((l) => (
               <Link
                 key={l.id}
@@ -79,8 +99,6 @@ const PageContent: FC<PageContentProps> = ({ title, bio, links, style }) => {
           width={30}
           alt="Biolnk.me branding"
           title="Biolnk.me branding"
-          priority
-          placeholder="blur"
         />
       </Flex>
     </Container>

@@ -7,6 +7,7 @@ import getPageLink from "~/utils/misc/getPageLink";
 import { memo } from "react";
 import { useClipboard } from "@biolnk/core";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/gamut";
+import { Routes } from "~/data/enums";
 
 import Styles from "./Header.module.css";
 
@@ -26,13 +27,15 @@ const Header = () => {
     <header className={Styles["blui-root"]}>
       <Container className="flex items-center justify-between h-full">
         <Flex align="center">
-          <Image
-            src={Logo}
-            height={36}
-            width={22}
-            alt="Biolnk.me branding"
-            title="Biolnk.me branding"
-          />
+          <Link url={Routes.DASHBOARD}>
+            <Image
+              src={Logo}
+              height={36}
+              width={22}
+              alt="Biolnk.me branding"
+              title="Biolnk.me branding"
+            />
+          </Link>
           <div className={`${Styles["blui-separator"]} rotate-[30deg]`} />
 
           <Link url={pageLinkUrl} variant="basic" external noIcon>
@@ -55,7 +58,7 @@ const Header = () => {
           </Button>
         </Flex>
 
-        <Menu />
+        <Menu user={user} pageLink={pageLinkUrl} />
       </Container>
     </header>
   );

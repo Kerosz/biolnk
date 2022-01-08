@@ -21,6 +21,7 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
   return (
     <UserPageLayout backgroundCss={page.theme.style.background.css}>
       <PageContent
+        avatar={page.user.avatar_url}
         title={page.title}
         bio={page.user.biography}
         links={links}
