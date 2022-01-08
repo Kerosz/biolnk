@@ -1,3 +1,5 @@
+import { ThemeStyle } from ".";
+
 export type PageWithMetadata = {
   id: string;
   title: string;
@@ -13,6 +15,7 @@ export type PageWithMetadata = {
     name: string;
     kind: "SYSTEM" | "CUSTOM";
     state: "PUBLISHED" | "PRIVATE";
+    style: ThemeStyle;
   };
   user: {
     id: string;

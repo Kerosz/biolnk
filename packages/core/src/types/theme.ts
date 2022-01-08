@@ -1,9 +1,8 @@
 export type ThemeFontStyle = {
-  key: string;
-  font_weight: number;
-  font_size: string;
+  css: string;
   font_size_lead: string;
-  font_type: string;
+  font_size_text: string;
+  font_size_button: string;
 };
 
 export type ThemeButtonStyle = {
@@ -14,11 +13,16 @@ export type ThemeBackgroundStyle = {
   css: string;
 };
 
+export type ThemeTextStyle = {
+  css: string;
+};
+
 export type ThemeStyle = {
   css?: string;
   font?: ThemeFontStyle;
   button: ThemeButtonStyle;
   background: ThemeBackgroundStyle;
+  text: ThemeTextStyle;
 };
 
 export type Theme = {
