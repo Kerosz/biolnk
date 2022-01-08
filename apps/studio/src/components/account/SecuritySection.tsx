@@ -14,7 +14,7 @@ export interface SecuritySectionProps {
 const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
   const { mutateAsync, isLoading } = useDeleteUser();
   const { session } = useSupabase();
-  const { replace } = useRouter();
+  const { replace, reload } = useRouter();
 
   const deleteDialog = useDisclosure();
 
@@ -25,7 +25,7 @@ const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
 
         storage.remove("supabase.auth.token");
 
-        replace(Routes.SIGNIN);
+        replace(Routes.SIGNIN).then(() => reload());
       }
     } catch (error) {
       makeToast({
