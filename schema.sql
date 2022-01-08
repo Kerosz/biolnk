@@ -14,7 +14,7 @@ create table if not exists public.users (
   username varchar(20) unique not null,
   full_name varchar(100),
   biography varchar(120),
-  avatar_url text,
+  avatar_url text default 'https://luvvzhalwfofocddxfrk.supabase.in/storage/v1/object/public/avatars/default-avatar.jpg'::text,
   status user_status default 'BASIC'::public.user_status,
   page_link page_link_preference default 'PATH'::public.page_link_preference,
   is_banned boolean default false,
