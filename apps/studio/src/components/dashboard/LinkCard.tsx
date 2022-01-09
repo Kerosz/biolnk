@@ -62,6 +62,8 @@ const LinkCard: FC<Link> = ({
     }
   }, [previewToggle.isOpen]);
 
+  const linkMode = previewToggle.isOpen ? "visible" : "hidden";
+
   return (
     <>
       <ConfirmDialog
@@ -116,7 +118,7 @@ const LinkCard: FC<Link> = ({
                     {title}
                   </Text>
 
-                  <Tooltip content="Preview Mode">
+                  <Tooltip content={`Preview Mode ( ${linkMode} )`}>
                     <Toggle
                       aria-label="Toggle visibility"
                       label="Toggle visibility"
