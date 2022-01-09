@@ -51,7 +51,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
     >
       {({
         register,
-        formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+        formState: { errors, isSubmitting, isValid, isDirty },
       }) => (
         <>
           <Input
@@ -64,7 +64,6 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
             placeholder="SEO Title"
             borderless
             error={errors.seo_title?.message}
-            valid={!errors.seo_title && touchedFields.seo_title}
             {...register("seo_title")}
           />
           <Textarea
@@ -77,7 +76,6 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
             rows={2}
             borderless
             error={errors.seo_description?.message}
-            valid={!errors.seo_description && touchedFields.seo_description}
             {...register("seo_description")}
           />
           <Flex justify="end" className="w-full">

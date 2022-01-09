@@ -159,10 +159,7 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
       resetOnSubmit
       resetOptions={{ keepValues: true }}
     >
-      {({
-        register,
-        formState: { errors, touchedFields, isValid, isSubmitting },
-      }) => (
+      {({ register, formState: { errors, isValid, isSubmitting } }) => (
         <>
           <Flex className="flex-col sm:flex-row">
             <label
@@ -220,7 +217,6 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
                 placeholder="Page title"
                 borderless
                 error={errors.title?.message}
-                valid={!errors.title && touchedFields.title}
                 {...register("title")}
               />
               <Textarea
@@ -233,7 +229,6 @@ const PageProfileForm: FC<PageProfileFormProps> = ({ page }) => {
                 rows={2}
                 borderless
                 error={errors.biography?.message}
-                valid={!errors.biography && touchedFields.biography}
                 {...register("biography")}
               />
 

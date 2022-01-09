@@ -18,7 +18,7 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
 
   const {
     register,
-    formState: { errors, touchedFields, isValid, isDirty },
+    formState: { errors, isValid, isDirty },
     handleSubmit,
     reset,
   } = useForm<FormLinkDto>({
@@ -68,7 +68,6 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
           placeholder="Title"
           borderless
           error={errors.title?.message}
-          valid={!errors.title && touchedFields.title}
           {...register("title")}
         />
         <Input
@@ -81,7 +80,6 @@ const AddLinkDialog: React.FC<AddLinkDialogProps> = ({ open, onClose }) => {
           autoComplete="url"
           borderless
           error={errors.url?.message}
-          valid={!errors.url && touchedFields.url}
           {...register("url")}
         />
       </form>
