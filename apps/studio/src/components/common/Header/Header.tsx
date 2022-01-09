@@ -3,9 +3,8 @@ import Logo from "~/assets/images/biolnk.png";
 import Menu from "./Menu";
 import Link from "../Link";
 import useUser from "~/utils/hooks/queries/useUser";
-import getPageLink from "~/utils/misc/getPageLink";
 import { memo } from "react";
-import { useClipboard } from "@biolnk/core";
+import { useClipboard, getPageLink } from "@biolnk/core";
 import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/gamut";
 import { Routes } from "~/data/enums";
 
