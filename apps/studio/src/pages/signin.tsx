@@ -32,7 +32,10 @@ function SignInPage() {
           </Link>
         </>
       }
-      seoOptions={{ title: "Sign In", canonical: "https://biolnk.me/signin" }}
+      seoOptions={{
+        title: "Sign In",
+        canonical: "https://app.biolnk.me/signin",
+      }}
     >
       <Form<SignInDto>
         onSubmit={handleSignIn}
@@ -42,7 +45,7 @@ function SignInPage() {
       >
         {({
           register,
-          formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+          formState: { errors, isSubmitting, isValid, isDirty },
         }) => (
           <>
             <Input
@@ -57,7 +60,6 @@ function SignInPage() {
               placeholder="username"
               borderless
               error={errors.username?.message}
-              valid={!errors.username && touchedFields.username}
               {...register("username")}
             />
             <Input
@@ -70,7 +72,6 @@ function SignInPage() {
               placeholder="Password"
               borderless
               error={errors.password?.message}
-              valid={!errors.password && touchedFields.password}
               {...register("password")}
             />
             <Button

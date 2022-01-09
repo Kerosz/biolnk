@@ -134,7 +134,7 @@ const PreferenceSection: FC<PreferenceSectionProps> = ({ page }) => {
             className="cursor-not-allowed max-w-max"
           >
             <input
-              className="!h-5 !w-5 border !bg-mauve-50 checked:!bg-blue-800 checked:!border-blue-800 !ring-blue-800 focus:outline-none transition duration-200 mt-0.5 mr-3 cursor-pointer"
+              className="!h-5 !w-5 border !bg-mauve-50 checked:!bg-blue-800 checked:!border-blue-800 !ring-blue-800 focus:outline-none transition duration-200 mt-0.5 mr-3 !cursor-not-allowed"
               type="radio"
               name="page-prefference"
               id={PageLinkPreference.CUSTOM}
