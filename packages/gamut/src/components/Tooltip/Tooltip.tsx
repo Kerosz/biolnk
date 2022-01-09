@@ -24,7 +24,7 @@ const Tooltip = ({
   content,
   className,
   children,
-  delay = 500,
+  delay = 250,
   sideOffset = 5,
   ...otherProps
 }: TooltipOwnProps) => {
