@@ -32,7 +32,10 @@ function SignUpPage() {
           </Link>
         </>
       }
-      seoOptions={{ title: "Sign Up", canonical: "https://biolnk.me/signup" }}
+      seoOptions={{
+        title: "Sign Up",
+        canonical: "https://app.biolnk.me/signup",
+      }}
     >
       <Form<SignUpDto>
         onSubmit={handleSignUp}
@@ -42,7 +45,7 @@ function SignUpPage() {
       >
         {({
           register,
-          formState: { errors, isSubmitting, touchedFields, isValid, isDirty },
+          formState: { errors, isSubmitting, isValid, isDirty },
         }) => (
           <>
             <Input
@@ -55,7 +58,6 @@ function SignUpPage() {
               placeholder="Email address"
               borderless
               error={errors.email?.message}
-              valid={!errors.email && touchedFields.email}
               {...register("email")}
             />
             <Input
@@ -70,7 +72,6 @@ function SignUpPage() {
               placeholder="username"
               borderless
               error={errors.username?.message}
-              valid={!errors.username && touchedFields.username}
               {...register("username")}
             />
             <Input
@@ -83,7 +84,6 @@ function SignUpPage() {
               placeholder="Password"
               borderless
               error={errors.password?.message}
-              valid={!errors.password && touchedFields.password}
               {...register("password")}
             />
             <Button

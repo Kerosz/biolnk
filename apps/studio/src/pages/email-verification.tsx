@@ -5,12 +5,17 @@ import { useSupabase } from "~/lib/supabase";
 export default function EmailVerificationPage() {
   const { session } = useSupabase();
 
+  const seoOptions = {
+    title: "Email Verification",
+    noindex: true,
+  };
+
   if (session?.user.confirmed_at && session?.user.email_confirmed_at) {
     return (
       <CenteredPageLayout
         title="Email verified"
         social={false}
-        seoOptions={{ title: "Email Verification" }}
+        seoOptions={seoOptions}
       >
         <Text size="sm" center>
           Your email address has been already verified.
@@ -23,7 +28,7 @@ export default function EmailVerificationPage() {
     <CenteredPageLayout
       title="Verify your email"
       social={false}
-      seoOptions={{ title: "Email Verification" }}
+      seoOptions={seoOptions}
     >
       <Text size="sm" center className="pb-1">
         Almost there! We've sent a verification email.
