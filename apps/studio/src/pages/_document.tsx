@@ -64,6 +64,7 @@ class MyDocument extends Document {
             color="#e03177"
           />
           <link rel="shortcut icon" href="/favicons/favicon.ico" />
+          <link rel="icon" href="/favicons/favicon.ico" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="apple-mobile-web-app-title" content="Biolnk Studio" />
           <meta name="application-name" content="Biolnk Studio" />
