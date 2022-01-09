@@ -129,7 +129,7 @@ export const createUserWithEmailAndPassword = async ({
       data: {
         username,
         avatar_url:
-          "https://luvvzhalwfofocddxfrk.supabase.in/storage/v1/object/public/avatars/default-avatar.jpg",
+          "https://qatejhwdylvqgwcegrjn.supabase.in/storage/v1/object/public/avatars/default-avatar.jpg",
       },
     }
   );
