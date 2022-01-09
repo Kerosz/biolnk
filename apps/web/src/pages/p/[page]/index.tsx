@@ -1,9 +1,10 @@
 import PageContent from "~/components/page/PageContent";
+import seoConfig from "web.seo";
 import { useRouter } from "next/router";
 import { Loading } from "@biolnk/gamut";
+import { Link, PageWithMetadata, getPageLink } from "@biolnk/core";
 import { UserPageLayout } from "~/components/layouts";
 import type { NextPage } from "next";
-import type { Link, PageWithMetadata } from "@biolnk/core";
 
 interface PageScreenProps {
   domain: string;
@@ -18,8 +19,17 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
     return <Loading />;
   }
 
+  const [_, pageLinkUrl] = getPageLink(page.subdomain, page.user.page_link);
+
   return (
-    <UserPageLayout backgroundCss={page.theme.style.background.css}>
+    <UserPageLayout
+      backgroundCss={page.theme.style.background.css}
+      seoOptions={{
+        title: page.seo_title || `${page.title}’s Page`,
+        description: page.seo_description || seoConfig.description,
+        canonical: pageLinkUrl,
+      }}
+    >
       <PageContent
         avatar={page.user.avatar_url}
         title={page.title}

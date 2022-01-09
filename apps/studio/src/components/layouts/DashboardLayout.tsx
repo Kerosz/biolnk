@@ -2,15 +2,22 @@ import React from "react";
 import Header from "~/components/common/Header/Header";
 import PreviewEmbed from "../dashboard/PreviewEmbed/PreviewEmbed";
 import PageNavigation from "../dashboard/PageNavigation";
+import { NextSeo, NextSeoProps } from "next-seo";
 import { Container } from "@biolnk/gamut";
+import type { FC } from "react";
 
 export interface DashboardLayoutProps {
-  children?: React.ReactNode;
+  seoOptions?: NextSeoProps;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: FC<DashboardLayoutProps> = ({
+  children,
+  seoOptions,
+}) => {
   return (
     <>
+      {seoOptions && <NextSeo {...seoOptions} />}
+
       <Header />
       <Container
         as="main"

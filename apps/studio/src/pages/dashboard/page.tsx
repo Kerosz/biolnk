@@ -15,7 +15,7 @@ function PageScreen() {
   const { themes } = useThemes();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout seoOptions={{ title: "Page" }}>
       <SectionShell title="Profile">
         <PageProfileForm page={page} />
       </SectionShell>

@@ -1,9 +1,10 @@
-import { PageLinkPreference, __DEV__ } from "@biolnk/core";
+import { __DEV__ } from ".";
+import { PageLinkPreference } from "..";
 
-export type PageLinkReturn = [label: string, url: string];
+export type PageLinkReturn = [string, string];
 export type GetPageLinkSignature = (
   user: string,
-  preference: `${PageLinkPreference}`,
+  preference: "PATH" | "SUBDOMAIN" | "CUSTOM",
   customDomain?: string | null
 ) => PageLinkReturn;
 
@@ -16,7 +17,7 @@ export type GetPageLinkSignature = (
  * @param [customDomain] - User custom domain
  * @returns {PageLinkReturn} `[label, url]`
  */
-const getPageLink: GetPageLinkSignature = (
+export const getPageLink: GetPageLinkSignature = (
   user,
   preference,
   customDomain = null
@@ -25,25 +26,30 @@ const getPageLink: GetPageLinkSignature = (
   let pageLinkUrl: string;
 
   switch (preference) {
-    case PageLinkPreference.PATH:
+    case PageLinkPreference.PATH: {
       pageLinkLabel = `biolnk.me/${user}`;
       pageLinkUrl = __DEV__
         ? `http://localhost:3000/p/${user}`
         : `https://biolnk.me/p/${user}`;
       break;
-    case PageLinkPreference.SUBDOMAIN:
+    }
+    case PageLinkPreference.SUBDOMAIN: {
       pageLinkLabel = `${user}.biolnk.me`;
       pageLinkUrl = __DEV__
         ? `http://${user}.localhost:3000`
         : `https://${user}.biolnk.me`;
       break;
-    case PageLinkPreference.CUSTOM:
-      pageLinkLabel = customDomain;
+    }
+    case PageLinkPreference.CUSTOM: {
+      pageLinkLabel = customDomain as string;
       pageLinkUrl = `https://${customDomain}`;
-    default:
+      break;
+    }
+    default: {
       pageLinkLabel = "";
       pageLinkUrl = "";
       break;
+    }
   }
 
   return [pageLinkLabel, pageLinkUrl];

@@ -1,6 +1,5 @@
 import useUser from "~/utils/hooks/queries/useUser";
-import getPageLink from "~/utils/misc/getPageLink";
-import { useWindowSize } from "@biolnk/core";
+import { useWindowSize, getPageLink } from "@biolnk/core";
 
 import Styles from "./PreviewEmbed.module.css";
 

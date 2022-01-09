@@ -17,7 +17,7 @@ function AccountPage() {
   }
 
   return (
-    <AccountLayout>
+    <AccountLayout seoOptions={{ title: "Account" }}>
       <GeneralSection user={page.user} />
       <PreferenceSection page={page} />
       <ChangePasswordSection />
