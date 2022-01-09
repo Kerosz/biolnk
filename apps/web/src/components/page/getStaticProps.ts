@@ -59,7 +59,8 @@ export const getStaticProps: GetStaticProps<{}, PageParams> = async ({
   const linkRecords = await sbClient
     .from<Link>(Tables.LINKS)
     .select("*")
-    .eq("user_id", pageRecord.data.user.id);
+    .eq("user_id", pageRecord.data.user.id)
+    .order("display_order", { ascending: true });
 
   if (!linkRecords.data || linkRecords.error) {
     return {

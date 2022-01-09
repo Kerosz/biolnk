@@ -75,18 +75,20 @@ const PageContent: FC<PageContentProps> = ({
 
         {links.length > 0 ? (
           <div className="mt-6 mb-28">
-            {links.map((l) => (
-              <Link
-                key={l.id}
-                url={l.url}
-                className="mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu animate-decelerate hover:scale-[1.03]"
-                style={CSSstring(style.button.css)}
-                external
-                noIcon
-              >
-                <Text style={getTextStyles("button")}>{l.title}</Text>
-              </Link>
-            ))}
+            {links
+              .filter((l) => l.visible !== false)
+              .map((l) => (
+                <Link
+                  key={l.id}
+                  url={l.url}
+                  className="mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu animate-decelerate hover:scale-[1.03]"
+                  style={CSSstring(style.button.css)}
+                  external
+                  noIcon
+                >
+                  <Text style={getTextStyles("button")}>{l.title}</Text>
+                </Link>
+              ))}
           </div>
         ) : null}
       </div>
