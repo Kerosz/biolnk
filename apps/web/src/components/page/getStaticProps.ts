@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps<{}, PageParams> = async ({
       avatar_url,
       full_name,
       biography,
-      status
+      status,
+      page_link
     ),
     theme:themes(
       id,

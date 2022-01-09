@@ -1,8 +1,7 @@
 import { NextSeoProps } from "next-seo";
 
 const seoConfig: NextSeoProps = {
-  title: "Combine your content into one short, easy link",
-  titleTemplate: "Biolnk — %s",
+  title: "Biolnk — Combine your content into one short, easy link",
   description:
     "Combine all your online content into one short, easy Biolink. Create Biolink pages for things like blogs, merch, multimedia and so much more.",
   canonical: "https://biolnk.me",
