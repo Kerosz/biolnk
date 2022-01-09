@@ -19,6 +19,12 @@ const nextConfig = {
    */
   // swcMinify: true,
   optimizeFonts: true,
+  images: {
+    domains: [
+      "luvvzhalwfofocddxfrk.supabase.in",
+      "qatejhwdylvqgwcegrjn.supabase.in",
+    ],
+  },
   async Headers() {
     return [
       {
