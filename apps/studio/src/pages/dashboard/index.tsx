@@ -9,7 +9,7 @@ function LinksScreen() {
   const { addLinkDialog } = useAppContext();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout seoOptions={{ title: "Links" }}>
       <Flex justify="end" className="flex-col-reverse xs:flex-row">
         <Button
           variant="primary"

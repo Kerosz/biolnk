@@ -1,13 +1,19 @@
 import SideNavigation from "../account/SideNavigation";
 import Header from "../common/Header/Header";
+import { NextSeo, NextSeoProps } from "next-seo";
 import { Container } from "@biolnk/gamut";
 import type { FC } from "react";
 
-const AccountLayout: FC = ({ children }) => {
+export interface AccountLayoutProps {
+  seoOptions?: NextSeoProps;
+}
+
+const AccountLayout: FC<AccountLayoutProps> = ({ children, seoOptions }) => {
   return (
     <>
-      <Header />
+      {seoOptions && <NextSeo {...seoOptions} />}
 
+      <Header />
       <Container
         as="main"
         maxWidth="lg"

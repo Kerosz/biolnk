@@ -23,6 +23,7 @@ function SignUpPage() {
     <CenteredPageLayout
       title="Sign Up"
       subTitle="Free forever. No payment needed."
+      socialBtnText="Sign Up"
       footer={
         <>
           Have an account?{" "}
@@ -31,7 +32,7 @@ function SignUpPage() {
           </Link>
         </>
       }
-      socialBtnText="Sign Up"
+      seoOptions={{ title: "Sign Up", canonical: "https://biolnk.me/signup" }}
     >
       <Form<SignUpDto>
         onSubmit={handleSignUp}

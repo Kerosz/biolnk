@@ -7,7 +7,11 @@ export default function EmailVerificationPage() {
 
   if (session?.user.confirmed_at && session?.user.email_confirmed_at) {
     return (
-      <CenteredPageLayout title="Email verified" social={false}>
+      <CenteredPageLayout
+        title="Email verified"
+        social={false}
+        seoOptions={{ title: "Email Verification" }}
+      >
         <Text size="sm" center>
           Your email address has been already verified.
         </Text>
@@ -16,7 +20,11 @@ export default function EmailVerificationPage() {
   }
 
   return (
-    <CenteredPageLayout title="Verify your email" social={false}>
+    <CenteredPageLayout
+      title="Verify your email"
+      social={false}
+      seoOptions={{ title: "Email Verification" }}
+    >
       <Text size="sm" center className="pb-1">
         Almost there! We've sent a verification email.
       </Text>

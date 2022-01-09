@@ -4,7 +4,7 @@ import { DashboardLayout } from "~/components/layouts";
 
 function AnalyticsScreen() {
   return (
-    <DashboardLayout>
+    <DashboardLayout seoOptions={{ title: "Stats" }}>
       <ComingSoon />
     </DashboardLayout>
   );
