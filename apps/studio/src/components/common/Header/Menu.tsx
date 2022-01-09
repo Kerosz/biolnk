@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "../Link";
 import NewLinkDialog from "~/components/dashboard/AddLinkDialog";
-import { Plus, Dropdown, Avatar, Feather, Trello } from "@biolnk/gamut";
+import { Plus, Dropdown, Feather } from "@biolnk/gamut";
 import { useAppContext } from "~/data/context";
 import { useSupabase } from "~/lib/supabase";
 import { Routes } from "~/data/enums/routes";
@@ -17,7 +18,6 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
   const { addLinkDialog } = useAppContext();
 
   const avatarAlt = `${user?.username} profile`;
-  const avatarFallback = user?.username ?? "Biolnk";
 
   return (
     <>
@@ -28,11 +28,12 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
 
       <Dropdown
         trigger={
-          <button type="button">
-            <Avatar
+          <button type="button" className="rounded-full flex">
+            <Image
               src={user?.avatar_url}
               alt={avatarAlt}
-              fallback={avatarFallback}
+              width={36}
+              height={36}
             />
           </button>
         }
@@ -50,7 +51,7 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
 
         <Dropdown.Group>
           {/* @ts-ignore */}
-          <Dropdown.ListItem as={Link} url={pageLink} isExternal noIcon>
+          <Dropdown.ListItem as={Link} url={pageLink} external noIcon>
             My Page
           </Dropdown.ListItem>
           <Dropdown.ListItem
@@ -66,7 +67,7 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
             // @ts-ignore
             url="https://github.com/Kerosz/biolnk/issues/new?assignees=&labels=bug&template=bug-report-template.md&title="
             rightIcon={Feather}
-            isExternal
+            external
             noIcon
           >
             Submit an Issue
