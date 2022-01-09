@@ -13,7 +13,7 @@ export default function middleware(req: NextRequest) {
    * If prod, get the custom domain/subdomain value by removing the root URL
    */
   const currentHost =
-    process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
+    process.env.NODE_ENV === "production"
       ? hostname.replace(`.${PROD_HOST}`, "")
       : hostname.replace(`.${DEV_HOST}`, "");
 
