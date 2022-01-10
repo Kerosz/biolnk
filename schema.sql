@@ -33,9 +33,19 @@ create unique index users_username_idx on public.users(username);
 */ 
 create or replace function public.handle_new_user() 
 returns trigger as $$
+declare
+_username text;
 begin
+  -- check to see if 'user_name` is not null, if is assign a random 'user_name'
+  -- used for external providers that do not offer the 'user_name' by default
+  if (new.raw_user_meta_data->>'user_name') is null then
+    _username := extensions.hash_encode(123456789, new.email, 10);
+  else
+    _username := new.raw_user_meta_data->>'user_name';
+  end if;
+
   insert into public.users (id, email, username, full_name, avatar_url)
-  values (new.id, new.email, new.raw_user_meta_data->>'username', new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
+  values (new.id, new.email, _username, new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'avatar_url');
   return new;
 end;
 $$ language plpgsql security definer;
