@@ -125,9 +125,9 @@ export const createUserWithEmailAndPassword = async ({
     { email, password },
     {
       // additional metadata needed to auto create a new user entry
-      // on auth ( new.raw_user_meta_data->>'username' )
+      // on auth ( new.raw_user_meta_data->>'user_name' )
       data: {
-        username,
+        user_name: username,
         avatar_url:
           "https://qatejhwdylvqgwcegrjn.supabase.in/storage/v1/object/public/avatars/default-avatar.jpg",
       },

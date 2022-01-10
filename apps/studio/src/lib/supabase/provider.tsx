@@ -11,21 +11,22 @@ import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
 import {
   createUserWithEmailAndPassword,
-  getUserById,
   getUserByUsername,
 } from "~/services/supabase";
-import { makeContext, User } from "@biolnk/core";
+import { makeContext } from "@biolnk/core";
 import type { Session } from "@supabase/supabase-js";
 import type { SignInDto, SignUpDto, AuthUser } from "~/types";
 
 export type SupabaseContextState = {
-  user: User;
-  authUser: AuthUser;
+  user: AuthUser;
   session: Session;
   isAuthenticated: boolean;
   signOut: () => Promise<void>;
   signUpWithEmail: (signUpDto: SignUpDto) => Promise<void>;
   signInWithEmail: (signInDto: SignInDto) => Promise<void>;
+  signInWithTwitter: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
 };
 
 export type SupabaseProviderProps = {
@@ -39,13 +40,7 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
   const [currentSession, setCurrentSession] = useState<Session | null>(
     sbClient.auth.session()
   );
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const router = useRouter();
-
-  const _getUser = async (id: string) => {
-    const user = await getUserById(id);
-    setCurrentUser(user ?? null);
-  };
 
   const signOut = useCallback(async () => {
     const { error } = await sbClient.auth.signOut();
@@ -105,6 +100,90 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
     []
   );
 
+  const signInWithTwitter = useCallback(async () => {
+    const { user, error } = await sbClient.auth.signIn({
+      provider: "twitter",
+    });
+
+    if (error) {
+      makeToast({
+        duration: 2500,
+        kind: "error",
+        title: "Failed",
+        message: error.message,
+      });
+
+      return;
+    }
+
+    if (user && !error) {
+      await router.replace(Routes.DASHBOARD);
+
+      makeToast({
+        duration: 2500,
+        kind: "success",
+        title: "Logged In",
+        message: "You have successfully logged in your account!",
+      });
+    }
+  }, []);
+
+  const signInWithFacebook = useCallback(async () => {
+    const { user, error } = await sbClient.auth.signIn({
+      provider: "facebook",
+    });
+
+    if (error) {
+      makeToast({
+        duration: 2500,
+        kind: "error",
+        title: "Failed",
+        message: error.message,
+      });
+
+      return;
+    }
+
+    if (user && !error) {
+      await router.replace(Routes.DASHBOARD);
+
+      makeToast({
+        duration: 2500,
+        kind: "success",
+        title: "Logged In",
+        message: "You have successfully logged in your account!",
+      });
+    }
+  }, []);
+
+  const signInWithGoogle = useCallback(async () => {
+    const { user, error } = await sbClient.auth.signIn({
+      provider: "google",
+    });
+
+    if (error) {
+      makeToast({
+        duration: 2500,
+        kind: "error",
+        title: "Failed",
+        message: error.message,
+      });
+
+      return;
+    }
+
+    if (user && !error) {
+      await router.replace(Routes.DASHBOARD);
+
+      makeToast({
+        duration: 2500,
+        kind: "success",
+        title: "Logged In",
+        message: "You have successfully logged in your account!",
+      });
+    }
+  }, []);
+
   const signUpWithEmail = useCallback(async (signUpDto: SignUpDto) => {
     try {
       await createUserWithEmailAndPassword(signUpDto);
@@ -125,34 +204,26 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
 
   const providerValue: SupabaseContextState = useMemo(
     () => ({
-      user: currentUser,
-      authUser,
+      user: authUser,
       session: currentSession,
       isAuthenticated,
       signOut,
       signUpWithEmail,
       signInWithEmail,
+      signInWithTwitter,
+      signInWithFacebook,
+      signInWithGoogle,
     }),
-    [currentSession, currentUser]
+    [currentSession]
   );
 
   useEffect(() => {
-    const currentUserId = currentSession?.user.id;
-    if (currentUserId) {
-      _getUser(currentUserId);
-    }
-
     const { data } = sbClient.auth.onAuthStateChange((_event, session) => {
       setCurrentSession(session);
-
-      const userId = session?.user.id;
-      if (userId) {
-        _getUser(userId);
-      }
     });
 
     return () => data?.unsubscribe();
-  }, []);
+  }, [router.pathname]);
 
   return <Provider {...props} value={providerValue} />;
 };

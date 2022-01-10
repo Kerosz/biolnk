@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Button, Heading, makeToast, Text } from "@biolnk/gamut";
 import { PageWithMetadata, storage, useDisclosure } from "@biolnk/core";
 import { useSupabase } from "~/lib/supabase";
-import { Routes } from "~/data/enums";
 import type { FC } from "react";
 
 export interface SecuritySectionProps {
@@ -14,7 +13,7 @@ export interface SecuritySectionProps {
 const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
   const { mutateAsync, isLoading } = useDeleteUser();
   const { session } = useSupabase();
-  const { replace, reload } = useRouter();
+  const { reload } = useRouter();
 
   const deleteDialog = useDisclosure();
 
@@ -25,7 +24,7 @@ const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
 
         storage.remove("supabase.auth.token");
 
-        replace(Routes.SIGNIN).then(() => reload());
+        reload();
       }
     } catch (error) {
       makeToast({

@@ -19,6 +19,7 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
 
     const isEntryPage = pathname === Routes.ENTRY;
     const isSignUpPage = pathname === Routes.SIGNUP;
+    const isSignInPage = pathname === Routes.SIGNIN;
     // pages that you need to be auth to acess
     const isBlacklisted = !PAGE_WHITELIST.includes(pathname as any);
 
@@ -31,7 +32,11 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
 
     useSafeLayoutEffect(() => {
       // entry page or signup page and user -> redirect to dashboard
-      if ((isEntryPage || isSignUpPage) && isAuthenticated && isReady) {
+      if (
+        (isEntryPage || isSignUpPage || isSignInPage) &&
+        isAuthenticated &&
+        isReady
+      ) {
         replace(Routes.DASHBOARD);
       }
 

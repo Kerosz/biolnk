@@ -1,3 +1,4 @@
+import Skeleton from "react-loading-skeleton";
 import Form from "../common/Form";
 import useUpdatePage from "~/utils/hooks/mutations/useUpdatePage";
 import { Input, Flex, Button } from "@biolnk/gamut";
@@ -5,7 +6,6 @@ import { STATS_GA_SCHEMA } from "~/data/validations";
 import type { FC } from "react";
 import type { PageWithMetadata } from "@biolnk/core";
 import type { StatsGADto } from "~/types";
-import Skeleton from "react-loading-skeleton";
 
 export interface StatsGAFormProps {
   page: PageWithMetadata;

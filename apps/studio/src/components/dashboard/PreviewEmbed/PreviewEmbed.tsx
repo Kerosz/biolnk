@@ -22,7 +22,6 @@ const PreviewEmbed: React.FC = () => {
           key="iframe-preview"
           src={pageLinkUrl}
           className={Styles["blui-embed-iframe"]}
-          sandbox="allow-scripts"
           width="100%"
           height="100%"
           frameBorder={0}

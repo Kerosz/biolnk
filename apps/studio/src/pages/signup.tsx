@@ -13,7 +13,12 @@ function SignUpPage() {
     username: "",
     password: "",
   };
-  const { signUpWithEmail } = useSupabase();
+  const {
+    signUpWithEmail,
+    signInWithTwitter,
+    signInWithFacebook,
+    signInWithGoogle,
+  } = useSupabase();
 
   const handleSignUp = async (formData: SignUpDto) => {
     await signUpWithEmail(formData);
@@ -24,6 +29,9 @@ function SignUpPage() {
       title="Sign Up"
       subTitle="Free forever. No payment needed."
       socialBtnText="Sign Up"
+      twitterSigning={signInWithTwitter}
+      facebookSigning={signInWithFacebook}
+      googleSigning={signInWithGoogle}
       footer={
         <>
           Have an account?{" "}

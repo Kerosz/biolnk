@@ -28,7 +28,7 @@ const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
     username: user?.username,
   };
 
-  const { authUser } = useSupabase();
+  const { user: authUser } = useSupabase();
   const { mutate, isLoading } = useUpdateUser();
 
   const handleAccountUpdate = async (formData: AccountGeneralDto) => {
