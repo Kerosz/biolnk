@@ -1,4 +1,9 @@
-import { LinkKind, PageLinkPosition, PageLinkPreference } from "@biolnk/core";
+import {
+  LinkKind,
+  PageLinkPosition,
+  PageLinkPreference,
+  PageIntegrations,
+} from "@biolnk/core";
 
 export type CreateLinkDto = {
   user_id: string;
@@ -33,6 +38,7 @@ export type UpdatePageDto = {
   nsfw_content?: boolean;
   show_branding?: boolean;
   social_link_position?: `${PageLinkPosition}`;
+  integrations?: PageIntegrations;
 };
 
 export type PageSeoDto = {
@@ -43,6 +49,10 @@ export type PageSeoDto = {
 export type PageProfileDto = {
   title: string;
   biography: string;
+};
+
+export type StatsGADto = {
+  google_analytics_id: string;
 };
 
 export type UpdateUserDto = {
