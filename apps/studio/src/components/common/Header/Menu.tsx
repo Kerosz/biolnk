@@ -28,12 +28,16 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
 
       <Dropdown
         trigger={
-          <button type="button" className="rounded-full flex">
+          <button
+            type="button"
+            className="rounded-full flex border border-mauve-200"
+          >
             <Image
               src={user?.avatar_url}
               alt={avatarAlt}
               width={36}
               height={36}
+              className="rounded-full"
             />
           </button>
         }

@@ -20,7 +20,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({
 
       <Header />
       <Container
-        as="main"
+        as="div"
         maxWidth="3xl"
         className="py-6 md:grid grid-cols-5 lg:gap-12 md:gap-3 relative"
       >

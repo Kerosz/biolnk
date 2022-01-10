@@ -25,7 +25,7 @@ const SecuritySection: FC<SecuritySectionProps> = ({ user }) => {
 
         storage.remove("supabase.auth.token");
 
-        replace(Routes.SIGNIN).then(() => reload());
+        reload();
       }
     } catch (error) {
       makeToast({
