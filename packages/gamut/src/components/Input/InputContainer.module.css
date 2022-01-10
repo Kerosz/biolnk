@@ -63,7 +63,7 @@
 }
 
 .blui-desc {
-  @apply mt-2 ml-0.5 text-sm text-normalText font-semibold dark:text-gray-300;
+  @apply mt-2.5 ml-0.5 text-sm text-normalText font-medium dark:text-gray-300;
 }
 
 /*
