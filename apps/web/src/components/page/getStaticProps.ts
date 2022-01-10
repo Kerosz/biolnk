@@ -1,5 +1,5 @@
 import sbClient from "~/lib/supabase";
-import { Link, Page, PageWithMetadata, Tables } from "@biolnk/core";
+import { Link, PageWithMetadata, Tables } from "@biolnk/core";
 import type { GetStaticProps } from "next";
 import type { ParsedUrlQuery } from "querystring";
 
@@ -30,6 +30,7 @@ export const getStaticProps: GetStaticProps<{}, PageParams> = async ({
     nsfw_content,
     show_branding,
     social_link_position,
+    integrations,
     user:users(
       id,
       username,
