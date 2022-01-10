@@ -11,9 +11,7 @@ function AnalyticsScreen() {
   return (
     <DashboardLayout seoOptions={{ title: "Stats" }}>
       <SectionShell title="Google Analytics">
-        <StatsGAForm
-          currentGATrackingId={page?.integrations.google_analytics_id}
-        />
+        <StatsGAForm page={page} />
       </SectionShell>
 
       <SectionShell title="Insights">

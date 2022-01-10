@@ -17,7 +17,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
     seo_description: page?.seo_description,
   };
 
-  const { mutateAsync } = useUpdatePage();
+  const { mutate, isLoading } = useUpdatePage();
 
   const handleSeoUpdate = async (formData: PageSeoDto) => {
     // If any of the fields are different from the existing values -> send req
@@ -25,7 +25,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
       page?.seo_title !== formData.seo_title ||
       page?.seo_description !== formData.seo_description
     ) {
-      await mutateAsync({ data: formData, userId: page?.user.id });
+      mutate({ data: formData, userId: page?.user.id });
     }
   };
 
@@ -49,10 +49,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
       resetOnSubmit
       resetOptions={{ keepValues: true }}
     >
-      {({
-        register,
-        formState: { errors, isSubmitting, isValid, isDirty },
-      }) => (
+      {({ register, formState: { errors, isValid, isDirty } }) => (
         <>
           <Input
             id="seo_title"
@@ -85,7 +82,7 @@ const PageSeoForm: FC<PageSeoFormProps> = ({ page }) => {
               variant="primary"
               size="md"
               uppercase
-              loading={isSubmitting}
+              loading={isLoading}
               disabled={!isDirty || !isValid}
             >
               Save
