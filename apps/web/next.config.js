@@ -23,6 +23,10 @@ const nextConfig = {
     domains: [
       "luvvzhalwfofocddxfrk.supabase.in",
       "qatejhwdylvqgwcegrjn.supabase.in",
+      "pbs.twimg.com",
+      "scontent-lhr8-1.xx.fbcdn.net",
+      "scontent-frt3-1.xx.fbcdn.net",
+      "lh3.googleusercontent.com",
     ],
   },
   async Headers() {
