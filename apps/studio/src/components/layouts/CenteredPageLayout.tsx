@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Logo from "~/assets/images/biolnk.png";
 import { NextSeo, NextSeoProps } from "next-seo";
-import { Button, Heading, Text, Facebook, Twitter } from "@biolnk/gamut";
+import {
+  Button,
+  Heading,
+  Text,
+  Facebook,
+  Twitter,
+  Google,
+} from "@biolnk/gamut";
 import type { FC, ReactNode } from "react";
 
 export interface CenteredPageLayoutProps {
@@ -11,6 +18,9 @@ export interface CenteredPageLayoutProps {
   footer?: ReactNode;
   socialBtnText?: string;
   social?: boolean;
+  twitterSigning?: () => Promise<void>;
+  facebookSigning?: () => Promise<void>;
+  googleSigning?: () => Promise<void>;
   seoOptions?: NextSeoProps;
 }
 
@@ -21,6 +31,9 @@ const CenteredPageLayout: FC<CenteredPageLayoutProps> = ({
   footer,
   socialBtnText,
   social = true,
+  twitterSigning,
+  facebookSigning,
+  googleSigning,
   seoOptions,
 }) => {
   return (
@@ -63,6 +76,7 @@ const CenteredPageLayout: FC<CenteredPageLayoutProps> = ({
                   block
                   icon={Twitter}
                   iconProps={{ fill: "#1DA1F2" }}
+                  onClick={twitterSigning}
                 >
                   {socialBtnText} With Twitter
                 </Button>
@@ -72,8 +86,19 @@ const CenteredPageLayout: FC<CenteredPageLayoutProps> = ({
                   block
                   icon={Facebook}
                   iconProps={{ fill: "#4267B2" }}
+                  onClick={facebookSigning}
                 >
                   {socialBtnText} With Facebook
+                </Button>
+
+                <Button
+                  size="md"
+                  block
+                  icon={Google}
+                  // iconProps={{ fill: "#4267B2" }}
+                  onClick={googleSigning}
+                >
+                  {socialBtnText} With Google
                 </Button>
               </div>
             </>
