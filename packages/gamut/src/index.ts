@@ -19,5 +19,7 @@ export * from "./components/Badge/Badge";
 export * from "./components/Textarea/Textarea";
 export * from "./components/Toggle/Toggle";
 export * from "./components/Tooltip/Tooltip";
+// custom icons
+export * from "./icons/index";
 // types
 export * from "./types/index";
