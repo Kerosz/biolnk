@@ -21,7 +21,7 @@ const ComingSoon: FC<ComingSoonProps> = ({
 
   return (
     <section className="py-6">
-      <Flex className="mb-8 flex-col sm:flex-row sm:items-center">
+      <Flex className="flex-col sm:flex-row sm:items-center">
         {showTitle && (
           <Heading
             as="h2"
@@ -36,7 +36,7 @@ const ComingSoon: FC<ComingSoonProps> = ({
       </Flex>
 
       {showExtras && (
-        <Text size="leading" className="!leading-8">
+        <Text size="leading" className="!leading-8 mt-5">
           This feature will ship as soon as possible, meanwhile if you are
           interested in the development status, check out the{" "}
           <Link

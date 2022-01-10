@@ -1,15 +1,37 @@
 import { ThemeStyle } from ".";
 
+export type PageIntegrations = {
+  google_analytics_id: string | null;
+};
+
+export type Page = {
+  id: string;
+  user_id: string;
+  theme: string;
+  title: string;
+  subdomain: string;
+  custom_domain: string;
+  seo_title: string | null;
+  seo_description: string | null;
+  nsfw_content: boolean;
+  show_branding: boolean;
+  social_link_position: any;
+  integrations: PageIntegrations;
+  inserted_at: string;
+  updated_at: string;
+};
+
 export type PageWithMetadata = {
   id: string;
   title: string;
   subdomain: string;
   custom_domain: string;
-  nsfw_content: boolean;
-  seo_description: string | null;
   seo_title: string | null;
+  seo_description: string | null;
+  nsfw_content: boolean;
   show_branding: boolean;
   social_link_position: "TOP" | "BOTTOM";
+  integrations: PageIntegrations;
   theme: {
     id: string;
     name: string;
@@ -28,20 +50,4 @@ export type PageWithMetadata = {
     page_link: "PATH" | "SUBDOMAIN" | "CUSTOM";
     status: "BASIC" | "VERIFIED";
   };
-};
-
-export type Page = {
-  id: string;
-  user_id: string;
-  theme: string;
-  title: string;
-  subdomain: string;
-  custom_domain: string;
-  seo_title: string | null;
-  seo_description: string | null;
-  nsfw_content: boolean;
-  show_branding: boolean;
-  social_link_position: any;
-  inserted_at: string;
-  updated_at: string;
 };

@@ -156,6 +156,7 @@ create table if not exists public.pages (
   custom_domain varchar(180) unique,
   seo_title varchar(55),
   seo_description varchar(180),
+  integrations jsonb not null,
   nsfw_content boolean default false not null,
   show_branding boolean default true not null,
   social_link_position page_link_position default 'TOP'::public.page_link_position,
@@ -175,8 +176,8 @@ create policy "Can update own page data." on public.pages for update using (auth
 create or replace function public.handle_new_page() 
 returns trigger as $$
 begin
-  insert into public.pages (user_id, title, subdomain)
-  values (new.id, new.username, new.username);
+  insert into public.pages (user_id, title, subdomain, integrations)
+  values (new.id, new.username, new.username, '{"google_analytics_id":null}');
   return new;
 end;
 $$ language plpgsql security definer;

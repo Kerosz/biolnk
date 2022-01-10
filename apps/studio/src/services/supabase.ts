@@ -282,6 +282,7 @@ export const getPageWithMetadata = async (
       nsfw_content,
       show_branding,
       social_link_position,
+      integrations,
       user:users(
         id,
         username,
