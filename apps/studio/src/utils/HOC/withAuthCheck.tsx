@@ -37,7 +37,13 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
         isAuthenticated &&
         isReady
       ) {
-        replace(Routes.DASHBOARD);
+        if (user) {
+          if (user.onboarding_process) {
+            replace(Routes.ONBOARDING);
+          } else {
+            replace(Routes.DASHBOARD);
+          }
+        }
       }
 
       // user -> stop loading
