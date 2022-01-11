@@ -43,7 +43,6 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
         <SensitiveContentAgreement
           pageID={page.id}
           defaultAgreement={page.nsfw_content}
-          style={page.theme.style}
         />
         <PageContent
           avatarURL={page.user.avatar_url}

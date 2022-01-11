@@ -2,12 +2,11 @@ import Link from "../Link";
 import dynamic from "next/dynamic";
 import { FC, useCallback } from "react";
 import { BaseIcon, Button, EyeOff, Flex, Heading, Text } from "@biolnk/gamut";
-import { useLocalStorage, CSSstring, ThemeStyle } from "@biolnk/core";
+import { useLocalStorage } from "@biolnk/core";
 
 export interface SensitiveContentAgreementProps {
   defaultAgreement: boolean;
   pageID: string;
-  style: ThemeStyle;
 }
 
 const SENSITIVE_AGREEMENT_KEY = (id: string) => `bl__${id}--nsfw-agreement`;
@@ -15,7 +14,6 @@ const SENSITIVE_AGREEMENT_KEY = (id: string) => `bl__${id}--nsfw-agreement`;
 const SensitiveContentAgreement: FC<SensitiveContentAgreementProps> = ({
   defaultAgreement,
   pageID,
-  style,
 }) => {
   const [nsfw, setNsfw] = useLocalStorage(
     SENSITIVE_AGREEMENT_KEY(pageID),
@@ -36,17 +34,13 @@ const SensitiveContentAgreement: FC<SensitiveContentAgreementProps> = ({
         aria-hidden
         className={`${
           nsfw ? "fixed" : "hidden"
-        } z-30 inset-0 bg-blackAlpha-600`}
+        } z-30 inset-0 bg-blackAlpha-700`}
       />
       <div
         className={`${nsfw ? "!absolute" : "!hidden"} z-40 max-w-xl w-full
-        border border-mauve-400 shadow-md rounded-md`}
+        border border-mauve-400 bg-mauve-200 shadow-md rounded-md`}
         role="dialog"
         aria-modal="true"
-        style={{
-          ...CSSstring(style.background.css),
-          ...CSSstring(style.text.css),
-        }}
       >
         <Flex layout="vertical" className="p-4 text-center items-center">
           <Heading
@@ -63,9 +57,14 @@ const SensitiveContentAgreement: FC<SensitiveContentAgreementProps> = ({
             over eighteen and willing to see sensitive content?
           </Text>
 
-          <Flex className="space-x-3 w-full">
-            {/* @ts-ignore */}
-            <Button size="lg" block as={Link} url="/">
+          <Flex className="space-x-2 xs:space-x-3 w-full">
+            <Button
+              size="lg"
+              block
+              // @ts-ignore
+              as={Link}
+              url="/"
+            >
               Nope
             </Button>
             <Button
