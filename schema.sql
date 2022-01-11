@@ -18,6 +18,7 @@ create table if not exists public.users (
   status user_status default 'BASIC'::public.user_status,
   page_link page_link_preference default 'PATH'::public.page_link_preference,
   is_banned boolean default false,
+  onboarding_process boolean default true,
   inserted_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
 
