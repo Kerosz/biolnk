@@ -55,6 +55,14 @@ export type StatsGADto = {
   google_analytics_id: string;
 };
 
+export type OnboardingDto = {
+  avatar_url?: string;
+  full_name?: string;
+  link_title?: string;
+  link_url?: string;
+  username?: string;
+};
+
 export type UpdateUserDto = {
   email?: string;
   username?: string;

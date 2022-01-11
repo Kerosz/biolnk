@@ -38,7 +38,7 @@ const withAuthCheck = <Props,>(WrappedComponent: ComponentType<Props>) => {
         isReady
       ) {
         if (user) {
-          if (!user.onboarding_process) {
+          if (user.onboarding_process) {
             replace(Routes.ONBOARDING);
           } else {
             replace(Routes.DASHBOARD);

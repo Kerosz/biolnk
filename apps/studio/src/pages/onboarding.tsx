@@ -1,5 +1,7 @@
-import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import useUser from "~/utils/hooks/queries/useUser";
+import withAuthCheck from "~/utils/HOC/withAuthCheck";
+import { SimplePageLayout } from "~/components/layouts";
+import OnboardingForm from "~/components/OnboardingForm";
 
 function OnboardingPage() {
   const { user, isLoading } = useUser();
@@ -8,7 +10,11 @@ function OnboardingPage() {
     return <span>loading</span>;
   }
 
-  return <p>hello {user.username}</p>;
+  return (
+    <SimplePageLayout title="Complete your profile">
+      <OnboardingForm user={user} />
+    </SimplePageLayout>
+  );
 }
 
 export default withAuthCheck(OnboardingPage);

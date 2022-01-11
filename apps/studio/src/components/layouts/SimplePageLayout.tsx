@@ -5,8 +5,8 @@ import { Heading, Text } from "@biolnk/gamut";
 import type { FC, ReactNode } from "react";
 
 export interface SimplePageLayoutProps {
+  title: string;
   children?: ReactNode;
-  title?: string;
   seoOptions?: NextSeoProps;
 }
 
@@ -27,7 +27,7 @@ const SimplePageLayout: FC<SimplePageLayoutProps> = ({
           placeholder="blur"
           alt="Biolnk.me branding"
         />
-        <div className="bg-white rounded-lg max-w-md w-full px-4 sm:px-8 py-6 mt-6">
+        <div className="bg-white rounded-lg max-w-md w-full px-4 sm:px-6 py-6 mt-6">
           {/* Header */}
           <Heading as="h1" className="font-semibold pb-7">
             {title}
