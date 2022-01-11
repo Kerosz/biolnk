@@ -188,7 +188,9 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
     try {
       await createUserWithEmailAndPassword(signUpDto);
 
-      router.replace(Routes.EMAIL_VERIFICATION);
+      router
+        .replace(Routes.EMAIL_VERIFICATION)
+        .then(() => router.push({ query: { to: encodeURI(signUpDto.email) } }));
     } catch (error) {
       makeToast({
         duration: 2500,
