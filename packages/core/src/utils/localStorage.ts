@@ -5,7 +5,7 @@ import { isBrowser } from "./dom";
  * @param key Key of the item
  * @returns the value or null
  */
-export function get(key: string): any | null {
+export function get<T>(key: string): T | null {
   if (!isBrowser) {
     throw new Error(`localStorage cannot be used outside the browser`);
   }
