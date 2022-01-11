@@ -6,21 +6,23 @@ import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
 
 export interface PageContentProps {
-  avatar: string;
+  avatarURL: string;
   title: string;
   bio: string;
   links: LinkType[];
   style: ThemeStyle;
+  showBrand: boolean;
 }
 
 export type TextType = "title" | "bio" | "button";
 
 const PageContent: FC<PageContentProps> = ({
-  avatar,
+  avatarURL,
   title,
   bio,
   links,
   style,
+  showBrand,
 }) => {
   const getTextStyles = (type: TextType) => {
     const fontSize =
@@ -40,10 +42,10 @@ const PageContent: FC<PageContentProps> = ({
   return (
     <Container className="!max-w-screen-md pt-14 min-h-screen z-10 flex flex-col justify-between">
       <div>
-        {avatar && (
+        {avatarURL && (
           <Flex justify="center" className="pb-3.5">
             <Image
-              src={avatar}
+              src={avatarURL}
               alt={title}
               priority
               width={80}
@@ -93,16 +95,18 @@ const PageContent: FC<PageContentProps> = ({
         ) : null}
       </div>
 
-      {/* @ts-ignore */}
-      <Flex as={Link} justify="center" className="mb-5" url="/">
-        <Image
-          src={Logo}
-          height={49}
-          width={30}
-          alt="Biolnk.me branding"
-          title="Biolnk.me branding"
-        />
-      </Flex>
+      {showBrand && (
+        // @ts-ignore
+        <Flex as={Link} justify="center" className="mb-5" url="/">
+          <Image
+            src={Logo}
+            height={49}
+            width={30}
+            alt="Biolnk.me branding"
+            title="Biolnk.me branding"
+          />
+        </Flex>
+      )}
     </Container>
   );
 };

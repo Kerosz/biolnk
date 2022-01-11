@@ -37,11 +37,12 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
         }}
       >
         <PageContent
-          avatar={page.user.avatar_url}
+          avatarURL={page.user.avatar_url}
           title={page.title}
           bio={page.user.biography}
           links={links}
           style={page.theme.style}
+          showBrand={page.show_branding}
         />
       </UserPageLayout>
     </>
