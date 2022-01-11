@@ -2,7 +2,11 @@ import seoConfig from "web.seo";
 import { useRouter } from "next/router";
 import { Loading } from "@biolnk/gamut";
 import { Link, PageWithMetadata, getPageLink } from "@biolnk/core";
-import { PageContent, GoogleAnalyticsIntegration } from "~/components/page";
+import {
+  PageContent,
+  GoogleAnalyticsIntegration,
+  SensitiveContentAgreement,
+} from "~/components/page";
 import { UserPageLayout } from "~/components/layouts";
 import type { NextPage } from "next";
 
@@ -36,6 +40,10 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
           canonical: pageLinkUrl,
         }}
       >
+        <SensitiveContentAgreement
+          pageID={page.id}
+          defaultAgreement={page.nsfw_content}
+        />
         <PageContent
           avatarURL={page.user.avatar_url}
           title={page.title}
