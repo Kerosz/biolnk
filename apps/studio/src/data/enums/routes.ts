@@ -7,4 +7,5 @@ export enum Routes {
   PAGE = "/dashboard/page",
   STATS = "/dashboard/stats",
   EMAIL_VERIFICATION = "/email-verification",
+  ONBOARDING = "/onboarding",
 }
