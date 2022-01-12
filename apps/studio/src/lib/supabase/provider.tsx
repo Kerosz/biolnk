@@ -11,9 +11,10 @@ import { sbClient } from "./client";
 import { Routes } from "~/data/enums/routes";
 import {
   createUserWithEmailAndPassword,
+  getUserById,
   getUserByUsername,
 } from "~/services/supabase";
-import { makeContext } from "@biolnk/core";
+import { isBrowser, makeContext } from "@biolnk/core";
 import type { Session } from "@supabase/supabase-js";
 import type { SignInDto, SignUpDto, AuthUser } from "~/types";
 
@@ -41,6 +42,14 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
     sbClient.auth.session()
   );
   const router = useRouter();
+  /**
+   * Used for the Supabase Callback redirect
+   * href -> https://app.biolnk.me/siginin
+   * pathname -> /signin
+   * callbackRedirectPath -> https://app.biolnk.me
+   */
+  const callbackRedirectPath =
+    isBrowser && window.location.href.replace(window.location.pathname, "");
 
   const signOut = useCallback(async () => {
     const { error } = await sbClient.auth.signOut();
@@ -79,7 +88,11 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
         }
 
         if (user && !error) {
-          router.replace(Routes.DASHBOARD);
+          if (dbUser.onboarding_process) {
+            router.replace(Routes.ONBOARDING);
+          } else {
+            router.replace(Routes.DASHBOARD);
+          }
 
           makeToast({
             duration: 2500,
@@ -101,9 +114,14 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
   );
 
   const signInWithTwitter = useCallback(async () => {
-    const { user, error } = await sbClient.auth.signIn({
-      provider: "twitter",
-    });
+    const { error } = await sbClient.auth.signIn(
+      {
+        provider: "twitter",
+      },
+      {
+        redirectTo: `${callbackRedirectPath}${Routes.ONBOARDING}`,
+      }
+    );
 
     if (error) {
       makeToast({
@@ -114,24 +132,18 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
       });
 
       return;
-    }
-
-    if (user && !error) {
-      await router.replace(Routes.DASHBOARD);
-
-      makeToast({
-        duration: 2500,
-        kind: "success",
-        title: "Logged In",
-        message: "You have successfully logged in your account!",
-      });
     }
   }, []);
 
   const signInWithFacebook = useCallback(async () => {
-    const { user, error } = await sbClient.auth.signIn({
-      provider: "facebook",
-    });
+    const { error } = await sbClient.auth.signIn(
+      {
+        provider: "facebook",
+      },
+      {
+        redirectTo: `${callbackRedirectPath}${Routes.ONBOARDING}`,
+      }
+    );
 
     if (error) {
       makeToast({
@@ -142,24 +154,18 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
       });
 
       return;
-    }
-
-    if (user && !error) {
-      await router.replace(Routes.DASHBOARD);
-
-      makeToast({
-        duration: 2500,
-        kind: "success",
-        title: "Logged In",
-        message: "You have successfully logged in your account!",
-      });
     }
   }, []);
 
   const signInWithGoogle = useCallback(async () => {
-    const { user, error } = await sbClient.auth.signIn({
-      provider: "google",
-    });
+    const { error } = await sbClient.auth.signIn(
+      {
+        provider: "google",
+      },
+      {
+        redirectTo: `${callbackRedirectPath}${Routes.ONBOARDING}`,
+      }
+    );
 
     if (error) {
       makeToast({
@@ -170,17 +176,6 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
       });
 
       return;
-    }
-
-    if (user && !error) {
-      await router.replace(Routes.DASHBOARD);
-
-      makeToast({
-        duration: 2500,
-        kind: "success",
-        title: "Logged In",
-        message: "You have successfully logged in your account!",
-      });
     }
   }, []);
 
@@ -188,7 +183,9 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
     try {
       await createUserWithEmailAndPassword(signUpDto);
 
-      router.replace(Routes.EMAIL_VERIFICATION);
+      router
+        .replace(Routes.EMAIL_VERIFICATION)
+        .then(() => router.push({ query: { to: encodeURI(signUpDto.email) } }));
     } catch (error) {
       makeToast({
         duration: 2500,
@@ -220,6 +217,17 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
   useEffect(() => {
     const { data } = sbClient.auth.onAuthStateChange((_event, session) => {
       setCurrentSession(session);
+
+      // NOTE: Hacking the routing until a better 'authCheck' is implemented
+      if (session) {
+        getUserById(session.user.id).then((dbUser) => {
+          if (dbUser.onboarding_process) {
+            router.replace(Routes.ONBOARDING);
+          } else {
+            router.replace(Routes.DASHBOARD);
+          }
+        });
+      }
     });
 
     return () => data?.unsubscribe();

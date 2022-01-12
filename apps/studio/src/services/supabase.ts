@@ -292,7 +292,8 @@ export const getPageWithMetadata = async (
         biography,
         status,
         page_link,
-        is_banned
+        is_banned,
+        onboarding_process
       ),
       theme:themes(
         id,

@@ -49,5 +49,6 @@ export type PageWithMetadata = {
     is_banned: boolean;
     page_link: "PATH" | "SUBDOMAIN" | "CUSTOM";
     status: "BASIC" | "VERIFIED";
+    onboarding_process: boolean;
   };
 };

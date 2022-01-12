@@ -2,7 +2,7 @@ import Link from "~components/common/Link";
 import Form from "~components/common/Form";
 import withAuthCheck from "~/utils/HOC/withAuthCheck";
 import { Button, Input } from "@biolnk/gamut";
-import { CenteredPageLayout } from "~/components/layouts";
+import { SigningLayout } from "~/components/layouts";
 import { useSupabase } from "~/lib/supabase";
 import { SIGNIN_SCHEMA } from "~/data/validations";
 import type { SignInDto } from "~/types";
@@ -13,25 +13,17 @@ function SignInPage() {
     password: "",
   };
 
-  const {
-    signInWithEmail,
-    signInWithTwitter,
-    signInWithFacebook,
-    signInWithGoogle,
-  } = useSupabase();
+  const { signInWithEmail } = useSupabase();
 
   const handleSignIn = async (formData: SignInDto) => {
     await signInWithEmail(formData);
   };
 
   return (
-    <CenteredPageLayout
+    <SigningLayout
       title="Sign In"
       subTitle="Free forever. No payment needed."
       socialBtnText="Continue"
-      twitterSigning={signInWithTwitter}
-      facebookSigning={signInWithFacebook}
-      googleSigning={signInWithGoogle}
       footer={
         <>
           Don't have an account?{" "}
@@ -97,7 +89,7 @@ function SignInPage() {
           </>
         )}
       </Form>
-    </CenteredPageLayout>
+    </SigningLayout>
   );
 }
 

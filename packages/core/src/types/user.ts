@@ -8,6 +8,7 @@ export type User = {
   status: "BASIC" | "VERIFIED";
   page_link: "PATH" | "SUBDOMAIN" | "CUSTOM";
   is_banned: boolean;
+  onboarding_process: boolean;
   updated_at: string;
   inserted_at: string;
 };

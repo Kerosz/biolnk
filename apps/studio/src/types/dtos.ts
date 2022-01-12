@@ -55,6 +55,13 @@ export type StatsGADto = {
   google_analytics_id: string;
 };
 
+export type OnboardingDto = {
+  full_name?: string;
+  link_title?: string;
+  link_url?: string;
+  username?: string;
+};
+
 export type UpdateUserDto = {
   email?: string;
   username?: string;
@@ -62,6 +69,7 @@ export type UpdateUserDto = {
   biography?: string | null;
   full_name?: string | null;
   page_link?: `${PageLinkPreference}`;
+  onboarding_process?: boolean;
 };
 
 export type AccountGeneralDto = {
