@@ -79,7 +79,11 @@ const SupabaseProvider = (props: SupabaseProviderProps) => {
         }
 
         if (user && !error) {
-          router.replace(Routes.DASHBOARD);
+          if (dbUser.onboarding_process) {
+            router.replace(Routes.ONBOARDING);
+          } else {
+            router.replace(Routes.DASHBOARD);
+          }
 
           makeToast({
             duration: 2500,
