@@ -188,7 +188,7 @@ create or replace function public.handle_new_page()
 returns trigger as $$
 begin
   insert into public.pages (user_id, title, subdomain, integrations)
-  values (new.id, new.username, new.username, '{"google_analytics_id":null}');
+  values (new.id, 'My Page', new.username, '{"google_analytics_id":null}');
   return new;
 end;
 $$ language plpgsql security definer;
