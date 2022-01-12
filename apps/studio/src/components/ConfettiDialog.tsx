@@ -9,6 +9,7 @@ import {
   getPageLink,
 } from "@biolnk/core";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
+import { memo } from "react";
 
 export interface ConfettiDialogProps {
   id: string;
@@ -61,7 +62,7 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
       >
         <Flex className="text-mauve-950" layout="vertical" align="center">
           <Text center>
-            Add it to your socials bio, Instagrem, TikTok, Twitter, or wherever
+            Add it to your socials bio, Instagram, TikTok, Twitter, or wherever
             your audience is.
           </Text>
 
@@ -74,4 +75,4 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
   );
 };
 
-export default ConfettiDialog;
+export default memo(ConfettiDialog);
