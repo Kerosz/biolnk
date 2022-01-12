@@ -19,13 +19,9 @@ export const ACCOUNT_GENERAL_SCHEMA: any = create(
     test("username", "Username must be at most 18 characters long!", () => {
       enforce(username).shorterThanOrEquals(18);
     });
-    test(
-      "username",
-      "Username must be lowercase and no special characters!",
-      () => {
-        enforce(username).matches(/^[a-z0-9.\-_]+$/);
-      }
-    );
+    test("username", "Username must have no special characters!", () => {
+      enforce(username).matches(/^[a-zA-Z0-9.\-_]+$/);
+    });
 
     // Email validation
     test("email", "Email address must not be empty!", () => {

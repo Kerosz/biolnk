@@ -56,7 +56,6 @@ export type StatsGADto = {
 };
 
 export type OnboardingDto = {
-  avatar_url?: string;
   full_name?: string;
   link_title?: string;
   link_url?: string;
@@ -70,6 +69,7 @@ export type UpdateUserDto = {
   biography?: string | null;
   full_name?: string | null;
   page_link?: `${PageLinkPreference}`;
+  onboarding_process?: boolean;
 };
 
 export type AccountGeneralDto = {
