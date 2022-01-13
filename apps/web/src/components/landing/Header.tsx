@@ -20,15 +20,26 @@ const Header: FC = () => {
         </Link>
 
         <Flex className="space-x-2.5">
-          <Button size="lg" variant="secondary">
+          <Button
+            // @ts-ignore
+            as={Link}
+            url="https://app.biolnk.me/signup"
+            size="lg"
+            variant="secondary"
+            noIcon
+          >
             Get Started
           </Button>
           <Button
+            // @ts-ignore
+            as={Link}
+            url="https://app.biolnk.me/signin"
             size="lg"
             icon={User}
             iconProps={{ size: 23 }}
             variant="outline"
             aria-label="Signin"
+            noIcon
           />
         </Flex>
       </Container>

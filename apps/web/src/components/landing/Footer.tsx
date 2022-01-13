@@ -70,17 +70,19 @@ const Footer: FC = () => {
             </Link>
 
             <Link
-              url="/"
+              url="https://github.com/Kerosz/biolnk/issues"
               variant="hover"
               className="text-xl text-mauveDark-500"
+              noIcon
             >
               Roadmap
             </Link>
 
             <Link
-              url="/"
+              url="https://github.com/Kerosz/biolnk/blob/main/LICENSE"
               variant="hover"
               className="text-xl text-mauveDark-500"
+              noIcon
             >
               Licensing
             </Link>
