@@ -28,11 +28,6 @@ export default function EmailVerificationPage() {
     setDisableResend(true);
   };
 
-  // email not provided in query we don't allow access -> redirect
-  if (!isVerified && !query.to) {
-    isReady && replace(Routes.SIGNIN);
-  }
-
   if (isVerified) {
     return (
       <SimplePageLayout title="Email verified" seoOptions={seoOptions}>
