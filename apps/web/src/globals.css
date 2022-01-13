@@ -13,7 +13,7 @@
   }
 
   body {
-    @apply bg-body overflow-y-auto;
+    @apply bg-body overflow-y-auto overflow-x-hidden;
   }
 
   ::selection {
