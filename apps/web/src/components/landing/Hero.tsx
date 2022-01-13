@@ -1,6 +1,6 @@
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import {
   BaseIcon,
-  Heading,
   Text,
   Container,
   Input,
@@ -8,9 +8,39 @@ import {
   Link,
   Button,
 } from "@biolnk/gamut";
-import type { FC } from "react";
+import { __DEV__ } from "@biolnk/core";
+import { doesUsernameExist } from "~/services/supabase";
+
+export type ClaimLinkDto = {
+  username: string;
+};
 
 const Hero: FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [serverError, setServerError] = useState<null | string>(null);
+
+  const onUseranmeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+
+    setUsername(value);
+  };
+
+  const handleClaimLink = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setServerError(null);
+
+    const itExists = await doesUsernameExist(username);
+
+    if (itExists) {
+      setServerError("Name already exists!");
+      setUsername("");
+    } else {
+      window.location.href = __DEV__
+        ? `http://localhost:4200/signup?username=${username}`
+        : `https://app.biolnk.me/signup?username=${username}`;
+    }
+  };
+
   return (
     <Container className="flex flex-col pt-20 items-center">
       <Flex
@@ -29,7 +59,10 @@ const Hero: FC = () => {
         upgrades needed.
       </Text>
 
-      <Flex className="items-center space-x-2 mt-16 sm:flex-row flex-col">
+      <form
+        onSubmit={handleClaimLink}
+        className="flex tems-center space-x-2 mt-16 sm:flex-row flex-col"
+      >
         <Input
           id="username"
           type="text"
@@ -39,18 +72,24 @@ const Hero: FC = () => {
           leftAddon="biolnk.me/"
           tightAddonSpace
           autoComplete="username"
-          placeholder="username"
+          placeholder="name"
           borderless
           size="2xl"
+          value={username}
+          onChange={onUseranmeChange}
         />
         <Button
+          type="submit"
           size="2xl"
           variant="primary"
           className="mt-3.5 w-full sm:!max-w-max"
         >
           Claim my link
         </Button>
-      </Flex>
+      </form>
+      {serverError && (
+        <span className="block mt-2 text-red-950">{serverError}</span>
+      )}
     </Container>
   );
 };

@@ -21,7 +21,7 @@ const MeetBiolnk: FC = () => {
     [0, 0.23, 0.28, 1],
     [0, 220, 220, 0]
   );
-  const lockAnim = useTransform(scrollYProgress, [0.1, 0.23], [0, -718]);
+  const lockAnim = useTransform(scrollYProgress, [0.15, 0.23], [0, -718]);
 
   return (
     <Container className="flex flex-col pt-36 pb-28 items-center relative">

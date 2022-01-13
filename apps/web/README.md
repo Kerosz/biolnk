@@ -18,4 +18,5 @@ The `web` is where the landing page lives, along with all users generated pages.
 `├────`[`assets`](./src/assets) — static files<br>
 `├────`[`components`](./src/components) — common React components, UI building blocks<br>
 `├────`[`lib`](./src/lib) — configuration for external libs<br>
-`└────`[`pages`](./src/pages) — application views and router<br>
+`├────`[`pages`](./src/pages) — application views and router<br>
+`└────`[`services`](./src/services) — network calls and business logic<br>

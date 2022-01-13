@@ -1,5 +1,4 @@
-import sbClient from "~/lib/supabase";
-import { Link, PageWithMetadata, Tables } from "@biolnk/core";
+import { getLinksByUserId, getPageWithFilter } from "~/services/supabase";
 import type { GetStaticProps } from "next";
 import type { ParsedUrlQuery } from "querystring";
 
@@ -17,51 +16,13 @@ export const getStaticProps: GetStaticProps<{}, PageParams> = async ({
     filter = "custom_domain";
   }
 
-  const pageRecord = await sbClient
-    .from<PageWithMetadata>(Tables.PAGES)
-    .select(
-      `
-    id,
-    title,
-    subdomain,
-    custom_domain,
-    seo_title,
-    seo_description,
-    nsfw_content,
-    show_branding,
-    social_link_position,
-    integrations,
-    user:users(
-      id,
-      username,
-      avatar_url,
-      full_name,
-      biography,
-      status,
-      page_link
-    ),
-    theme:themes(
-      id,
-      style,
-      name,
-      kind,
-      state
-    )
-  `
-    )
-    .eq(filter, page)
-    .limit(1)
-    .single();
+  const pageRecord = await getPageWithFilter(filter, page);
 
   if (!pageRecord.data || pageRecord.error) {
     return { notFound: true, revalidate: 1 };
   }
 
-  const linkRecords = await sbClient
-    .from<Link>(Tables.LINKS)
-    .select("*")
-    .eq("user_id", pageRecord.data.user.id)
-    .order("display_order", { ascending: true });
+  const linkRecords = await getLinksByUserId(pageRecord.data.user.id);
 
   if (!linkRecords.data || linkRecords.error) {
     return {
