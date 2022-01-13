@@ -49,3 +49,9 @@
 .blui-size-xl.blui-addon--tight {
   @apply pr-1.5 pl-6;
 }
+.blui-size-2xl {
+  @apply px-6 py-4 text-xl;
+}
+.blui-size-2xl.blui-addon--tight {
+  @apply pl-6 pr-2;
+}

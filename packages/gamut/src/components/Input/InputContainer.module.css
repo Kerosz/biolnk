@@ -95,3 +95,8 @@
 .blui-size--xl .blui-desc {
   @apply text-lg;
 }
+.blui-size--xl .blui-label,
+.blui-size--xl .blui-error,
+.blui-size--xl .blui-desc {
+  @apply text-2xl;
+}

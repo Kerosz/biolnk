@@ -6,7 +6,7 @@ import Styles from "./InputAddon.module.css";
 export interface InputAddonProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   position?: "start" | "end";
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   borderless?: boolean;
   error?: boolean;
   tightSpace?: boolean;
