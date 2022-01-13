@@ -49,7 +49,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Size variants for the button
    * @default `xs`
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   /** Size variant for the button icon
    * @default `xs`
    */

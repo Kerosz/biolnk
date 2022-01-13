@@ -49,6 +49,9 @@
 .blui-btn_text--xl {
   @apply text-base;
 }
+.blui-btn_text--2xl {
+  @apply text-lg;
+}
 
 .blui-btn_space--xs {
   @apply px-2.5 py-1.5;
@@ -64,6 +67,9 @@
 }
 .blui-btn_space--xl {
   @apply px-6 py-3;
+}
+.blui-btn_space--2xl {
+  @apply px-6 py-4;
 }
 
 /*

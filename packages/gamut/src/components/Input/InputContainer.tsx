@@ -17,7 +17,7 @@ type InputContainerProps = {
   style?: React.CSSProperties;
   flex?: boolean;
   responsive?: boolean;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   beforeLabel?: string;
   afterLabel?: string;
 };

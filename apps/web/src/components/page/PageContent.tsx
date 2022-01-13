@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "../Link";
 import Logo from "~assets/images/biolnk.png";
-import { Flex, Heading, Text, Container } from "@biolnk/gamut";
+import { Flex, Heading, Text, Container, Avatar } from "@biolnk/gamut";
 import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
 
@@ -44,14 +44,7 @@ const PageContent: FC<PageContentProps> = ({
       <div>
         {avatarURL && (
           <Flex justify="center" className="pb-3.5">
-            <Image
-              src={avatarURL}
-              alt={title}
-              priority
-              width={80}
-              height={80}
-              className="rounded-full border border-mauve-400"
-            />
+            <Avatar src={avatarURL} alt={title} fallback={title} size="lg" />
           </Flex>
         )}
 

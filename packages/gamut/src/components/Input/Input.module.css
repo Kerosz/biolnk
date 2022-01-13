@@ -31,7 +31,6 @@
   @apply focus-within:ring-lime-500 focus-within:border-lime-800;
 }
 
-
 .blui--borderless {
   @apply border-transparent shadow-none bg-inputBorderlessBg;
   @apply focus-within:bg-body;
@@ -42,7 +41,7 @@
 }
 
 .blui-icon-container {
- @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-normalText;
+  @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-normalText;
 }
 
 .blui-addon--left {
@@ -87,7 +86,12 @@
 .blui-size-xl.blui-addon--tight {
   @apply pl-1.5 pr-6;
 }
-
+.blui-size-2xl {
+  @apply px-6 py-4 text-xl;
+}
+.blui-size-2xl.blui-addon--tight {
+  @apply pl-2 pr-6;
+}
 
 /*
   Input icon

@@ -54,7 +54,7 @@ export interface InputProps
   /** Size variants for the input
    * @default `xs`
    */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   /** Renders the input component in the `borderless` state */
   borderless?: boolean;
   /**

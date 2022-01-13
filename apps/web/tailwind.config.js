@@ -248,6 +248,9 @@ module.exports = {
         950: "hsl(0 0% 100% / 0.592)",
         1000: "hsl(0 0% 100% / 0.923)",
       },
+      mauveAlpha: {
+        1000: "hsl(300 7.7% 97.5% / 0.923)",
+      },
     },
     extend: {
       backgroundImage: {
