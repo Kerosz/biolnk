@@ -36,8 +36,12 @@ const Hero: FC = () => {
       setUsername("");
     } else {
       window.location.href = __DEV__
-        ? `http://localhost:4200/signup?username=${username}`
-        : `https://app.biolnk.me/signup?username=${username}`;
+        ? `http://localhost:4200/signup?username=${encodeURIComponent(
+            username
+          )}`
+        : `https://app.biolnk.me/signup?username=${encodeURIComponent(
+            username
+          )}`;
     }
   };
 
