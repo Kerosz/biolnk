@@ -78,3 +78,7 @@ export type PolymorphicForwardRefExoticComponent<
   React.ForwardRefExoticComponent<P & { [key: string]: unknown }>,
   PolymorphicExoticComponent<P, C>
 >;
+
+export interface CustomSVGProps extends React.SVGAttributes<SVGElement> {
+  size?: number;
+}

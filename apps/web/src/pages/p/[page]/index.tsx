@@ -1,7 +1,7 @@
 import seoConfig from "web.seo";
 import { useRouter } from "next/router";
 import { Loading } from "@biolnk/gamut";
-import { Link, PageWithMetadata, getPageLink } from "@biolnk/core";
+import { Link, PageWithMetadata, getPageLink, UserStatus } from "@biolnk/core";
 import {
   PageContent,
   GoogleAnalyticsIntegration,
@@ -51,6 +51,7 @@ const PageScreen: NextPage<PageScreenProps> = ({ domain, page, links }) => {
           links={links}
           style={page.theme.style}
           showBrand={page.show_branding}
+          showVerifiedBadge={page.user.status === UserStatus.VERIFIED}
         />
       </UserPageLayout>
     </>

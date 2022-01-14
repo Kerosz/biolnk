@@ -4,8 +4,18 @@ import Logo from "~assets/images/biolnk.png";
 import usePage from "~/utils/hooks/queries/usePage";
 import useLinks from "~/utils/hooks/queries/useLinks";
 import { memo } from "react";
-import { useWindowSize, CSSstring } from "@biolnk/core";
-import { Avatar, Flex, Heading, Loading, Text, Container } from "@biolnk/gamut";
+import { useWindowSize, CSSstring, UserStatus } from "@biolnk/core";
+import {
+  Avatar,
+  Flex,
+  Heading,
+  Loading,
+  Text,
+  Container,
+  BaseIcon,
+  VerifiedBadge,
+  Biolnk,
+} from "@biolnk/gamut";
 
 import Styles from "./PhonePreview.module.css";
 
@@ -60,13 +70,23 @@ const PhonePreview: React.FC = () => {
                 </Flex>
               )}
               {page.title && (
-                <Heading
-                  as="h1"
-                  style={getTextStyles("title")}
-                  className="!font-medium text-center pb-3"
-                >
-                  {page.title}
-                </Heading>
+                <Flex className="pb-3 items-center justify-center">
+                  <Heading
+                    as="h1"
+                    style={getTextStyles("title")}
+                    className="!font-medium text-center"
+                  >
+                    {page.title}
+                  </Heading>
+                  {page.user.status === UserStatus.VERIFIED && (
+                    <BaseIcon
+                      icon={VerifiedBadge}
+                      fill="#0081f1"
+                      size={21}
+                      className="ml-0.5 mt-0.5"
+                    />
+                  )}
+                </Flex>
               )}
               {page.user.biography && (
                 <Text
@@ -99,14 +119,19 @@ const PhonePreview: React.FC = () => {
             </div>
 
             {page.show_branding && (
-              // @ts-ignore
-              <Flex as={Link} justify="center" className="mb-5" url="/">
-                <Image
-                  src={Logo}
-                  height={49}
-                  width={30}
-                  alt="Biolnk.me branding"
-                  title="Biolnk.me branding"
+              <Flex
+                as={Link}
+                // @ts-ignore
+                url="/"
+                justify="center"
+                className="mb-3.5"
+                style={CSSstring(page.theme.style.text.css)}
+              >
+                <BaseIcon
+                  icon={Biolnk}
+                  width={22}
+                  height={36}
+                  fill="currentColor"
                 />
               </Flex>
             )}

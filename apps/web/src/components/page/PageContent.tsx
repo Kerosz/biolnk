@@ -1,7 +1,14 @@
-import Image from "next/image";
 import Link from "../Link";
-import Logo from "~assets/images/biolnk.png";
-import { Flex, Heading, Text, Container, Avatar } from "@biolnk/gamut";
+import {
+  Flex,
+  Heading,
+  Text,
+  Container,
+  Avatar,
+  BaseIcon,
+  VerifiedBadge,
+  Biolnk,
+} from "@biolnk/gamut";
 import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
 
@@ -12,6 +19,7 @@ export interface PageContentProps {
   links: LinkType[];
   style: ThemeStyle;
   showBrand: boolean;
+  showVerifiedBadge: boolean;
 }
 
 export type TextType = "title" | "bio" | "button";
@@ -23,6 +31,7 @@ const PageContent: FC<PageContentProps> = ({
   links,
   style,
   showBrand,
+  showVerifiedBadge,
 }) => {
   const getTextStyles = (type: TextType) => {
     const fontSize =
@@ -40,7 +49,7 @@ const PageContent: FC<PageContentProps> = ({
   };
 
   return (
-    <Container className="!max-w-screen-md pt-14 min-h-screen z-10 flex flex-col justify-between">
+    <Container className="!max-w-screen-md pt-12 min-h-screen z-10 flex flex-col justify-between">
       <div>
         {avatarURL && (
           <Flex justify="center" className="pb-3.5">
@@ -49,13 +58,24 @@ const PageContent: FC<PageContentProps> = ({
         )}
 
         {title && (
-          <Heading
-            as="h1"
-            style={getTextStyles("title")}
-            className="!font-medium text-center pb-3"
-          >
-            {title}
-          </Heading>
+          <Flex className="pb-3 items-center justify-center">
+            <Heading
+              as="h1"
+              style={getTextStyles("title")}
+              className="!font-medium text-center"
+            >
+              {title}
+            </Heading>
+            {showVerifiedBadge && (
+              <BaseIcon
+                icon={VerifiedBadge}
+                fill="#0081f1"
+                size={21}
+                className="ml-0.5 mt-0.5"
+                aria-label="User verified"
+              />
+            )}
+          </Flex>
         )}
 
         {bio && (
@@ -89,15 +109,15 @@ const PageContent: FC<PageContentProps> = ({
       </div>
 
       {showBrand && (
-        // @ts-ignore
-        <Flex as={Link} justify="center" className="mb-5" url="/">
-          <Image
-            src={Logo}
-            height={49}
-            width={30}
-            alt="Biolnk.me branding"
-            title="Biolnk.me branding"
-          />
+        <Flex
+          as={Link}
+          // @ts-ignore
+          url="/"
+          justify="center"
+          className="mb-3.5"
+          style={CSSstring(style.text.css)}
+        >
+          <BaseIcon icon={Biolnk} width={22} height={36} fill="currentColor" />
         </Flex>
       )}
     </Container>

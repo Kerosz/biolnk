@@ -1,14 +1,11 @@
 import * as React from "react";
+import { CustomSVGProps } from "@/types";
 
-export default function Google({
-  width = 18,
-  height = 18,
-  ...otherProps
-}: React.SVGAttributes<SVGElement>) {
+export default function Google({ size = 18, ...otherProps }: CustomSVGProps) {
   return (
     <svg
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       viewBox="0 0 533.5 544.3"
       focusable="false"
       role="presentation"
