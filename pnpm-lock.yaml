@@ -39,6 +39,7 @@ importers:
       react-dom: 17.0.2
       react-hook-form: ^7.21.0
       react-loading-skeleton: ^3.0.2
+      react-qr-code: ^2.0.3
       react-query: ^3.34.0
       react-test-renderer: ^17.0.2
       sharp: ^0.29.3
@@ -63,6 +64,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.24.0_react@17.0.2
       react-loading-skeleton: 3.0.2_react@17.0.2
+      react-qr-code: 2.0.3_react@17.0.2
       react-query: 3.34.8_react-dom@17.0.2+react@17.0.2
       sharp: 0.29.3
       validator: 13.7.0
@@ -9829,6 +9831,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /qr.js/0.0.0:
+    resolution: {integrity: sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=}
+    dev: false
+
   /qs/6.5.3:
     resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==}
     engines: {node: '>=0.6'}
@@ -9969,6 +9975,17 @@ packages:
 
   /react-merge-refs/1.1.0:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}
+    dev: false
+
+  /react-qr-code/2.0.3_react@17.0.2:
+    resolution: {integrity: sha512-6GDH0l53lksf2JgZwwcoS0D60a1OAal/GQRyNFkMBW19HjSqvtD5S20scmSQsKl+BgWM85Wd5DCcUYoHd+PZnQ==}
+    peerDependencies:
+      react: ^16.x || ^17.x
+      react-native-svg: '*'
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 17.0.2
     dev: false
 
   /react-query/3.34.8_react-dom@17.0.2+react@17.0.2:
