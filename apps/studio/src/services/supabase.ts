@@ -212,7 +212,8 @@ export const getLinksByUserId = async (id: string) => {
   const { data, error } = await sbClient
     .from<Link>(Tables.LINKS)
     .select("*")
-    .eq("user_id", id);
+    .eq("user_id", id)
+    .order("display_order", { ascending: true });
 
   if (error) {
     throw new Error(error.message);

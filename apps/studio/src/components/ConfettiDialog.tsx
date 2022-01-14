@@ -1,5 +1,5 @@
 import Confetti from "react-confetti";
-import { Dialog, Flex, Link, Text } from "@biolnk/gamut";
+import { Dialog, Flex, Link as LinkIcon, Text } from "@biolnk/gamut";
 import {
   useDisclosure,
   useWindowSize,
@@ -10,6 +10,7 @@ import {
 } from "@biolnk/core";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
 import { memo } from "react";
+import Link from "./common/Link";
 
 export interface ConfettiDialogProps {
   id: string;
@@ -50,7 +51,7 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
               variant="text"
               size="xl"
               rounded={false}
-              icon={Link}
+              icon={LinkIcon}
               block
               className="!bg-mauve-200 hover:!bg-mauve-300"
               onClick={handleConfettiClose}
@@ -59,6 +60,7 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
             </Dialog.Button>
           </Flex>
         }
+        showX={false}
       >
         <Flex className="text-mauve-950" layout="vertical" align="center">
           <Text center>
@@ -66,9 +68,13 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
             your audience is.
           </Text>
 
-          <span className="block mt-8 text-2xl bg-clip-text text-transparent bg-gradient-btn">
+          <Link
+            url={linkUrl}
+            className="block mt-8 text-2xl bg-clip-text text-transparent bg-gradient-btn"
+            noIcon
+          >
             {linkLabel}
-          </span>
+          </Link>
         </Flex>
       </Dialog>
     </>
