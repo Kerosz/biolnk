@@ -86,7 +86,7 @@ const Hero: FC = () => {
           type="submit"
           size="2xl"
           variant="primary"
-          className="mt-3.5 w-full sm:!max-w-max"
+          className="mt-4 w-full sm:!max-w-max"
         >
           Claim my link
         </Button>
