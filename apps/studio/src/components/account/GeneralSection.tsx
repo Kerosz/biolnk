@@ -1,3 +1,4 @@
+import QRCode from "react-qr-code";
 import Form from "../common/Form";
 import useUpdateUser from "~/utils/hooks/mutations/useUpdateUser";
 import {
@@ -9,11 +10,12 @@ import {
   Input,
   makeToast,
   Text,
+  Dialog,
 } from "@biolnk/gamut";
+import { PageWithMetadata, getPageLink, useDisclosure } from "@biolnk/core";
 import { useSupabase } from "~/lib/supabase";
 import { doesUsernameExist } from "~/services/supabase";
 import { ACCOUNT_GENERAL_SCHEMA } from "~/data/validations";
-import type { PageWithMetadata } from "@biolnk/core";
 import type { FC } from "react";
 import type { AccountGeneralDto } from "~/types";
 
@@ -28,8 +30,12 @@ const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
     username: user?.username,
   };
 
+  const qrDialog = useDisclosure();
+
   const { user: authUser } = useSupabase();
   const { mutate, isLoading } = useUpdateUser();
+
+  const [_, pageLinkUrl] = getPageLink(user?.username, user?.page_link);
 
   const handleAccountUpdate = async (formData: AccountGeneralDto) => {
     const updateDto = {
@@ -65,101 +71,130 @@ const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
   const emailNotConfirmed = !!authUser?.new_email;
 
   return (
-    <section
-      id="general"
-      className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm sm:scroll-mt-20"
-    >
-      {/* Title */}
-      <Heading as="h2" size="sm" className="pb-1 font-medium">
-        General
-      </Heading>
-      <Text size="sm" variant="light" className="mb-12">
-        Your account information
-      </Text>
-
-      {/* Content */}
-      <div className={emailNotConfirmed ? "block" : "hidden"}>
-        <Flex
-          role="alert"
-          align="center"
-          className="bg-yellow-200 shadow rounded-md px-4 py-2.5 mb-5 text-yellow-950"
-        >
-          <BaseIcon icon={AlertCircle} className="mr-2" />
-          <span>
-            You must confirm the changes on both your old and new email address.
-          </span>
-        </Flex>
-      </div>
-
-      <Form<AccountGeneralDto>
-        onSubmit={handleAccountUpdate}
-        defaultValues={DEFAULT_FORM_VALUES}
-        validationSchema={ACCOUNT_GENERAL_SCHEMA}
-        resetOnSubmit
-        resetOptions={{ keepValues: true }}
-        className="space-y-6 text-mauveDark-950"
+    <>
+      <Dialog
+        title={`@${user?.username} QR Code`}
+        open={qrDialog.isOpen}
+        onClose={qrDialog.onClose}
+        actions={
+          <Dialog.Button
+            variant="text"
+            size="xl"
+            rounded={false}
+            block
+            className="!bg-mauve-200 hover:!bg-mauve-300"
+            onClick={qrDialog.onClose}
+          >
+            Done
+          </Dialog.Button>
+        }
       >
-        {({ register, formState: { errors, isValid, isDirty } }) => (
-          <>
-            <Input
-              id="username"
-              type="text"
-              title="Please enter your username!"
-              label="Username"
-              layout="vertical"
-              leftAddon="biolnk.me/"
-              tightAddonSpace
-              autoComplete="username"
-              placeholder="personal"
-              borderless
-              error={errors.username?.message}
-              {...register("username")}
-            />
+        <Flex justify="center">
+          <QRCode value={pageLinkUrl} />
+        </Flex>
+      </Dialog>
 
-            <Input
-              id="email-address"
-              type="email"
-              title="Please enter a valid email address!"
-              label="Email address"
-              layout="vertical"
-              autoComplete="email"
-              placeholder="jondoe@biolnk.me"
-              borderless
-              error={errors.email?.message}
-              {...register("email")}
-            />
+      <section
+        id="general"
+        className="bg-mauve-50 rounded pt-4 pb-5 px-4 sm:px-6 shadow-sm sm:scroll-mt-20"
+      >
+        {/* Title */}
+        <Heading as="h2" size="sm" className="pb-1 font-medium">
+          General
+        </Heading>
+        <Text size="sm" variant="light" className="mb-3">
+          Your account information
+        </Text>
 
-            <Input
-              id="full-name"
-              type="text"
-              title="Please enter your legal name!"
-              label="Full Name"
-              layout="vertical"
-              autoComplete="name"
-              placeholder="Jon Doe"
-              borderless
-              error={errors.full_name?.message}
-              {...register("full_name")}
-            />
+        {/* Content */}
+        <Button onClick={qrDialog.onOpen} className="mb-12">
+          QR Code
+        </Button>
 
-            {(isDirty && isValid) || isLoading ? (
-              <Flex justify="end" className="w-full">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="md"
-                  uppercase
-                  loading={isLoading}
-                  disabled={!isDirty || !isValid}
-                >
-                  Save Changes
-                </Button>
-              </Flex>
-            ) : null}
-          </>
-        )}
-      </Form>
-    </section>
+        <div className={emailNotConfirmed ? "block" : "hidden"}>
+          <Flex
+            role="alert"
+            align="center"
+            className="bg-yellow-200 shadow rounded-md px-4 py-2.5 mb-5 text-yellow-950"
+          >
+            <BaseIcon icon={AlertCircle} className="mr-2" />
+            <span>
+              You must confirm the changes on both your old and new email
+              address.
+            </span>
+          </Flex>
+        </div>
+
+        <Form<AccountGeneralDto>
+          onSubmit={handleAccountUpdate}
+          defaultValues={DEFAULT_FORM_VALUES}
+          validationSchema={ACCOUNT_GENERAL_SCHEMA}
+          resetOnSubmit
+          resetOptions={{ keepValues: true }}
+          className="space-y-6 text-mauveDark-950"
+        >
+          {({ register, formState: { errors, isValid, isDirty } }) => (
+            <>
+              <Input
+                id="username"
+                type="text"
+                title="Please enter your username!"
+                label="Username"
+                layout="vertical"
+                leftAddon="biolnk.me/"
+                tightAddonSpace
+                autoComplete="username"
+                placeholder="personal"
+                borderless
+                error={errors.username?.message}
+                {...register("username")}
+              />
+
+              <Input
+                id="email-address"
+                type="email"
+                title="Please enter a valid email address!"
+                label="Email address"
+                layout="vertical"
+                autoComplete="email"
+                placeholder="jondoe@biolnk.me"
+                borderless
+                error={errors.email?.message}
+                {...register("email")}
+              />
+
+              <Input
+                id="full-name"
+                type="text"
+                title="Please enter your legal name!"
+                label="Full Name"
+                layout="vertical"
+                autoComplete="name"
+                placeholder="Jon Doe"
+                borderless
+                error={errors.full_name?.message}
+                {...register("full_name")}
+              />
+
+              {(isDirty && isValid) || isLoading ? (
+                <Flex justify="end" className="w-full">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="md"
+                    uppercase
+                    loading={isLoading}
+                    disabled={!isDirty || !isValid}
+                  >
+                    Save Changes
+                  </Button>
+                </Flex>
+              ) : null}
+            </>
+          )}
+        </Form>
+      </section>
+    </>
   );
 };
 
