@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "~/components/common/Header/Header";
-import PreviewEmbed from "../dashboard/PreviewEmbed/PreviewEmbed";
-import PageNavigation from "../dashboard/PageNavigation";
 import { NextSeo, NextSeoProps } from "next-seo";
 import { Container } from "@biolnk/gamut";
+import { PhonePreview, PageNavigation } from "../dashboard/index";
 import type { FC } from "react";
 
 export interface DashboardLayoutProps {
@@ -29,7 +28,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({
           {children}
         </div>
 
-        <PreviewEmbed />
+        <PhonePreview />
       </Container>
     </>
   );

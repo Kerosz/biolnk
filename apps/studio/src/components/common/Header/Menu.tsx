@@ -37,6 +37,7 @@ const Menu: FC<MenuProps> = ({ user, pageLink }) => {
               alt={avatarAlt}
               width={36}
               height={36}
+              objectFit="cover"
               className="rounded-full"
             />
           </button>

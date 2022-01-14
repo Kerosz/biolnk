@@ -1,0 +1,27 @@
+.blui-preview-root {
+  @apply hidden md:inline-block col-span-2 mt-14 mx-auto;
+}
+
+.blui-preview-frame {
+  @apply border-mauve-1000 overflow-hidden transform-gpu;
+
+  transform-origin: top center;
+  width: 340px;
+  max-width: 340px;
+  height: 700px;
+  max-height: 700px;
+  border-width: 16px;
+  border-radius: 45px;
+}
+
+.blui-preview-container {
+  @apply max-w-screen-md pt-14 h-full z-10 flex flex-col justify-between w-full px-4 mx-auto overflow-y-auto;
+}
+
+.blui-preview-button {
+  @apply mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu hover:scale-[1.03];
+
+  transition-property: transform, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+}

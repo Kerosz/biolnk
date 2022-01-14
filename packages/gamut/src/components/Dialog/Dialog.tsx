@@ -15,7 +15,8 @@ export interface DialogOwnProps {
   open: boolean;
   onClose: () => void;
   title: string;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
+  showX?: boolean;
 }
 
 export type DialogProps<C extends React.ElementType> = PolymorphicPropsWithRef<
@@ -49,6 +50,7 @@ const DialogMenu = forwardRef(
       title,
       actions,
       children,
+      showX = true,
     }: PolymorphicPropsWithoutRef<DialogOwnProps, C>,
     ref: PolymorphicRef<C>
   ) => {
@@ -102,13 +104,15 @@ const DialogMenu = forwardRef(
                     {title}
                   </HeadlessDialog.Title>
 
-                  <Button
-                    variant="text"
-                    size="xs"
-                    icon={X}
-                    iconProps={{ size: "xl" }}
-                    onClick={onClose}
-                  />
+                  {showX && (
+                    <Button
+                      variant="text"
+                      size="xs"
+                      icon={X}
+                      iconProps={{ size: "xl" }}
+                      onClick={onClose}
+                    />
+                  )}
                 </Flex>
 
                 <div className={Styles["blui-dialog--child"]}>{children}</div>
