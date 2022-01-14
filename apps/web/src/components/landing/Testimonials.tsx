@@ -4,7 +4,7 @@ import TestimonialCard from "./TestimonialCard";
 
 const Testimonials: FC = () => {
   return (
-    <section className="bg-mauve-300 pb-28">
+    <section className="bg-mauve-300 pb-28 md:px-9 sm:px-6 px-4">
       <Container className="py-24 bg-black rounded-3xl">
         <h2 className="text-mauve-300 sm:text-5xl text-4xl font-semibold !leading-normal">
           Trusted by thousands of{" "}

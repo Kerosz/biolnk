@@ -13,12 +13,12 @@ const MeetBiolnk: FC = () => {
   const { scrollYProgress } = useViewportScroll();
   const meetAnim = useTransform(
     scrollYProgress,
-    [0, 0.23, 0.28, 1],
+    [0, 0.23, 0.28, 0.55],
     [0, -220, -220, 0]
   );
   const bioAnim = useTransform(
     scrollYProgress,
-    [0, 0.23, 0.28, 1],
+    [0, 0.23, 0.28, 0.55],
     [0, 220, 220, 0]
   );
   const lockAnim = useTransform(scrollYProgress, [0.15, 0.23], [0, -718]);
