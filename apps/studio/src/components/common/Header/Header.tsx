@@ -5,7 +5,15 @@ import Link from "../Link";
 import useUser from "~/utils/hooks/queries/useUser";
 import { memo } from "react";
 import { useClipboard, getPageLink } from "@biolnk/core";
-import { BaseIcon, Container, Text, Copy, Button, Flex } from "@biolnk/gamut";
+import {
+  BaseIcon,
+  Container,
+  Text,
+  Copy,
+  Button,
+  Flex,
+  Tooltip,
+} from "@biolnk/gamut";
 import { Routes } from "~/data/enums";
 
 import Styles from "./Header.module.css";
@@ -42,19 +50,20 @@ const Header = () => {
               {pageLinkLabel}
             </Text>
           </Link>
-          <Button
-            variant="text"
-            size="xs"
-            title="Copy to clipboard"
-            onClick={() => handleCopy(pageLinkUrl)}
-          >
-            <BaseIcon
-              aria-label="Copy to clipboard"
-              icon={Copy}
-              size="lg"
-              stroke="hsl(336 73.7% 53.5%)"
-            />
-          </Button>
+          <Tooltip content="Copy to clipboard">
+            <Button
+              variant="text"
+              size="xs"
+              onClick={() => handleCopy(pageLinkUrl)}
+            >
+              <BaseIcon
+                aria-label="Copy to clipboard"
+                icon={Copy}
+                size="lg"
+                stroke="hsl(336 73.7% 53.5%)"
+              />
+            </Button>
+          </Tooltip>
         </Flex>
 
         <Menu user={user} pageLink={pageLinkUrl} />
