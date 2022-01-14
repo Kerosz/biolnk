@@ -1,4 +1,5 @@
 import Confetti from "react-confetti";
+import QRCode from "react-qr-code";
 import { Dialog, Flex, Link as LinkIcon, Text } from "@biolnk/gamut";
 import {
   useDisclosure,
@@ -63,14 +64,16 @@ const ConfettiDialog: React.FC<ConfettiDialogProps> = ({
         showX={false}
       >
         <Flex className="text-mauve-950" layout="vertical" align="center">
-          <Text center>
+          <Text center className="mb-8">
             Add it to your socials bio, Instagram, TikTok, Twitter, or wherever
             your audience is.
           </Text>
 
+          <QRCode size={200} value={linkUrl} />
+
           <Link
             url={linkUrl}
-            className="block mt-8 text-2xl bg-clip-text text-transparent bg-gradient-btn"
+            className="block mt-4 text-2xl bg-clip-text text-transparent bg-gradient-btn"
             noIcon
           >
             {linkLabel}
