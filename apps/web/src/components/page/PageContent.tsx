@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "../Link";
 import Logo from "~assets/images/biolnk.png";
-import { Flex, Heading, Text, Container, Avatar } from "@biolnk/gamut";
+import {
+  Flex,
+  Heading,
+  Text,
+  Container,
+  Avatar,
+  BaseIcon,
+  VerifiedBadge,
+} from "@biolnk/gamut";
 import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
 
@@ -12,6 +20,7 @@ export interface PageContentProps {
   links: LinkType[];
   style: ThemeStyle;
   showBrand: boolean;
+  showVerifiedBadge: boolean;
 }
 
 export type TextType = "title" | "bio" | "button";
@@ -23,6 +32,7 @@ const PageContent: FC<PageContentProps> = ({
   links,
   style,
   showBrand,
+  showVerifiedBadge,
 }) => {
   const getTextStyles = (type: TextType) => {
     const fontSize =
@@ -49,13 +59,24 @@ const PageContent: FC<PageContentProps> = ({
         )}
 
         {title && (
-          <Heading
-            as="h1"
-            style={getTextStyles("title")}
-            className="!font-medium text-center pb-3"
-          >
-            {title}
-          </Heading>
+          <Flex className="pb-3 items-center justify-center">
+            <Heading
+              as="h1"
+              style={getTextStyles("title")}
+              className="!font-medium text-center"
+            >
+              {title}
+            </Heading>
+            {showVerifiedBadge && (
+              <BaseIcon
+                icon={VerifiedBadge}
+                fill="#0081f1"
+                size={21}
+                className="ml-0.5 mt-0.5"
+                aria-label="User verified"
+              />
+            )}
+          </Flex>
         )}
 
         {bio && (
