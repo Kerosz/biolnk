@@ -6,7 +6,7 @@ import type { FC } from "react";
 
 const Header: FC = () => {
   return (
-    <header className="h-24 sticky top-0 bg-mauveAlpha-1000 z-40 border-b border-mauve-300">
+    <header className="h-[90px] sticky top-0 bg-mauveAlpha-1000 z-40 border-b border-mauve-300">
       <Container as="div" className="flex justify-between items-center h-full">
         <Link url="/" className="h-fit">
           <Image
@@ -24,6 +24,7 @@ const Header: FC = () => {
             // @ts-ignore
             as={Link}
             url="https://app.biolnk.me/signup"
+            target="same"
             size="lg"
             variant="secondary"
             noIcon
@@ -34,6 +35,7 @@ const Header: FC = () => {
             // @ts-ignore
             as={Link}
             url="https://app.biolnk.me/signin"
+            target="same"
             size="lg"
             icon={User}
             iconProps={{ size: 23 }}
