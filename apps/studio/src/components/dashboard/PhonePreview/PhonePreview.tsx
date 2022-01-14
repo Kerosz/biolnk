@@ -14,6 +14,7 @@ import {
   Container,
   BaseIcon,
   VerifiedBadge,
+  Biolnk,
 } from "@biolnk/gamut";
 
 import Styles from "./PhonePreview.module.css";
@@ -118,14 +119,19 @@ const PhonePreview: React.FC = () => {
             </div>
 
             {page.show_branding && (
-              // @ts-ignore
-              <Flex as={Link} justify="center" className="mb-5" url="/">
-                <Image
-                  src={Logo}
-                  height={49}
-                  width={30}
-                  alt="Biolnk.me branding"
-                  title="Biolnk.me branding"
+              <Flex
+                as={Link}
+                // @ts-ignore
+                url="/"
+                justify="center"
+                className="mb-3.5"
+                style={CSSstring(page.theme.style.text.css)}
+              >
+                <BaseIcon
+                  icon={Biolnk}
+                  width={22}
+                  height={36}
+                  fill="currentColor"
                 />
               </Flex>
             )}

@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Link from "../Link";
-import Logo from "~assets/images/biolnk.png";
 import {
   Flex,
   Heading,
@@ -9,6 +7,7 @@ import {
   Avatar,
   BaseIcon,
   VerifiedBadge,
+  Biolnk,
 } from "@biolnk/gamut";
 import { CSSstring, Link as LinkType, ThemeStyle } from "@biolnk/core";
 import type { FC } from "react";
@@ -50,7 +49,7 @@ const PageContent: FC<PageContentProps> = ({
   };
 
   return (
-    <Container className="!max-w-screen-md pt-14 min-h-screen z-10 flex flex-col justify-between">
+    <Container className="!max-w-screen-md pt-12 min-h-screen z-10 flex flex-col justify-between">
       <div>
         {avatarURL && (
           <Flex justify="center" className="pb-3.5">
@@ -110,15 +109,15 @@ const PageContent: FC<PageContentProps> = ({
       </div>
 
       {showBrand && (
-        // @ts-ignore
-        <Flex as={Link} justify="center" className="mb-5" url="/">
-          <Image
-            src={Logo}
-            height={49}
-            width={30}
-            alt="Biolnk.me branding"
-            title="Biolnk.me branding"
-          />
+        <Flex
+          as={Link}
+          // @ts-ignore
+          url="/"
+          justify="center"
+          className="mb-3.5"
+          style={CSSstring(style.text.css)}
+        >
+          <BaseIcon icon={Biolnk} width={22} height={36} fill="currentColor" />
         </Flex>
       )}
     </Container>

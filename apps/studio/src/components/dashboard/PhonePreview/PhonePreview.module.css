@@ -15,7 +15,7 @@
 }
 
 .blui-preview-container {
-  @apply max-w-screen-md pt-14 h-full z-10 flex flex-col justify-between w-full px-4 mx-auto overflow-y-auto;
+  @apply max-w-screen-md pt-12 h-full z-10 flex flex-col justify-between w-full px-4 mx-auto overflow-y-auto;
 }
 
 .blui-preview-button {
