@@ -11,6 +11,7 @@ import {
   makeToast,
   Text,
   Dialog,
+  CodeQR,
 } from "@biolnk/gamut";
 import { PageWithMetadata, getPageLink, useDisclosure } from "@biolnk/core";
 import { useSupabase } from "~/lib/supabase";
@@ -107,7 +108,7 @@ const GeneralSection: FC<GeneralSectionProps> = ({ user }) => {
         </Text>
 
         {/* Content */}
-        <Button onClick={qrDialog.onOpen} className="mb-12">
+        <Button icon={CodeQR} onClick={qrDialog.onOpen} className="mb-12">
           QR Code
         </Button>
 
