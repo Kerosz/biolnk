@@ -10,6 +10,7 @@ export interface LinkProps
   external?: boolean;
   noIcon?: boolean;
   variant?: "hover" | "basic";
+  target?: "new" | "same";
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
@@ -23,6 +24,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       className,
       replace,
       passHref,
+      target = "new",
       ...otherProps
     },
     ref
@@ -44,7 +46,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           ref={ref}
           href={url}
           rel="noopener noreferrer"
-          target="_blank"
+          target={target === "new" ? "_blank" : "_self"}
           {...otherProps}
         >
           {children}
