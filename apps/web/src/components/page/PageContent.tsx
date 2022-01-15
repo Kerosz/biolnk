@@ -96,7 +96,7 @@ const PageContent: FC<PageContentProps> = ({
                 <Link
                   key={l.id}
                   url={l.url}
-                  className="mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu animate-decelerate hover:scale-[1.03]"
+                  className="mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu animate-decelerate hover:scale-[1.03] px-2 text-center"
                   style={CSSstring(style.button.css)}
                   external
                   noIcon

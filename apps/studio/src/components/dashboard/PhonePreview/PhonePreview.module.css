@@ -19,7 +19,7 @@
 }
 
 .blui-preview-button {
-  @apply mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu hover:scale-[1.03];
+  @apply mb-4 last:mb-0 h-14 w-full flex justify-center transform-gpu hover:scale-[1.03] px-2 text-center;
 
   transition-property: transform, box-shadow;
   transition-duration: 300ms;

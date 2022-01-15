@@ -129,7 +129,8 @@ const LinkCard: FC<Link> = ({
                     />
                   </Tooltip>
                 </Flex>
-                <Text as="p" variant="light" size="sm" className="truncate">
+
+                <Text as="p" variant="light" size="sm">
                   {url}
                 </Text>
 
